@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,33 +30,37 @@ import com.bas.KU.enums.*;
  *
  */
 
+@RequestMapping(value = "/login")
 @Controller
 public class LoginController {
 
 	@Autowired
-	UserService userService;
-
-	@Autowired
 	AdminService adminService;
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	// for POST Request
+	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView adminLogin(@RequestParam(value = "username", required = false) String username,
-			@RequestParam(value = "password", required = false) String password) {
-		
-		String role = AdminStatus.UNAUTHORISED.getStatus();
+			@RequestParam(value = "password", required = false) String password,ModelMap model) {
 
 		if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
-			// get admin by provided username and password
 			Admin admin = adminService.getAdmin(username, password);
-			// get the role of the admin
-			if (admin != null && admin.getStatus().equalsIgnoreCase(AdminStatus.ADMIN.getStatus()))
-				role = AdminStatus.ADMIN.getStatus();
-			else if (admin != null && admin.getStatus().equalsIgnoreCase(AdminStatus.SUPERADMIN.getStatus()))
-				role = AdminStatus.SUPERADMIN.getStatus();
+			String role = admin != null && admin.getStatus().equalsIgnoreCase(AdminStatus.SUPERADMIN.getStatus())
+					? AdminStatus.SUPERADMIN.getStatus()
+					: admin != null && admin.getStatus().equalsIgnoreCase(AdminStatus.ADMIN.getStatus())
+							? AdminStatus.ADMIN.getStatus() : AdminStatus.UNAUTHORISED.getStatus();
+			model.addAttribute("user", admin);
+
+			return new ModelAndView(MainUtils.getPage(role));
 
 		}
-		return new ModelAndView(MainUtils.getPage(role),"role",role);
+		return new ModelAndView(MainUtils.getPage(AdminStatus.UNAUTHORISED.getStatus()));
 
+	}
+
+	// for GET Request
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView adminLogin() {
+		return new ModelAndView(MainUtils.getPage(AdminStatus.UNAUTHORISED.getStatus()));
 	}
 
 }

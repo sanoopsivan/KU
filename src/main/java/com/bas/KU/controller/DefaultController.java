@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class DefaultController {
 
+	// will load the login page on start up
 	@RequestMapping("/")
 	public ModelAndView login(Locale locale) {
 		// for study purpose

@@ -9,14 +9,13 @@ package com.bas.KU.utils;
  */
 public class MainUtils {
 
+	// return the page names after checking the role
 	public static String getPage(String role) {
 		switch (role) {
 		case "admin":
-			return "view";
 		case "superadmin":
 			return "view";
 		case "unauthorized":
-			return "login";
 		default:
 			return "login";
 		}

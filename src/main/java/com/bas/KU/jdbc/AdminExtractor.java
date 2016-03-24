@@ -20,7 +20,7 @@ public class AdminExtractor implements ResultSetExtractor<Admin> {
 
 	public Admin extractData(ResultSet resultSet) throws SQLException, DataAccessException {
 		// check if the result set is empty or not
-		if (resultSet.next()) {
+		if (resultSet!=null) {
 			Admin admin = new Admin();
 			admin.setAdminId(resultSet.getInt("id"));
 			admin.setUsername(resultSet.getString("username"));
