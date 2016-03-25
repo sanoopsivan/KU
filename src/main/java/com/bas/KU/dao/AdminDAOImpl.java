@@ -17,6 +17,7 @@ public class AdminDAOImpl implements AdminDAO {
 	DataSource dataSource;
 
 	private static final String GET_ALL_ADMINS_QUERY = "select * from admin";
+	private static final String GET_ADMIN_BY_USERNAME_AND_PASSWORD = "select * from admin where username= '%s' and password = '%s'";
 
 	public void insertData(Admin admin) {
 	};
@@ -41,8 +42,8 @@ public class AdminDAOImpl implements AdminDAO {
 
 	public Admin getAdmin(String username, String password) {
 		List<Admin> adminList = new ArrayList<Admin>();
-		String sql = "select * from admin where username= '" + username + "' and password = '" + password + "'";
-		// create databse connection using spring jdbc template
+		String sql = String.format(GET_ADMIN_BY_USERNAME_AND_PASSWORD, username, password);
+		// create database connection using spring jdbc template
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		// retrieve the datas from db and map the result to admin
 		adminList = jdbcTemplate.query(sql, new AdminRowMapper());

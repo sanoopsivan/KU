@@ -66,7 +66,7 @@ public class LoginController {
 	private ModelMap setModel(ModelMap model, Admin admin) {
 		if (admin != null) {
 			model.addAttribute("admin", admin);
-			List<User> users = userService.getUserList();
+			List<User> users = userService.getUserList(2);
 			if (!users.isEmpty())
 				model.addAttribute("users", users);
 

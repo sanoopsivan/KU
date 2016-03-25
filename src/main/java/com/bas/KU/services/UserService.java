@@ -19,4 +19,5 @@ public interface UserService {
 	 public void deleteData(String id);  
 	 public User getUser(String id);  
 	 public void updateData(User user);  
+	 public List<User> getUserList(int limit);
 }

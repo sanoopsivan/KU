@@ -20,26 +20,41 @@ import com.bas.KU.models.User;
  */
 public class UserDAOImpl implements UserDAO {
 
+	private static final String INSERT_NEW_USER_QUERY = "INSERT INTO user (firstName,lastName, gender, email, address, phoneNumber ,creatDate ,areaCode ) VALUES (?, ?, ?, ?, ?, ?)";
+	private static final String UPDATE_USER_QUERY = "UPDATE user set firstName = ?,lastName = ?, gender = ?, email = ? ,address = ?,phoneNumber =? where user_id = ?";
+	private static final String SELECT_ALL_USER_QUERY = "select * from user";
+	private static final String SELECT_A_LIMIT_OF_USERS_QUERY = "select * from user limit %d";
+
 	@Autowired
 	DataSource dataSource;
 
-	public void insertData(User user) {
-		// TODO Auto-generated method stub
+	public void insertUser(User user) {
+		String sql = INSERT_NEW_USER_QUERY;
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+
+		jdbcTemplate.update(sql, new Object[] { user.getFirstName(), user.getLastName(), user.getGender(),
+				user.getEmail(), user.getAddress(), user.getPhoneNumber() });
 
 	}
 
 	public List<User> getUserList() {
 		List<User> userList = new ArrayList<>();
 
-		String sql = "select * from user";
+		String sql = SELECT_ALL_USER_QUERY;
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		userList = jdbcTemplate.query(sql, new UserRowMapper());
 		return userList.isEmpty() ? null : userList;
 	}
 
-	public void updateData(User user) {
-		// TODO Auto-generated method stub
+	public void updateUser(User user) {
+		String sql = UPDATE_USER_QUERY;
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+
+		jdbcTemplate.update(sql, new Object[] { user.getFirstName(), user.getLastName(), user.getGender(),
+				user.getEmail(), user.getAddress(), user.getPhoneNumber() });
 
 	}
 
@@ -51,6 +66,16 @@ public class UserDAOImpl implements UserDAO {
 	public User getUser(String id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public List<User> getUserList(int limit) {
+		List<User> userList = new ArrayList<>();
+
+		String sql = String.format(SELECT_A_LIMIT_OF_USERS_QUERY, limit);
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		userList = jdbcTemplate.query(sql, new UserRowMapper());
+		return userList.isEmpty() ? null : userList;
 	}
 
 }

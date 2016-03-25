@@ -12,14 +12,16 @@ import com.bas.KU.models.User;
  *
  */
 public interface UserDAO {
-	public void insertData(User user);
+	public void insertUser(User user);
 
 	public List<User> getUserList();
 
-	public void updateData(User user);
+	public void updateUser(User user);
 
 	public void deleteData(String id);
 
 	public User getUser(String id);
+	
+	public List<User> getUserList(int limit);
 
 }

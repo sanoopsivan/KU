@@ -22,12 +22,12 @@ public class UserExtractor implements ResultSetExtractor<User> {
 
 		if (resultSet != null) {
 			User user = new User();
-			user.setUserId(resultSet.getInt("id"));
-			user.setFirstName(resultSet.getString("firstname"));
-			user.setLastName(resultSet.getString("lastname"));
-			user.setEmial(resultSet.getString("email"));
+			user.setUserId(resultSet.getString("id"));
+			user.setFirstName(resultSet.getString("firstName"));
+			user.setLastName(resultSet.getString("lastName"));
+			user.setEmail(resultSet.getString("email"));
 			user.setAddress(resultSet.getString("address"));
-			user.setPhoneNumber(resultSet.getString("phonenumber"));
+			user.setPhoneNumber(resultSet.getString("phoneNumber"));
 			user.setGender(resultSet.getString("gender"));
 			return user;
 		} else

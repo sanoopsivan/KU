@@ -3,18 +3,38 @@
  */
 package com.bas.KU.models;
 
+import java.util.Date;
+
 /**
  * @author San
  *
  */
 public class User {
-	private int userId;
+	private String userId;
 	private String firstName;
 	private String lastName;
 	private String gender;
 	private String address;
 	private String phoneNumber;
-	private String emial;
+	private String email;
+	private Date createDate;
+	private String areaCode;
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public String getAreaCode() {
+		return areaCode;
+	}
+
+	public void setAreaCode(String areaCode) {
+		this.areaCode = areaCode;
+	}
 
 	public String getPhoneNumber() {
 		return phoneNumber;
@@ -24,19 +44,19 @@ public class User {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String getEmial() {
-		return emial;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setEmial(String emial) {
-		this.emial = emial;
+	public void setEmail(String emial) {
+		this.email = emial;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
