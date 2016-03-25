@@ -9,20 +9,30 @@ import java.sql.SQLException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
+import com.bas.KU.models.Admin;
 import com.bas.KU.models.User;
 
 /**
  * @author San
  *
  */
-public class UserExtractor implements ResultSetExtractor<User>{
+public class UserExtractor implements ResultSetExtractor<User> {
 
-	public User extractData(ResultSet resultSet) throws SQLException, DataAccessException {		    
-			  User user = new User();  		    
-			  user.setUserId(resultSet.getInt(1));  
-	
-			    
-			  return user;  
+	public User extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+
+		if (resultSet != null) {
+			User user = new User();
+			user.setUserId(resultSet.getInt("id"));
+			user.setFirstName(resultSet.getString("firstname"));
+			user.setLastName(resultSet.getString("lastname"));
+			user.setEmial(resultSet.getString("email"));
+			user.setAddress(resultSet.getString("address"));
+			user.setPhoneNumber(resultSet.getString("phonenumber"));
+			user.setGender(resultSet.getString("gender"));
+			return user;
+		} else
+			return null;
+
 	}
 
 }

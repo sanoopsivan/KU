@@ -29,13 +29,13 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	public List<User> getUserList() {
-		List userList = new ArrayList();  
-		  
-		  String sql = "select * from user";  
-		  
-		  JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);  
-		  userList = jdbcTemplate.query(sql, new UserRowMapper());  
-		  return userList;  
+		List<User> userList = new ArrayList<>();
+
+		String sql = "select * from user";
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		userList = jdbcTemplate.query(sql, new UserRowMapper());
+		return userList.isEmpty() ? null : userList;
 	}
 
 	public void updateData(User user) {
