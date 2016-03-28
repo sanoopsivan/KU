@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<h3>${admin.status} </h3>
 </body>
 </html>

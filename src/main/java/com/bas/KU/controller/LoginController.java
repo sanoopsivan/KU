@@ -9,9 +9,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bas.KU.enums.AdminStatus;
@@ -28,6 +30,8 @@ import com.bas.KU.utils.MainUtils;
 
 @RequestMapping(value = "/login")
 @Controller
+@SessionAttributes("admin")
+
 public class LoginController {
 
 	@Autowired
@@ -58,7 +62,15 @@ public class LoginController {
 
 	// for GET Request
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView adminLogin() {
+	public ModelAndView adminLogin(@ModelAttribute("admin") Admin admin,ModelMap model) {
+		if (admin != null) {
+			String role = admin != null && admin.getStatus().equalsIgnoreCase(AdminStatus.SUPERADMIN.getStatus())
+					? AdminStatus.SUPERADMIN.getStatus()
+					: admin != null && admin.getStatus().equalsIgnoreCase(AdminStatus.ADMIN.getStatus())
+							? AdminStatus.ADMIN.getStatus() : AdminStatus.UNAUTHORISED.getStatus();
+			setModel(model, admin);
+			return new ModelAndView(MainUtils.getPage(role));
+		}
 		return new ModelAndView(MainUtils.getPage(AdminStatus.UNAUTHORISED.getStatus()));
 	}
 

@@ -10,7 +10,7 @@
 <body>
 	<h1>${admin.status}</h1>
 
-	<table>
+	<%-- <table>
 		<tr>
 			<th>FirstName</th>
 			<th>LastName</th>
@@ -23,7 +23,29 @@
 				<td><a href="edit?${user.userId}">Edit</a></td>
 			</tr>
 		</c:forEach>
-	</table>
+	</table> --%>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$.ajax({
+				url : $("#searchForm").attr("action"),
+				type : "GET",
 
+				success : function(response) {
+					alert( response );
+				},
+				error : function(xhr, status, error) {
+					alert(xhr.responseText);
+				}
+			});
+			
+		});
+		
+	</script>
+	<form action="ajax" method="get" id="searchForm">
+	<input type="submit" id="submit"/>
+		<div id="result"></div>
+	</form>
 </body>
 </html>
