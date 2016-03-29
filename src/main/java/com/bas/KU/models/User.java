@@ -11,21 +11,66 @@ import java.util.Date;
  */
 public class User {
 	private String userId;
+	private String KUId;
 	private String firstName;
 	private String lastName;
 	private String gender;
 	private String address;
 	private String phoneNumber;
 	private String email;
-	private Date createDate;
+	private Date creationDate;
 	private String areaCode;
+	private String landLineNumber;
+	private String pincode;
+	private Date activationDate;
+	private Date deactivationDate;
 
-	public Date getCreateDate() {
-		return createDate;
+	public String getKUId() {
+		return KUId;
 	}
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public void setKUId(String KUId) {
+		KUId = KUId;
+	}
+
+	public String getLandLineNumber() {
+		return landLineNumber;
+	}
+
+	public void setLandLineNumber(String landLineNumber) {
+		this.landLineNumber = landLineNumber;
+	}
+
+	public String getPincode() {
+		return pincode;
+	}
+
+	public void setPincode(String pincode) {
+		this.pincode = pincode;
+	}
+
+	public Date getActivationDate() {
+		return activationDate;
+	}
+
+	public void setActivationDate(Date activationDate) {
+		this.activationDate = activationDate;
+	}
+
+	public Date getDeactivationDate() {
+		return deactivationDate;
+	}
+
+	public void setDeactivationDate(Date deactivationDate) {
+		this.deactivationDate = deactivationDate;
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 
 	public String getAreaCode() {

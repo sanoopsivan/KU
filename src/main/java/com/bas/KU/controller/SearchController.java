@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bas.KU.models.User;
 import com.bas.KU.services.UserService;
+import com.bas.KU.utils.MainUtils;
 
 /**
  * @author San
@@ -25,7 +26,7 @@ import com.bas.KU.services.UserService;
 @Controller
 public class SearchController {
 	
-	private static final String  QUERY = "select * from user ";
+	
 
 	@Autowired
 	UserService userservice;
@@ -38,10 +39,9 @@ public class SearchController {
 											@RequestParam(value = "status", required = false) String status){
 			
 		List <User> searchResults = new ArrayList<>();
-		StringBuilder query = new StringBuilder(QUERY);
-		/*if(StringUtils.isNotBlank(q))
-			query.append("where").append("user.firstName like ").append(q);
-	*/
+		
+		String query = MainUtils.getQuery(q, area, status, startDate, endDate);
+		System.out.println(query);
 		searchResults = userservice.getUserList();
 		return searchResults;
 	}
