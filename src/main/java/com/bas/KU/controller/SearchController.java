@@ -42,7 +42,7 @@ public class SearchController {
 		
 		String query = MainUtils.getQuery(q, area, status, startDate, endDate);
 		System.out.println(query);
-		searchResults = userservice.getUserList();
+		searchResults = userservice.getUserList(query);
 		return searchResults;
 	}
 

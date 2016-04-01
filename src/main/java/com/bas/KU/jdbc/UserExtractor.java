@@ -32,9 +32,9 @@ public class UserExtractor implements ResultSetExtractor<User> {
 			user.setGender(resultSet.getString("gender"));
 			user.setAreaCode(resultSet.getString("areaCode"));
 			user.setLandLineNumber(resultSet.getString("landlineNumber"));
-			user.setCreationDate(resultSet.getDate("creationDate"));
+		/*	user.setCreationDate(resultSet.getDate("creationDate"));
 			user.setActivationDate(resultSet.getDate("activationDate"));
-			user.setDeactivationDate(resultSet.getDate("deactivationDate"));
+			user.setDeactivationDate(resultSet.getDate("deactivationDate"));*/
 			return user;
 		} else
 			return null;

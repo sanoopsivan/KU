@@ -21,7 +21,9 @@ public interface UserDAO {
 	public void deleteData(String id);
 
 	public User getUser(String id);
-	
+
 	public List<User> getUserList(int limit);
+
+	public List<User> getUserList(String query);
 
 }

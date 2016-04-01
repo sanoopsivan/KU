@@ -15,18 +15,18 @@ import com.bas.KU.models.User;
  *
  */
 public class UserServiceImpl implements UserService {
-	
-	@Autowired  
-	 UserDAO userdao;  
+
+	@Autowired
+	UserDAO userdao;
 
 	public void insertData(User user) {
-		// TODO Auto-generated method stub
+		userdao.insertUser(user);
 
 	}
 
 	public List<User> getUserList() {
 		// TODO Auto-generated method stub
-		return userdao.getUserList();  
+		return userdao.getUserList();
 	}
 
 	public void deleteData(String id) {
@@ -46,6 +46,10 @@ public class UserServiceImpl implements UserService {
 
 	public List<User> getUserList(int limit) {
 		return userdao.getUserList(limit);
+	}
+
+	public List<User> getUserList(String query) {
+		return userdao.getUserList(query);
 	}
 
 }

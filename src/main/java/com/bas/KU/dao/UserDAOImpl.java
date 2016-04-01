@@ -20,7 +20,7 @@ import com.bas.KU.models.User;
  */
 public class UserDAOImpl implements UserDAO {
 
-	private static final String INSERT_NEW_USER_QUERY = "INSERT INTO user (firstName,lastName, gender, email, address, phoneNumber ,creatDate ,areaCode ) VALUES (?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_NEW_USER_QUERY = "INSERT INTO user (KUid,firstName,lastName,gender,email,address,phoneNumber,landlineNumber,areaCode,creationDate,activationDate,deactivationDate ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_USER_QUERY = "UPDATE user set firstName = ?,lastName = ?, gender = ?, email = ? ,address = ?,phoneNumber =? where user_id = ?";
 	private static final String SELECT_ALL_USER_QUERY = "select * from user";
 	private static final String SELECT_A_LIMIT_OF_USERS_QUERY = "select * from user limit %d";
@@ -33,8 +33,10 @@ public class UserDAOImpl implements UserDAO {
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
-		jdbcTemplate.update(sql, new Object[] { user.getFirstName(), user.getLastName(), user.getGender(),
-				user.getEmail(), user.getAddress(), user.getPhoneNumber() });
+		jdbcTemplate.update(sql,
+				new Object[] { user.getKUId(), user.getFirstName(), user.getLastName(), user.getGender(),
+						user.getEmail(), user.getAddress(), user.getPhoneNumber(), user.getLandLineNumber(),
+						user.getAreaCode(), user.getCreationDate(), null, null });
 
 	}
 
@@ -75,6 +77,13 @@ public class UserDAOImpl implements UserDAO {
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		userList = jdbcTemplate.query(sql, new UserRowMapper());
+		return userList.isEmpty() ? null : userList;
+	}
+
+	public List<User> getUserList(String query) {
+		List<User> userList = new ArrayList<>();
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		userList = jdbcTemplate.query(query, new UserRowMapper());
 		return userList.isEmpty() ? null : userList;
 	}
 

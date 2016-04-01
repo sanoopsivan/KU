@@ -32,12 +32,13 @@ public class MainUtils {
 	public static String getQuery(String q, String area, String status, Date startDate, Date endDate) {
 		boolean isWhereClauseAdded = false;
 		StringBuilder query = new StringBuilder(QUERY);
-		if (StringUtils.isBlank(q) && StringUtils.isBlank(area) && status.equalsIgnoreCase("ALL") && startDate == null
+		if (StringUtils.isBlank(q) && StringUtils.isBlank(area)
+				&& (StringUtils.isBlank(status) || status.equalsIgnoreCase("ALL")) && startDate == null
 				&& endDate == null)
 			return query.toString();
 		if (StringUtils.isNotBlank(q)) {
 			query.append(WHERE_CLAUSE).append("firstName like %").append(q).append("% OR lastName like %").append(q)
-					.append("% OR address like %").append(q).append("% OR phoneNumber like %").append(q);
+					.append("% OR address like %").append(q).append("% OR phoneNumber like %").append(q).append("%");
 			isWhereClauseAdded = true;
 		}
 		if (StringUtils.isNotBlank(area)) {
@@ -56,10 +57,10 @@ public class MainUtils {
 				query.append(WHERE_CLAUSE);
 				isWhereClauseAdded = true;
 			}
-			query.append("area like %").append(area).append("%");
+			query.append("status like %").append(status).append("%");
 		}
-		
-		if(startDate != null && endDate != null ){
+
+		if (startDate != null && endDate != null) {
 			if (isWhereClauseAdded)
 				query.append(AND_CLAUSE);
 			else {

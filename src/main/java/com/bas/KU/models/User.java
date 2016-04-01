@@ -30,7 +30,7 @@ public class User {
 	}
 
 	public void setKUId(String KUId) {
-		KUId = KUId;
+		this.KUId = KUId;
 	}
 
 	public String getLandLineNumber() {

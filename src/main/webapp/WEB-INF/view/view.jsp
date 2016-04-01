@@ -24,7 +24,7 @@
 			</tr>
 		</c:forEach>
 	</table> --%>
-	<script
+	<!-- <script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -42,10 +42,12 @@
 			
 		});
 		
-	</script>
+	</script> -->
 	<form action="ajax" method="get" id="searchForm">
 	<input type="submit" id="submit"/>
 		<div id="result"></div>
 	</form>
+	
+	<a href="addUser">add USer</a>
 </body>
 </html>

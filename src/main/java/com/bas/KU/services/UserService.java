@@ -20,4 +20,5 @@ public interface UserService {
 	 public User getUser(String id);  
 	 public void updateData(User user);  
 	 public List<User> getUserList(int limit);
+	 public List<User> getUserList(String query);
 }
