@@ -1,0 +1,9 @@
+#page-wrapper {
+    min-height: 600px !important;
+}
+.customMarginTop {
+	margin-top: 10px;
+}
+.loginContainer {
+	margin-top: 100px;
+}

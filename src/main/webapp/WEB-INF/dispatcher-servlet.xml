@@ -10,6 +10,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 
 	<context:property-placeholder location="classpath:database.properties" />
 	<context:component-scan base-package="com.bas.KU.controller" />
+ 	<mvc:resources mapping="/resources/**" location="/resources/theme/"></mvc:resources> 
 	<mvc:annotation-driven />
 
 	<!-- declare beans -->

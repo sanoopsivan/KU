@@ -28,7 +28,7 @@ import com.bas.KU.utils.MainUtils;
  *
  */
 
-@RequestMapping(value = "/login")
+
 @Controller
 @SessionAttributes("admin")
 
@@ -41,7 +41,7 @@ public class LoginController {
 	UserService userService;
 
 	// for POST Request
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value = "/login",method = RequestMethod.POST)
 	public ModelAndView adminLogin(@RequestParam(value = "username", required = false) String username,
 			@RequestParam(value = "password", required = false) String password, ModelMap model) {
 
@@ -61,7 +61,7 @@ public class LoginController {
 	}
 
 	// for GET Request
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/login",method = RequestMethod.GET)
 	public ModelAndView adminLogin(@ModelAttribute("admin") Admin admin,ModelMap model) {
 		if (admin != null) {
 			String role = admin != null && admin.getStatus().equalsIgnoreCase(AdminStatus.SUPERADMIN.getStatus())
@@ -85,5 +85,12 @@ public class LoginController {
 		}
 		return model;
 	}
+	
+	@RequestMapping(value = "/logout",method = RequestMethod.GET)
+	public ModelAndView adminLogout() {
+		
+		return new ModelAndView("login");
+	}
+	
 
 }
