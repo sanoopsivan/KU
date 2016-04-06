@@ -42,7 +42,7 @@ public class LoginController {
 
 	// for POST Request
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
-	public ModelAndView adminLogin(@RequestParam(value = "username", required = false) String username,
+	public String adminLogin(@RequestParam(value = "username", required = false) String username,
 			@RequestParam(value = "password", required = false) String password, ModelMap model) {
 
 		if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
@@ -53,25 +53,25 @@ public class LoginController {
 							? AdminStatus.ADMIN.getStatus() : AdminStatus.UNAUTHORISED.getStatus();
 			setModel(model, admin);
 
-			return new ModelAndView(MainUtils.getPage(role));
+			return "redirect:"+MainUtils.getPage(role);
 
 		}
-		return new ModelAndView(MainUtils.getPage(AdminStatus.UNAUTHORISED.getStatus()));
+		return "redirect:"+(MainUtils.getPage(AdminStatus.UNAUTHORISED.getStatus()));
 
 	}
 
 	// for GET Request
 	@RequestMapping(value = "/login",method = RequestMethod.GET)
-	public ModelAndView adminLogin(@ModelAttribute("admin") Admin admin,ModelMap model) {
+	public String adminLogin(@ModelAttribute("admin") Admin admin,ModelMap model) {
 		if (admin != null) {
 			String role = admin != null && admin.getStatus().equalsIgnoreCase(AdminStatus.SUPERADMIN.getStatus())
 					? AdminStatus.SUPERADMIN.getStatus()
 					: admin != null && admin.getStatus().equalsIgnoreCase(AdminStatus.ADMIN.getStatus())
 							? AdminStatus.ADMIN.getStatus() : AdminStatus.UNAUTHORISED.getStatus();
 			setModel(model, admin);
-			return new ModelAndView(MainUtils.getPage(role));
+			return "redirect:"+MainUtils.getPage(role);
 		}
-		return new ModelAndView(MainUtils.getPage(AdminStatus.UNAUTHORISED.getStatus()));
+		return "redirect:"+(MainUtils.getPage(AdminStatus.UNAUTHORISED.getStatus()));
 	}
 
 	// set the model
@@ -90,6 +90,12 @@ public class LoginController {
 	public ModelAndView adminLogout() {
 		
 		return new ModelAndView("login");
+	}
+	
+	@RequestMapping(value = "/view",method = RequestMethod.GET)
+	public ModelAndView adminView() {
+		
+		return new ModelAndView("view");
 	}
 	
 
