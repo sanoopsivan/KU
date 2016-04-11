@@ -28,7 +28,6 @@ import com.bas.KU.utils.MainUtils;
  *
  */
 
-
 @Controller
 @SessionAttributes("admin")
 
@@ -41,7 +40,7 @@ public class LoginController {
 	UserService userService;
 
 	// for POST Request
-	@RequestMapping(value = "/login",method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String adminLogin(@RequestParam(value = "username", required = false) String username,
 			@RequestParam(value = "password", required = false) String password, ModelMap model) {
 
@@ -53,50 +52,39 @@ public class LoginController {
 							? AdminStatus.ADMIN.getStatus() : AdminStatus.UNAUTHORISED.getStatus();
 			setModel(model, admin);
 
-			return "redirect:"+MainUtils.getPage(role);
+			return "redirect:" + MainUtils.getPage(role);
 
 		}
-		return "redirect:"+(MainUtils.getPage(AdminStatus.UNAUTHORISED.getStatus()));
+		return "redirect:" + (MainUtils.getPage(AdminStatus.UNAUTHORISED.getStatus()));
 
 	}
 
 	// for GET Request
-	@RequestMapping(value = "/login",method = RequestMethod.GET)
-	public String adminLogin(@ModelAttribute("admin") Admin admin,ModelMap model) {
-		if (admin != null) {
-			String role = admin != null && admin.getStatus().equalsIgnoreCase(AdminStatus.SUPERADMIN.getStatus())
-					? AdminStatus.SUPERADMIN.getStatus()
-					: admin != null && admin.getStatus().equalsIgnoreCase(AdminStatus.ADMIN.getStatus())
-							? AdminStatus.ADMIN.getStatus() : AdminStatus.UNAUTHORISED.getStatus();
-			setModel(model, admin);
-			return "redirect:"+MainUtils.getPage(role);
-		}
-		return "redirect:"+(MainUtils.getPage(AdminStatus.UNAUTHORISED.getStatus()));
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String adminLogin() {
+		return MainUtils.getPage(AdminStatus.UNAUTHORISED.getStatus());
 	}
 
 	// set the model
 	private ModelMap setModel(ModelMap model, Admin admin) {
 		if (admin != null) {
 			model.addAttribute("admin", admin);
-			/*List<User> users = userService.getUserList(2);
-			if (!users.isEmpty())
-				model.addAttribute("users", users);*/
-
 		}
 		return model;
 	}
-	
-	@RequestMapping(value = "/logout",method = RequestMethod.GET)
-	public ModelAndView adminLogout() {
-		
-		return new ModelAndView("login");
+
+	// remove session variable on logout
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String adminLogout(ModelMap model) {
+		model.remove("admin");
+		return MainUtils.getPage(AdminStatus.UNAUTHORISED.getStatus());
 	}
 	
+	//show view page after successfull login
 	@RequestMapping(value = "/view",method = RequestMethod.GET)
-	public ModelAndView adminView() {
+	public String adminView() {
 		
-		return new ModelAndView("view");
+		return "view";
 	}
-	
 
 }

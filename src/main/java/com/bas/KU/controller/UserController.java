@@ -29,13 +29,13 @@ public class UserController {
 	UserService userService;
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView editUser(@RequestParam(value = "id", required = false) String id) {
-		return new ModelAndView("edit");
+	public String editUser(@RequestParam(value = "id", required = false) String id) {
+		return "edit";
 	}
 
 	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
-	public ModelAndView addUser() {
-		return new ModelAndView("addUser");
+	public String addUser() {
+		return "addUser";
 	}
 
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)

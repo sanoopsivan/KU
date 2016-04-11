@@ -53,7 +53,7 @@
             </div>
             
             <!-- BEGIN: User add form; March 13, 2016 - Ananthakrishnan -->
-            <form role = "form" action = "" id = "userAddForm" name = "userAddForm">
+            <form role = "form" action = "addUser" id = "userAddForm" name = "userAddForm" method="post">
                 
                 <div class = "row">                
                     

@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -18,9 +19,12 @@ public class DefaultController {
 
 	// will load the login page on start up
 	@RequestMapping("/")
-	public ModelAndView login(Locale locale) {
+	public String login(Locale locale) {
 		// for study purpose
 		// System.out.println(locale.getCountry());
-		return new ModelAndView("login");
+		return "login";
 	}
+	
+	
+	
 }
