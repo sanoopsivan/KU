@@ -79,11 +79,11 @@ public class LoginController {
 		model.remove("admin");
 		return MainUtils.getPage(AdminStatus.UNAUTHORISED.getStatus());
 	}
-	
-	//show view page after successfull login
-	@RequestMapping(value = "/view",method = RequestMethod.GET)
+
+	// show view page after successfull login
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public String adminView() {
-		
+
 		return "view";
 	}
 

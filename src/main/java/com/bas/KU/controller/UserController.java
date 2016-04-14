@@ -61,8 +61,8 @@ public class UserController {
 		user.setAreaCode(areaCode);
 		user.setLandLineNumber(landLineNumber);
 		user.setPincode(pincode);
-		user.setEmail(email);
-		user.setKUId("KUID01");
+		user.setEmail("dsdfdf");
+		user.setKUId("KUID05");
 		user.setCreationDate(new Date());
 		userService.insertData(user);
 		return new ModelAndView("view");

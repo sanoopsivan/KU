@@ -97,7 +97,7 @@
                                 Area:
                             </div>
                             <div class = "col-md-8">
-                                <input type = "text" class = "form-control" id = "area" name = "area">
+                                <input type = "text" class = "form-control" id = "areaCode" name = "areaCode">
                             </div>
                         </div>
                     </div>
@@ -110,7 +110,7 @@
                                 Pin code:
                             </div>
                             <div class = "col-md-8">
-                                <input type = "text" class = "form-control" id = "pinCode" name = "pinCode">
+                                <input type = "text" class = "form-control" id = "pincode" name = "pincode">
                             </div>
                         </div>
                         <div class = "row customMarginTop">
@@ -118,7 +118,7 @@
                                 Mobile number:
                             </div>
                             <div class = "col-md-8">
-                                <input type = "text" class = "form-control" id = "mobileNumber" name = "mobileNumber">
+                                <input type = "text" class = "form-control" id = "phoneNumber" name = "phoneNumber">
                             </div>
                         </div>
                         <div class = "row customMarginTop">
@@ -126,7 +126,7 @@
                                 Land number:
                             </div>
                             <div class = "col-md-8">
-                                <input type = "text" class = "form-control" id = "landPhoneNumber" name = "landPhoneNumber">
+                                <input type = "text" class = "form-control" id = "landLineNumber" name = "landLineNumber">
                             </div>
                         </div>
                         <div class = "row customMarginTop">

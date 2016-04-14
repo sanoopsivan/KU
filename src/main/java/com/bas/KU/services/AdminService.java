@@ -6,6 +6,7 @@ package com.bas.KU.services;
 import java.util.List;
 
 import com.bas.KU.models.Admin;
+import com.bas.KU.models.Area;
 import com.bas.KU.models.User;
 
 /**
@@ -25,5 +26,13 @@ public interface AdminService {
 	public Admin getAdmin(String username, String password);
 
 	public void updateData(Admin admin);
+
+	public void insertArea(Area area);
+
+	public List<Area> getAreaList();
+
+	public void deleteArea(String id);
+
+	public void updateArea(Area area);
 
 }

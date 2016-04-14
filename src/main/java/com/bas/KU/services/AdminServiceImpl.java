@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bas.KU.dao.AdminDAO;
 import com.bas.KU.models.Admin;
+import com.bas.KU.models.Area;
 
 /**
  * @author San
@@ -47,6 +48,27 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.getAdminList();
 	}
 
-	
+	@Override
+	public void insertArea(Area area) {
+		adminDAO.insertArea(area);
+
+	}
+
+	@Override
+	public List<Area> getAreaList() {
+		return adminDAO.getAreaList();
+	}
+
+	@Override
+	public void deleteArea(String id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void updateArea(Area area) {
+		// TODO Auto-generated method stub
+
+	}
 
 }
