@@ -4,14 +4,30 @@
 package com.bas.KU.utils;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
+
+import com.bas.KU.models.Area;
+import com.bas.KU.services.AdminService;
+import com.bas.KU.services.UserService;
 
 /**
  * @author San
  *
  */
 public class MainUtils {
+
+	@Autowired
+	public AdminService adminService;
+
+	@Autowired
+	public UserService userService;
 
 	private static final String QUERY = "select * from user";
 	private static final String WHERE_CLAUSE = " where ";

@@ -39,6 +39,8 @@ public class LoginController {
 	@Autowired
 	UserService userService;
 
+	public static MainUtils mainUtils = new MainUtils();
+
 	// for POST Request
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String adminLogin(@RequestParam(value = "username", required = false) String username,
@@ -51,7 +53,7 @@ public class LoginController {
 					: admin != null && admin.getStatus().equalsIgnoreCase(AdminStatus.ADMIN.getStatus())
 							? AdminStatus.ADMIN.getStatus() : AdminStatus.UNAUTHORISED.getStatus();
 			setModel(model, admin);
-
+			
 			return "redirect:" + MainUtils.getPage(role);
 
 		}

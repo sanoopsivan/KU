@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.bas.KU.models.Area;
 import com.bas.KU.services.AdminService;
 import com.bas.KU.services.UserService;
+import com.bas.KU.utils.MainUtils;
 
 /**
  * @author San
@@ -28,8 +29,12 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
 
+	public static MainUtils mainUtils = new MainUtils();
+
 	@RequestMapping(value = "/addArea", method = RequestMethod.GET)
-	public String addUser() {
+	public String addUser(ModelMap model) {
+
+		setAreaList(model);
 		return "addArea";
 	}
 
@@ -40,11 +45,25 @@ public class AdminController {
 			Area area = new Area(areaCode);
 			adminService.insertArea(area);
 		}
-		List<Area> areaList = adminService.getAreaList();
-		if (areaList != null)
-			model.addAttribute("areaList", areaList);
+		setAreaList(model);
 
 		return "addArea";
+	}
+
+	@RequestMapping(value = "/addUniqueID", method = RequestMethod.POST)
+	public String addUniqueID(@RequestParam(value = "format", required = false) String format,
+			@RequestParam(value = "value", required = false) String value, ModelMap model) {
+		
+		return "addUniqueID";
+	}
+
+	@RequestMapping(value = "/addUniqueID", method = RequestMethod.GET)
+	public String addUniqueID(ModelMap model) {
+		return "addUniqueID";
+	}
+
+	private void setAreaList(ModelMap model) {
+		model.addAttribute("areaList", adminService.getAreaList());
 	}
 
 }

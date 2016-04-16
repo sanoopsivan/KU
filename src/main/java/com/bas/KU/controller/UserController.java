@@ -9,12 +9,14 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bas.KU.models.User;
+import com.bas.KU.services.AdminService;
 import com.bas.KU.services.UserService;
 
 /**
@@ -24,9 +26,12 @@ import com.bas.KU.services.UserService;
 
 @Controller
 public class UserController {
-	
+
 	@Autowired
 	UserService userService;
+
+	@Autowired
+	AdminService adminService;
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String editUser(@RequestParam(value = "id", required = false) String id) {
@@ -34,7 +39,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
-	public String addUser() {
+	public String addUser(ModelMap model) {
+		model.addAttribute("areaList", adminService.getAreaList());
 		return "addUser";
 	}
 
