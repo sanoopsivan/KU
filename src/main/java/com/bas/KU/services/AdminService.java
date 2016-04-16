@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.bas.KU.models.Admin;
 import com.bas.KU.models.Area;
+import com.bas.KU.models.KUid;
 import com.bas.KU.models.User;
 
 /**
@@ -34,5 +35,11 @@ public interface AdminService {
 	public void deleteArea(String id);
 
 	public void updateArea(Area area);
+
+	public List<KUid> getKUidList();
+
+	public void insertKUid(KUid kuid);
+
+	public KUid getLastKuid();
 
 }

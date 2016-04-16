@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.bas.KU.dao.AdminDAO;
 import com.bas.KU.models.Admin;
 import com.bas.KU.models.Area;
+import com.bas.KU.models.KUid;
 
 /**
  * @author San
@@ -69,6 +70,23 @@ public class AdminServiceImpl implements AdminService {
 	public void updateArea(Area area) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public List<KUid> getKUidList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertKUid(KUid kuid) {
+		adminDAO.insertKUid(kuid);
+
+	}
+
+	@Override
+	public KUid getLastKuid() {
+		return adminDAO.getLastKuid();
 	}
 
 }

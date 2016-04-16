@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bas.KU.models.Area;
+import com.bas.KU.models.KUid;
 import com.bas.KU.services.AdminService;
 import com.bas.KU.services.UserService;
 import com.bas.KU.utils.MainUtils;
@@ -53,12 +54,20 @@ public class AdminController {
 	@RequestMapping(value = "/addUniqueID", method = RequestMethod.POST)
 	public String addUniqueID(@RequestParam(value = "format", required = false) String format,
 			@RequestParam(value = "value", required = false) String value, ModelMap model) {
-		
+		if (StringUtils.isNotBlank(format) || StringUtils.isNotBlank(value)) {
+			KUid kuid = new KUid();
+			kuid.setFormat(format);
+			kuid.setValue(value);
+			kuid.setKUid(format, value);
+			adminService.insertKUid(kuid);
+		}
+		model.addAttribute("KUid", adminService.getLastKuid());
 		return "addUniqueID";
 	}
 
 	@RequestMapping(value = "/addUniqueID", method = RequestMethod.GET)
 	public String addUniqueID(ModelMap model) {
+		model.addAttribute("KUid", adminService.getLastKuid());
 		return "addUniqueID";
 	}
 

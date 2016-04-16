@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bas.KU.models.KUid;
 import com.bas.KU.models.User;
 import com.bas.KU.services.AdminService;
 import com.bas.KU.services.UserService;
@@ -68,9 +69,22 @@ public class UserController {
 		user.setLandLineNumber(landLineNumber);
 		user.setPincode(pincode);
 		user.setEmail("dsdfdf");
-		user.setKUId("KUID05");
+		setUserKUID(user);
 		user.setCreationDate(new Date());
 		userService.insertData(user);
 		return new ModelAndView("view");
+	}
+
+	private void setUserKUID(User user) {
+		KUid kuid = adminService.getLastKuid();
+		user.setKUId(kuid.getKUid());
+		kuid.setValue(setNextKUID(kuid.getValue()));
+		kuid.setKUid(kuid.getFormat(), kuid.getValue());
+		adminService.insertKUid(kuid);
+	}
+
+	private String setNextKUID(String currentIDValue) {
+		int value = Integer.parseInt(currentIDValue) + 1;
+		return Integer.toString(value);
 	}
 }
