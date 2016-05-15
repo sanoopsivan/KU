@@ -6,6 +6,7 @@ package com.bas.KU.controller;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,11 +14,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bas.KU.models.KUid;
 import com.bas.KU.models.User;
 import com.bas.KU.services.AdminService;
+import com.bas.KU.services.ThirdPartyService;
 import com.bas.KU.services.UserService;
 
 /**
@@ -28,11 +31,16 @@ import com.bas.KU.services.UserService;
 @Controller
 public class UserController {
 
+	private static final String DATE_FORMAT = "yyyy/MM/dd HH:mm:ss";
+
 	@Autowired
 	UserService userService;
 
 	@Autowired
 	AdminService adminService;
+
+	@Autowired
+	ThirdPartyService thirdPartyService;
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String editUser(@RequestParam(value = "id", required = false) String id) {
@@ -56,9 +64,6 @@ public class UserController {
 			@RequestParam(value = "pincode", required = false) String pincode,
 			@RequestParam(value = "email", required = false) String email) {
 
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		Date date = new Date();
-		System.out.println(dateFormat.format(date)); // 2014/08/06 15:59:48
 		User user = new User();
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
@@ -68,10 +73,12 @@ public class UserController {
 		user.setAreaCode(areaCode);
 		user.setLandLineNumber(landLineNumber);
 		user.setPincode(pincode);
-		user.setEmail("dsdfdf");
+		user.setEmail(email);
 		setUserKUID(user);
 		user.setCreationDate(new Date());
 		userService.insertData(user);
+		thirdPartyService.sendMail();
+		// thirdPartyService.sendSMS();
 		return new ModelAndView("view");
 	}
 
@@ -86,5 +93,12 @@ public class UserController {
 	private String setNextKUID(String currentIDValue) {
 		int value = Integer.parseInt(currentIDValue) + 1;
 		return Integer.toString(value);
+	}
+
+	@RequestMapping(value = "/getUsers", method = RequestMethod.POST)
+	@ResponseBody
+	public List<User> getUsers(ModelMap model) {
+		System.out.println("Ajax worked");
+		return userService.getUserList();
 	}
 }

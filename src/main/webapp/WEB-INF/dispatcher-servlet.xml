@@ -17,6 +17,7 @@
 	<bean id="userService" class="com.bas.KU.services.UserServiceImpl" />
 	<bean id="adminDAO" class="com.bas.KU.dao.AdminDAOImpl" />
 	<bean id="adminService" class="com.bas.KU.services.AdminServiceImpl" />
+	<bean id="thirdPartyService" class="com.bas.KU.services.ThirdPartyServiceImpl" />
 
 
 	<bean

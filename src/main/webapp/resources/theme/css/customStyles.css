@@ -7,3 +7,10 @@
 .loginContainer {
 	margin-top: 100px;
 }
+#loadingImageHolder
+{    position: relative;
+    top: 100px;
+    left: 70px;
+    background-color: white;
+    width: 500px;
+    }
