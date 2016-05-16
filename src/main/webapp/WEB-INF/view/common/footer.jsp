@@ -11,15 +11,21 @@
 			maintained by: Ananthakrishnan, Bipin, Sanoop.</p>
 	</div>
 </footer>
-<script src="<c:url value="/resources/js/jquery.js" />"></script>
-<script src="<c:url value="/resources/js/includeHTML.js" />"></script>
-<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 
-<script src="<c:url value="/resources/js/home.js" />"></script>
-<script src="<c:url value="/resources/js/typeahead.js" />"></script>
+
 <%-- <script src="<c:url value="/resources/js/plugins/morris/raphael.min.js" />"></script>
 	    <script src="<c:url value="/resources/js/plugins/morris/morris.min.js" />"></script>
 	    <script src="<c:url value="/resources/js/plugins/morris/morris-data.js" />"></script> --%>
 
 </body>
+
+<script src="<c:url value="/resources/js/jquery.js" />"></script>
+<script src="<c:url value="/resources/js/includeHTML.js" />"></script>
+<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+
+<script src="<c:url value="/resources/js/typeahead.js" />"></script>
+<script src="<c:url value="/resources/js/moment.js" />"></script>
+<script
+	src="<c:url value="/resources/js/bootstrap-datetimepicker.js" />"></script>
+<script src="<c:url value="/resources/js/home.js" />"></script>
 </html>

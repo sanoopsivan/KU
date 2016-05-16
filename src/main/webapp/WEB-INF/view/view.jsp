@@ -10,11 +10,12 @@
 
 					<div class="col-md-3 topPadding">
 						<input type="text" class="form-control" id="searchCustomerByQuery"
-							placeholder="Search Customer" />
+							placeholder="Search Customer" name="q" />
 					</div>
 					<div class="col-md-3 topPadding">
 						<div class="form-group">
-							<select class="form-control" id="sel1">
+							<select class="form-control" id="searchCustomerByStatus"
+								name="searchCustomerByStatus">
 								<option selected disabled>Status</option>
 								<option>Activated</option>
 								<option>Deactivated</option>
@@ -23,11 +24,12 @@
 						</div>
 					</div>
 					<div class="col-md-2 topPadding">
-						<input type='text' class="form-control" id='datetimepicker'/>
+						<input type='text' class="form-control" id='datetimepicker_1'
+							placeholder="From Date" name="datetimepicker_1" />
 					</div>
 					<div class="col-md-2 topPadding">
-						<input type="text" class="form-control"
-							id="searchCustomerByDateTill" placeholder="Till Date" />
+						<input type='text' class="form-control" id='datetimepicker_2'
+							placeholder="Till Date" name="datetimepicker_2" />
 					</div>
 					<div class="col-md-2 topPadding">
 						<button class="btn btn-default" id="searchCustomerButton">Search</button>

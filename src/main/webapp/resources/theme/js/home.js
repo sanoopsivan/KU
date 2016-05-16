@@ -1,6 +1,18 @@
+$(function() {
+	$('#datetimepicker_1').datetimepicker();
+});
+$(function() {
+	$('#datetimepicker_2').datetimepicker();
+});
+
 $('document').ready(ajaxCall);
 
-$("#searchCustomerButton").click(ajaxCall);
+$("#searchCustomerForm").submit(function(event) {
+
+	event.preventDefault();
+	ajaxCall();
+
+});
 
 function ajaxCall() {
 	var customers = '';
@@ -9,6 +21,12 @@ function ajaxCall() {
 				method : 'post',
 				url : "getUsers",
 				async : true,
+				data : {
+					q : $('#searchCustomerByQuery').val(),
+					searchCustomerByStatus : $('#searchCustomerByStatus').val(),
+					datetimepicker_1 : $('#datetimepicker_1').val(),
+					datetimepicker_2 : $('#datetimepicker_2').val(),
+				},
 				dataType : 'json',
 				beforeSend : function(result) {
 					$('#loadingImageHolder').show();
@@ -85,7 +103,3 @@ function ajaxCall() {
 				}
 			});
 }
-
-$(function () {
-    $('#datetimepicker').datetimepicker();
-});

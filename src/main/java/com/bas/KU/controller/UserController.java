@@ -97,8 +97,15 @@ public class UserController {
 
 	@RequestMapping(value = "/getUsers", method = RequestMethod.POST)
 	@ResponseBody
-	public List<User> getUsers(ModelMap model) {
+	public List<User> getUsers(ModelMap model, @RequestParam(value = "q", required = false) String q,
+			@RequestParam(value = "datetimepicker_1", required = false) String datetimepicker_1,
+			@RequestParam(value = "datetimepicker_2", required = false) String datetimepicker_2,
+			@RequestParam(value = "searchCustomerByStatus", required = false) String searchCustomerByStatus) {
 		System.out.println("Ajax worked");
+		System.out.println(q);
+		System.out.println(datetimepicker_1);
+		System.out.println(datetimepicker_2);
+		System.out.println(searchCustomerByStatus);
 		return userService.getUserList();
 	}
 }
