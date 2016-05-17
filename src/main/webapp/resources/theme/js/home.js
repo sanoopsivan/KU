@@ -52,25 +52,28 @@ function ajaxCall() {
 												.append(
 														$(
 																'<td class = "searchable">')
-																.text(
-																		item.customerID),
-														$(
-																'<td class = "searchable">')
-																.text(item.name),
+																.text(item.kuid),
 														$(
 																'<td class = "searchable">')
 																.text(
-																		item.mobile),
+																		item.firstName),
 														$(
 																'<td class = "searchable">')
 																.text(
-																		item.dateAdded),
+																		item.lastName),
+														$(
+																'<td class = "searchable">')
+																.text(
+																		item.phoneNumber),
 														$('<td>').text(
 																item.status),
 														$('<td>')
+																.text(
+																		item.creationDate),
+														$('<td>')
 																.html(
 																		'<a href = "'
-																				+ item.viewProfile
+																				+ item.gender
 																				+ '" class = "btn btn-success">View</a>'))
 												.appendTo('#customerTable');
 									});
