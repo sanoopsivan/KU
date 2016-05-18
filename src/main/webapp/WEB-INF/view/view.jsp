@@ -36,61 +36,62 @@
 					</div>
 
 				</div>
-			</form>
-			<div class="row">
-				<div class="col-md-12">
-					<h1 class="page-header">View Users</h1>
+
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="page-header">View Users</h1>
+					</div>
+
 				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="table-responsive">
+							<div id="loadingImageHolder" class="col-md-12 text-center">
+								<img id="loadingImage"
+									src="<c:url value="/resources/images/ajax-loader.gif" />"
+									alt="Loading" />
+							</div>
 
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="table-responsive">
-						<div id="loadingImageHolder" class="col-md-12 text-center">
-							<img id="loadingImage"
-								src="<c:url value="/resources/images/ajax-loader.gif" />"
-								alt="Loading" />
+							<table id="customerTable"
+								class="table table-bordered table-hover table-striped">
+								<thead>
+									<tr>
+										<th>KU ID</th>
+										<th>First Name</th>
+										<th>Last Number</th>
+										<th>Mobile</th>
+										<th>Status</th>
+										<th>Date</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody id="customerTableBody">
+
+									<!-- April 10, 2016 - Ananthakirshnan: To be shown when no user is available -->
+									<tr id="noCustomerAvailable">
+										<td colspan="5" class="text-center">No users available.
+											Please click to 'Add' to add new users.</td>
+										<td>
+											<a href=addUser.html " class="btn btn-success"> Add </a>
+										</td>
+									</tr>
+
+									<!-- April 10, 2016 - Ananthakirshnan: To be shown searched customer is not found -->
+									<tr id="customerNotAvailable">
+										<td colspan="5" class="text-center">No users available.
+											Please click to 'Add' to add new users.</td>
+										<td>
+											<a href=addUser.html " class="btn btn-success"> Add </a>
+										</td>
+									</tr>
+
+								</tbody>
+							</table>
 						</div>
-
-						<table id="customerTable"
-							class="table table-bordered table-hover table-striped">
-							<thead>
-								<tr>
-									<th>KU ID</th>
-		                            <th>First Name</th>
-		                            <th>Last Number</th>
-		                            <th>Mobile</th>
-		                            <th>Status</th>
-		                            <th>Date</th>
-		                            <th>Action</th>
-								</tr>
-							</thead>
-							<tbody id="customerTableBody">
-
-								<!-- April 10, 2016 - Ananthakirshnan: To be shown when no user is available -->
-								<tr id="noCustomerAvailable">
-									<td colspan="5" class="text-center">No users available.
-										Please click to 'Add' to add new users.</td>
-									<td>
-										<a href=addUser.html " class="btn btn-success"> Add </a>
-									</td>
-								</tr>
-
-								<!-- April 10, 2016 - Ananthakirshnan: To be shown searched customer is not found -->
-								<tr id="customerNotAvailable">
-									<td colspan="5" class="text-center">No users available.
-										Please click to 'Add' to add new users.</td>
-									<td>
-										<a href=addUser.html " class="btn btn-success"> Add </a>
-									</td>
-								</tr>
-
-							</tbody>
-						</table>
 					</div>
 				</div>
-			</div>
-
+				<div id="pagination"></div>
+			</form>
 		</div>
 	</div>
 </div>

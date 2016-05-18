@@ -5,6 +5,11 @@ $(function() {
 	$('#datetimepicker_2').datetimepicker();
 });
 
+$(document.body).on('click', '.page', function(e) {
+	e.preventDefault();
+	ajaxCall();
+});
+
 $('document').ready(ajaxCall);
 
 $("#searchCustomerForm").submit(function(event) {
@@ -77,6 +82,9 @@ function ajaxCall() {
 																				+ '" class = "btn btn-success">View</a>'))
 												.appendTo('#customerTable');
 									});
+					$("#pagination").append("<ul class='pagination'></ul>");
+					$(".pagination").append(
+							"<li><a href='' class='page' id='1'>1</a></li>");
 					customers = new Bloodhound({
 						datumTokenizer : Bloodhound.tokenizers.obj.whitespace(
 								'name', 'customerID'),
