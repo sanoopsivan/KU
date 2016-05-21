@@ -3,6 +3,7 @@
  */
 package com.bas.KU.utils;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
 import com.bas.KU.models.Area;
+import com.bas.KU.models.SearchHelper;
 import com.bas.KU.services.AdminService;
 import com.bas.KU.services.UserService;
 
@@ -53,8 +55,9 @@ public class MainUtils {
 				&& endDate == null)
 			return query.toString();
 		if (StringUtils.isNotBlank(q)) {
-			query.append(WHERE_CLAUSE).append("firstName like %").append(q).append("% OR lastName like %").append(q)
-					.append("% OR address like %").append(q).append("% OR phoneNumber like %").append(q).append("%");
+			query.append(WHERE_CLAUSE).append("firstName like '%").append(q).append("%' OR lastName like '%").append(q)
+					.append("%' OR address like '%").append(q).append("%' OR phoneNumber like '%").append(q)
+					.append("%'");
 			isWhereClauseAdded = true;
 		}
 		if (StringUtils.isNotBlank(area)) {

@@ -8,11 +8,11 @@
 			<form id="searchCustomerForm">
 				<div class="row">
 
-					<div class="col-md-3 topPadding">
+					<div class="col-md-4 topPadding">
 						<input type="text" class="form-control" id="searchCustomerByQuery"
-							placeholder="Search Customer" name="q" />
+							placeholder="Search" name="q" />
 					</div>
-					<div class="col-md-3 topPadding">
+					<div class="col-md-4 topPadding">
 						<div class="form-group">
 							<select class="form-control" id="searchCustomerByStatus"
 								name="searchCustomerByStatus">
@@ -23,16 +23,27 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-2 topPadding">
+					<div class="col-md-4 topPadding">
+						<div class="form-group">
+							<input type='text' class="form-control" id='searchByArea'
+								placeholder="Area" name="searchByArea" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 topPadding">
 						<input type='text' class="form-control" id='datetimepicker_1'
-							placeholder="From Date" name="datetimepicker_1" />
+							placeholder="From Date" name="fromDate" />
 					</div>
-					<div class="col-md-2 topPadding">
+					<div class="col-md-4 topPadding">
 						<input type='text' class="form-control" id='datetimepicker_2'
-							placeholder="Till Date" name="datetimepicker_2" />
+							placeholder="Till Date" name="tillDate" />
 					</div>
 					<div class="col-md-2 topPadding">
-						<button class="btn btn-default" id="searchCustomerButton">Search</button>
+						<button class="btn btn-default" id="searchCustomerSubmitButton">Search</button>
+					</div>
+					<div class="col-md-2 topPadding">
+						<button class="btn btn-default" id="searchCustomerClearButton">Clear</button>
 					</div>
 
 				</div>

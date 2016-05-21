@@ -1,16 +1,46 @@
 #page-wrapper {
-    min-height: 600px !important;
+	min-height: 600px !important;
 }
+
 .customMarginTop {
 	margin-top: 10px;
 }
+
 .loginContainer {
 	margin-top: 100px;
 }
-#loadingImageHolder
-{    position: relative;
-    top: 100px;
-    left: 70px;
-    background-color: white;
-    width: 500px;
-    }
+
+#loadingImageHolder {
+	position: relative;
+	top: 100px;
+	left: 70px;
+	background-color: white;
+	width: 500px;
+}
+
+.tt-menu {
+	background-color: #fff;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 8px;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	margin: 12px 0;
+	padding: 8px 0;
+	width: 100%;
+}
+
+.tt-suggestion:hover {
+	/* UPDATE: newer versions use .tt-suggestion.tt-cursor */
+	color: #fff;
+	background-color: #0097cf;
+	cursor: pointer;
+}
+
+.tt-suggestion {
+	font-size: 18px;
+	line-height: 24px;
+	padding: 3px 20px;
+}
+
+.twitter-typeahead {
+	width: 100%;
+}

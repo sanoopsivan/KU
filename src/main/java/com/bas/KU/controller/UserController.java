@@ -96,7 +96,7 @@ public class UserController {
 		return Integer.toString(value);
 	}
 
-	@RequestMapping(value = "/getUsers", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/getUsers", method = RequestMethod.POST)
 	@ResponseBody
 	public List<User> getUsers(ModelMap model, @RequestParam(value = "q", required = false) String q,
 			@RequestParam(value = "datetimepicker_1", required = false) String datetimepicker_1,
@@ -109,7 +109,7 @@ public class UserController {
 		System.out.println(searchCustomerByStatus);
 		return userService.getUserList();
 	}
-
+*/
 	@RequestMapping("/view/{id}")
 	public void getAttr(@PathVariable(value = "id") String id) {
 		System.out.println(id);
