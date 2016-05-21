@@ -52,4 +52,8 @@ public class UserServiceImpl implements UserService {
 		return userdao.getUserList(query);
 	}
 
+	public List<User> getUserNameAndPhone() {
+		return userdao.getUserNameAndPhone();
+	}
+
 }

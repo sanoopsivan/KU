@@ -24,6 +24,7 @@ public class UserDAOImpl implements UserDAO {
 	private static final String UPDATE_USER_QUERY = "UPDATE user set firstName = ?,lastName = ?, gender = ?, email = ? ,address = ?,phoneNumber =? where user_id = ?";
 	private static final String SELECT_ALL_USER_QUERY = "select * from user";
 	private static final String SELECT_A_LIMIT_OF_USERS_QUERY = "select * from user limit %d";
+	private static final String SELECT_NAME_AND_PHONE_OF_ALLUSERS_QUERY = "SELECT firstName,lastName,phoneNumber FROM user";
 
 	@Autowired
 	DataSource dataSource;
@@ -84,6 +85,13 @@ public class UserDAOImpl implements UserDAO {
 		List<User> userList = new ArrayList<>();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		userList = jdbcTemplate.query(query, new UserRowMapper());
+		return userList.isEmpty() ? null : userList;
+	}
+
+	public List<User> getUserNameAndPhone() {
+		List<User> userList = new ArrayList<>();
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		userList = jdbcTemplate.query(SELECT_NAME_AND_PHONE_OF_ALLUSERS_QUERY, new UserRowMapper());
 		return userList.isEmpty() ? null : userList;
 	}
 

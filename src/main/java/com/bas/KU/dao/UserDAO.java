@@ -25,5 +25,7 @@ public interface UserDAO {
 	public List<User> getUserList(int limit);
 
 	public List<User> getUserList(String query);
+	
+	public List<User> getUserNameAndPhone();
 
 }

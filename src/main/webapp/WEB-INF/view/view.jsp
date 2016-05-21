@@ -68,8 +68,7 @@
 								<thead>
 									<tr>
 										<th>KU ID</th>
-										<th>First Name</th>
-										<th>Last Number</th>
+										<th>Name</th>
 										<th>Mobile</th>
 										<th>Status</th>
 										<th>Date</th>

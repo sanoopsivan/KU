@@ -12,6 +12,8 @@ import java.util.Date;
 public class User {
 	private String userId;
 	private String KUId;
+	private String name;
+
 	private String firstName;
 	private String lastName;
 	private String gender;
@@ -135,6 +137,14 @@ public class User {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String firstName, String lastName) {
+		this.name = firstName + " " + lastName;
 	}
 
 }

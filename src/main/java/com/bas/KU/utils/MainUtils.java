@@ -16,6 +16,7 @@ import org.springframework.ui.ModelMap;
 
 import com.bas.KU.models.Area;
 import com.bas.KU.models.SearchHelper;
+import com.bas.KU.models.User;
 import com.bas.KU.services.AdminService;
 import com.bas.KU.services.UserService;
 
@@ -23,13 +24,19 @@ import com.bas.KU.services.UserService;
  * @author San
  *
  */
+@Service
 public class MainUtils {
 
 	@Autowired
-	public AdminService adminService;
+	public static UserService userService;
 
-	@Autowired
-	public UserService userService;
+	public UserService getAdminService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
 
 	private static final String QUERY = "select * from user";
 	private static final String WHERE_CLAUSE = " where ";
@@ -90,6 +97,18 @@ public class MainUtils {
 		}
 
 		return query.toString();
+	}
+
+	public static List<SearchHelper> getSearchHelpers() {
+
+		List<SearchHelper> searchHelpers = new ArrayList<>();
+		for (User user : userService.getUserNameAndPhone()) {
+			SearchHelper searchHelper = new SearchHelper();
+			searchHelper.setName(user.getName());
+			searchHelper.setPhoneNumber(user.getPhoneNumber());
+			searchHelpers.add(searchHelper);
+		}
+		return searchHelpers;
 	}
 
 }

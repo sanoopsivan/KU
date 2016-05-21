@@ -67,7 +67,7 @@ public class SearchController {
 		List<SearchHelper> searchResults = new ArrayList<>();
 		// searchResults = adminService.getAreaList();
 		// System.out.println(searchResults.size());
-		MainUtils.getSearchHelp();
+		searchResults=MainUtils.getSearchHelpers();
 		return searchResults;
 	}
 

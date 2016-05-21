@@ -21,4 +21,5 @@ public interface UserService {
 	 public void updateData(User user);  
 	 public List<User> getUserList(int limit);
 	 public List<User> getUserList(String query);
+	 public List<User> getUserNameAndPhone();
 }

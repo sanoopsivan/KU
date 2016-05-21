@@ -40,4 +40,5 @@ public interface AdminDAO {
 	public void insertKUid(KUid kuid);
 
 	public KUid getLastKuid();
+	
 }

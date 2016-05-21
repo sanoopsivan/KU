@@ -12,7 +12,8 @@ $(document.body).on('click', '.page', function(e) {
 
 $('document').ready(function() {
 	ajaxGetAreas();
-	ajaxCall()
+	ajaxGetSearchHelp();
+	ajaxCall();
 
 });
 
@@ -71,12 +72,7 @@ function ajaxCall() {
 																.text(item.kuid),
 														$(
 																'<td class = "searchResultColumn">')
-																.text(
-																		item.firstName),
-														$(
-																'<td class = "searchResultColumn">')
-																.text(
-																		item.lastName),
+																.text(item.name),
 														$(
 																'<td class = "searchResultColumn">')
 																.text(
@@ -167,13 +163,13 @@ function ajaxGetSearchHelp() {
 				success : function(result) {
 					searchHelp = result;
 					searchHelp = new Bloodhound({
-						datumTokenizer : Bloodhound.tokenizers.obj
-								.whitespace('key'),
+						datumTokenizer : Bloodhound.tokenizers.obj.whitespace(
+								'name', 'phoneNumber'),
 						queryTokenizer : Bloodhound.tokenizers.whitespace,
-						local : areas
+						local : searchHelp
 					});
 
-					$('#searchByArea')
+					$('#searchCustomerByQuery')
 							.typeahead(
 									{
 										hint : true,
@@ -182,14 +178,26 @@ function ajaxGetSearchHelp() {
 									},
 									{
 										name : 'searchHelp',
-										display : 'searchHelp',
+										display : 'name',
 										displayKey : 'searchHelp',
-										source : areas,
+										source : searchHelp,
 										templates : {
 											notFound : [
 													'<div class = "empty-message" style = "padding: 5px;">',
-													'Area not found', '</div>' ]
-													.join('\n')
+													'Nothing found..  ',
+													'</div>' ].join('\n')
+										}
+									},
+									{
+										name : 'searchHelp',
+										display : 'phoneNumber',
+										displayKey : 'searchHelp',
+										source : searchHelp,
+										templates : {
+											notFound : [
+													'<div class = "empty-message" style = "padding: 5px;">',
+													'Nothing found..  ',
+													'</div>' ].join('\n')
 										}
 									});
 
