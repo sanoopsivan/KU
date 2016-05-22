@@ -62,12 +62,12 @@ public class SearchController {
 	}
 
 	@RequestMapping(value = "/ajax/getSearchHelp", method = RequestMethod.POST)
-	public @ResponseBody List<SearchHelper> getSearchHelp() {
+	public @ResponseBody List<String> getSearchHelp() {
 		System.out.println("Eneterd getAreas");
-		List<SearchHelper> searchResults = new ArrayList<>();
+		List<String> searchResults = new ArrayList<>();
 		// searchResults = adminService.getAreaList();
 		// System.out.println(searchResults.size());
-		searchResults=MainUtils.getSearchHelpers();
+		searchResults = MainUtils.getSearchHelpers();
 		return searchResults;
 	}
 

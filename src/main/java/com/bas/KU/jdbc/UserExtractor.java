@@ -32,8 +32,8 @@ public class UserExtractor implements ResultSetExtractor<User> {
 				case "id":
 					user.setUserId(resultSet.getString("id"));
 					break;
-				case "kUid":
-					user.setKUId(resultSet.getString("kUid"));
+				case "KUid":
+					user.setKUId(resultSet.getString("KUid"));
 					break;
 				case "firstName":
 					user.setFirstName(resultSet.getString("firstName"));
@@ -56,12 +56,24 @@ public class UserExtractor implements ResultSetExtractor<User> {
 				case "landlineNumber":
 					user.setLandLineNumber(resultSet.getString("landlineNumber"));
 					break;
+				case "status":
+					user.setStatus(resultSet.getString("status"));
+					break;
+				case "creationDate":
+					user.setCreationDate(resultSet.getDate("creationDate"));
+					break;
+				case "activationDate":
+					user.setActivationDate(resultSet.getDate("activationDate"));
+					break;
+				case "deactivationDate":
+					user.setDeactivationDate(resultSet.getDate("deactivationDate"));
+					break;
 				default:
 					System.out.println("Unknown Column");
 					break;
 
 				}
-				user.setName(user.getFirstName(), user.getLastName());
+
 			}
 
 			/*
@@ -69,6 +81,7 @@ public class UserExtractor implements ResultSetExtractor<User> {
 			 * user.setActivationDate(resultSet.getDate("activationDate"));
 			 * user.setDeactivationDate(resultSet.getDate("deactivationDate"));
 			 */
+			user.setName(user.getFirstName(), user.getLastName());
 			return user;
 		} else
 			return null;

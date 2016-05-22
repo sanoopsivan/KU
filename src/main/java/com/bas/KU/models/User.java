@@ -13,6 +13,7 @@ public class User {
 	private String userId;
 	private String KUId;
 	private String name;
+	private String status;
 
 	private String firstName;
 	private String lastName;
@@ -145,6 +146,14 @@ public class User {
 
 	public void setName(String firstName, String lastName) {
 		this.name = firstName + " " + lastName;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

@@ -99,14 +99,13 @@ public class MainUtils {
 		return query.toString();
 	}
 
-	public static List<SearchHelper> getSearchHelpers() {
+	public static List<String> getSearchHelpers() {
 
-		List<SearchHelper> searchHelpers = new ArrayList<>();
+		List<String> searchHelpers = new ArrayList<>();
 		for (User user : userService.getUserNameAndPhone()) {
-			SearchHelper searchHelper = new SearchHelper();
-			searchHelper.setName(user.getName());
-			searchHelper.setPhoneNumber(user.getPhoneNumber());
-			searchHelpers.add(searchHelper);
+
+			searchHelpers.add(user.getName());
+			searchHelpers.add(user.getPhoneNumber());
 		}
 		return searchHelpers;
 	}

@@ -163,8 +163,7 @@ function ajaxGetSearchHelp() {
 				success : function(result) {
 					searchHelp = result;
 					searchHelp = new Bloodhound({
-						datumTokenizer : Bloodhound.tokenizers.obj.whitespace(
-								'name', 'phoneNumber'),
+						datumTokenizer : Bloodhound.tokenizers.whitespace,
 						queryTokenizer : Bloodhound.tokenizers.whitespace,
 						local : searchHelp
 					});
@@ -178,20 +177,6 @@ function ajaxGetSearchHelp() {
 									},
 									{
 										name : 'searchHelp',
-										display : 'name',
-										displayKey : 'searchHelp',
-										source : searchHelp,
-										templates : {
-											notFound : [
-													'<div class = "empty-message" style = "padding: 5px;">',
-													'Nothing found..  ',
-													'</div>' ].join('\n')
-										}
-									},
-									{
-										name : 'searchHelp',
-										display : 'phoneNumber',
-										displayKey : 'searchHelp',
 										source : searchHelp,
 										templates : {
 											notFound : [

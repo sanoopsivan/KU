@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bas.KU.enums.UserStatus;
 import com.bas.KU.models.KUid;
 import com.bas.KU.models.User;
 import com.bas.KU.services.AdminService;
@@ -76,6 +77,7 @@ public class UserController {
 		user.setPincode(pincode);
 		user.setEmail(email);
 		setUserKUID(user);
+		user.setStatus(UserStatus.PENDING_FOR_ACTIVATION.getStatus());
 		user.setCreationDate(new Date());
 		userService.insertData(user);
 		thirdPartyService.sendMail();
@@ -96,20 +98,25 @@ public class UserController {
 		return Integer.toString(value);
 	}
 
-	/*@RequestMapping(value = "/getUsers", method = RequestMethod.POST)
-	@ResponseBody
-	public List<User> getUsers(ModelMap model, @RequestParam(value = "q", required = false) String q,
-			@RequestParam(value = "datetimepicker_1", required = false) String datetimepicker_1,
-			@RequestParam(value = "datetimepicker_2", required = false) String datetimepicker_2,
-			@RequestParam(value = "searchCustomerByStatus", required = false) String searchCustomerByStatus) {
-		System.out.println("Ajax worked");
-		System.out.println(q);
-		System.out.println(datetimepicker_1);
-		System.out.println(datetimepicker_2);
-		System.out.println(searchCustomerByStatus);
-		return userService.getUserList();
-	}
-*/
+	/*
+	 * @RequestMapping(value = "/getUsers", method = RequestMethod.POST)
+	 * 
+	 * @ResponseBody public List<User> getUsers(ModelMap
+	 * model, @RequestParam(value = "q", required = false) String q,
+	 * 
+	 * @RequestParam(value = "datetimepicker_1", required = false) String
+	 * datetimepicker_1,
+	 * 
+	 * @RequestParam(value = "datetimepicker_2", required = false) String
+	 * datetimepicker_2,
+	 * 
+	 * @RequestParam(value = "searchCustomerByStatus", required = false) String
+	 * searchCustomerByStatus) { System.out.println("Ajax worked");
+	 * System.out.println(q); System.out.println(datetimepicker_1);
+	 * System.out.println(datetimepicker_2);
+	 * System.out.println(searchCustomerByStatus); return
+	 * userService.getUserList(); }
+	 */
 	@RequestMapping("/view/{id}")
 	public void getAttr(@PathVariable(value = "id") String id) {
 		System.out.println(id);
