@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
 import com.bas.KU.models.Area;
-import com.bas.KU.models.SearchHelper;
+import com.bas.KU.models.SearchParams;
 import com.bas.KU.models.User;
 import com.bas.KU.services.AdminService;
 import com.bas.KU.services.UserService;
@@ -54,7 +54,7 @@ public class MainUtils {
 		}
 	}
 
-	public static String getQuery(String q, String area, String status, Date startDate, Date endDate) {
+	public static String getQuery(String q, String area, String status, String startDate, String endDate) {
 		boolean isWhereClauseAdded = false;
 		StringBuilder query = new StringBuilder(QUERY);
 		if (StringUtils.isBlank(q) && StringUtils.isBlank(area)
@@ -86,14 +86,23 @@ public class MainUtils {
 			query.append("status like %").append(status).append("%");
 		}
 
-		if (startDate != null && endDate != null) {
+		if (StringUtils.isNotBlank(startDate)) {
 			if (isWhereClauseAdded)
 				query.append(AND_CLAUSE);
 			else {
 				query.append(WHERE_CLAUSE);
 				isWhereClauseAdded = true;
 			}
-			query.append("");
+			query.append("creationDate >").append(startDate);
+		}
+		if (StringUtils.isNotBlank(endDate)) {
+			if (isWhereClauseAdded)
+				query.append(AND_CLAUSE);
+			else {
+				query.append(WHERE_CLAUSE);
+				isWhereClauseAdded = true;
+			}
+			query.append("creationDate <").append(endDate);
 		}
 
 		return query.toString();

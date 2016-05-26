@@ -1,8 +1,12 @@
 $(function() {
-	$('#datetimepicker_1').datetimepicker();
+	$('#datetimepicker_1').datetimepicker({
+		format : 'DD/MM/YYYY'
+	});
 });
 $(function() {
-	$('#datetimepicker_2').datetimepicker();
+	$('#datetimepicker_2').datetimepicker({
+		format : 'DD/MM/YYYY'
+	});
 });
 
 $(document.body).on('click', '.page', function(e) {
@@ -25,6 +29,7 @@ $("#searchCustomerForm").submit(function(event) {
 });
 
 function ajaxCall() {
+
 	var searchHelper = new Array();
 	$
 			.ajax({
@@ -33,11 +38,11 @@ function ajaxCall() {
 				async : true,
 				data : {
 					q : $('#searchCustomerByQuery').val(),
-					searchCustomerByStatus : $('#searchCustomerByStatus').val(),
-					datetimepicker_1 : $('#datetimepicker_1').val(),
-					datetimepicker_2 : $('#datetimepicker_2').val(),
+					status : $('#searchCustomerByStatus').val(),
+					startDate : $('#datetimepicker_1').val(),
+					endDate : $('#datetimepicker_2').val(),
+					area : $('#searchByArea').val()
 				},
-				dataType : 'json',
 				beforeSend : function(result) {
 					$('#loadingImageHolder').show();
 					$('#customerTable').hide();

@@ -86,15 +86,6 @@
 										</td>
 									</tr>
 
-									<!-- April 10, 2016 - Ananthakirshnan: To be shown searched customer is not found -->
-									<tr id="customerNotAvailable">
-										<td colspan="5" class="text-center">No users available.
-											Please click to 'Add' to add new users.</td>
-										<td>
-											<a href=addUser.html " class="btn btn-success"> Add </a>
-										</td>
-									</tr>
-
 								</tbody>
 							</table>
 						</div>
