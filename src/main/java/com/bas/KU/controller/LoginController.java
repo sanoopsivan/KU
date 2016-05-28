@@ -3,6 +3,7 @@
  */
 package com.bas.KU.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bas.KU.enums.AdminStatus;
+import com.bas.KU.enums.UserStatus;
 import com.bas.KU.models.Admin;
+import com.bas.KU.models.Status;
 import com.bas.KU.models.User;
 import com.bas.KU.services.AdminService;
 import com.bas.KU.services.UserService;
@@ -53,7 +56,7 @@ public class LoginController {
 					: admin != null && admin.getStatus().equalsIgnoreCase(AdminStatus.ADMIN.getStatus())
 							? AdminStatus.ADMIN.getStatus() : AdminStatus.UNAUTHORISED.getStatus();
 			setModel(model, admin);
-			
+
 			return "redirect:" + MainUtils.getPage(role);
 
 		}
@@ -84,9 +87,20 @@ public class LoginController {
 
 	// show view page after successfull login
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public String adminView() {
-
+	public String adminView(ModelMap model) {
+		List<Status> statusList = new ArrayList<>();
+		for (UserStatus status : UserStatus.values()) {
+			statusList.add(getStatusOf(status));
+		}
+		model.addAttribute("statusList", statusList);
 		return "view";
+	}
+
+	private Status getStatusOf(UserStatus userStatus) {
+		Status status = new Status();
+		status.setLabel(userStatus.getLabel());
+		status.setValue(userStatus.getStatus());
+		return status;
 	}
 
 }

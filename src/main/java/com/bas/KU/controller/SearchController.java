@@ -59,7 +59,7 @@ public class SearchController {
 	public @ResponseBody List<Area> getAreaList() {
 		List<Area> searchResults = new ArrayList<>();
 		searchResults = adminService.getAreaList();
-		System.out.println(searchResults.size());
+		// System.out.println(searchResults.size());
 		return searchResults;
 	}
 

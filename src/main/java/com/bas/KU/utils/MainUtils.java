@@ -26,6 +26,7 @@ import com.bas.KU.services.UserService;
  */
 @Service
 public class MainUtils {
+	private static final String DEFAULT_STATUS = "ALL";
 
 	@Autowired
 	public static UserService userService;
@@ -62,9 +63,9 @@ public class MainUtils {
 				&& endDate == null)
 			return query.toString();
 		if (StringUtils.isNotBlank(q)) {
-			query.append(WHERE_CLAUSE).append("firstName like '%").append(q).append("%' OR lastName like '%").append(q)
-					.append("%' OR address like '%").append(q).append("%' OR phoneNumber like '%").append(q)
-					.append("%'");
+			query.append(WHERE_CLAUSE).append("(").append("firstName like '").append(q).append("%' OR lastName like '")
+					.append(q).append("%' OR name like '").append(q).append("%' OR address like '").append(q)
+					.append("%' OR phoneNumber like '").append(q).append("%'").append(")");
 			isWhereClauseAdded = true;
 		}
 		if (StringUtils.isNotBlank(area)) {
@@ -74,16 +75,16 @@ public class MainUtils {
 				query.append(WHERE_CLAUSE);
 				isWhereClauseAdded = true;
 			}
-			query.append("area like %").append(area).append("%");
+			query.append("(").append("areaCode like '").append(area).append("%')");
 		}
-		if (StringUtils.isNotBlank(status)) {
+		if (StringUtils.isNotBlank(status) && !StringUtils.equalsIgnoreCase(status, DEFAULT_STATUS)) {
 			if (isWhereClauseAdded)
 				query.append(AND_CLAUSE);
 			else {
 				query.append(WHERE_CLAUSE);
 				isWhereClauseAdded = true;
 			}
-			query.append("status like %").append(status).append("%");
+			query.append("(").append("status like '").append(status).append("')");
 		}
 
 		if (StringUtils.isNotBlank(startDate)) {
@@ -93,7 +94,7 @@ public class MainUtils {
 				query.append(WHERE_CLAUSE);
 				isWhereClauseAdded = true;
 			}
-			query.append("creationDate >").append(startDate);
+			query.append("(").append("creationDate >").append(startDate).append(")");
 		}
 		if (StringUtils.isNotBlank(endDate)) {
 			if (isWhereClauseAdded)
@@ -102,7 +103,7 @@ public class MainUtils {
 				query.append(WHERE_CLAUSE);
 				isWhereClauseAdded = true;
 			}
-			query.append("creationDate <").append(endDate);
+			query.append("(").append("creationDate <").append(endDate).append(")");
 		}
 
 		return query.toString();

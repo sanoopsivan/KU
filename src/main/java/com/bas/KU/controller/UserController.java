@@ -79,8 +79,9 @@ public class UserController {
 		setUserKUID(user);
 		user.setStatus(UserStatus.PENDING_FOR_ACTIVATION.getStatus());
 		user.setCreationDate(new Date());
+		user.setName(firstName, lastName);
 		userService.insertData(user);
-		thirdPartyService.sendMail();
+		//thirdPartyService.sendMail();
 		// thirdPartyService.sendSMS();
 		return new ModelAndView("view");
 	}

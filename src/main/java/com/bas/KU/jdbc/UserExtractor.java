@@ -41,6 +41,9 @@ public class UserExtractor implements ResultSetExtractor<User> {
 				case "lastName":
 					user.setLastName(resultSet.getString("lastName"));
 					break;
+				case "name":
+					user.setName(resultSet.getString("name"));
+					break;
 				case "email":
 					user.setEmail(resultSet.getString("email"));
 					break;
@@ -81,7 +84,7 @@ public class UserExtractor implements ResultSetExtractor<User> {
 			 * user.setActivationDate(resultSet.getDate("activationDate"));
 			 * user.setDeactivationDate(resultSet.getDate("deactivationDate"));
 			 */
-			user.setName(user.getFirstName(), user.getLastName());
+			
 			return user;
 		} else
 			return null;

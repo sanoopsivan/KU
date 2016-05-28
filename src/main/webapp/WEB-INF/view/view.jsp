@@ -16,10 +16,10 @@
 						<div class="form-group">
 							<select class="form-control" id="searchCustomerByStatus"
 								name="searchCustomerByStatus">
-								<option selected disabled>Status</option>
-								<option>Activated</option>
-								<option>Deactivated</option>
-								<option>Pending For Activation</option>
+								<option selected value="ALL">Status</option>
+								<c:forEach var="status" items="${statusList}">
+									<option value="${status.value}">${status.label}</option>
+								</c:forEach>
 							</select>
 						</div>
 					</div>

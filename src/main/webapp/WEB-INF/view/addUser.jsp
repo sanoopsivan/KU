@@ -1,42 +1,3 @@
-<%-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="java.sql.*"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-	<h2>Add new User</h2>
-	<form action="addUser" method="post">
-		FirstName
-		<input type="text" name="firstName" />
-		<br> LastName
-		<input type="text" name="lastName" />
-		<br>
-		<label>Gender</label>
-		<input type="radio" name="gender" value="male" />
-		Male
-		<input type="radio" name="gender" value="female" />
-		Female <br> Address
-		<textarea name="address" cols="20" rows="5"... ></textarea>
-		<br> Area
-		<select name="areaCode" id="item">
-			<option value="area1" selected>Area1</option>
-		</select>
-		<br> pincode
-		<input type="text" name="pincode" />
-		<br> Mobile +91
-		<input type="text" name="phoneNumber" />
-		<br> Telephone
-		<input type="text" name="telephone" />
-		<br> E-mail
-		<input type="text" name="email" />
-		<br>
-		<input type="submit" value="add" />
-	</form>
-</body>
-</html> --%>
 
 <%@ include file="/WEB-INF/view/common/header.jsp"%><!-- March 12, 2016 - Ananthakrishnan: To inlcude navigation. -->
 
@@ -79,10 +40,10 @@
 							<div class="col-md-4">Gender:</div>
 							<div class="col-md-8">
 								<label class="radio-inline">
-									<input type="radio" name="gender">Male
+									<input type="radio" name="gender" value="male">Male
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="gender">Female
+									<input type="radio" name="gender" value="female">Female
 								</label>
 							</div>
 						</div>
@@ -97,7 +58,7 @@
 							<div class="col-md-8">
 								<select name="areaCode" id="areaCode">
 									<c:forEach var="area" items="${areaList}">
-										<option value="1">${area.areaName}</option>
+										<option value="${area.areaName}">${area.areaName}</option>
 									</c:forEach>
 								</select>
 							</div>
