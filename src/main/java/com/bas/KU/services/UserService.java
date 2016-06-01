@@ -13,13 +13,19 @@ import com.bas.KU.models.User;
  */
 public interface UserService {
 
-	
-	 public void insertData(User user);  
-	 public List<User> getUserList();  
-	 public void deleteData(String id);  
-	 public User getUser(String id);  
-	 public void updateData(User user);  
-	 public List<User> getUserList(int limit);
-	 public List<User> getUserList(String query);
-	 public List<User> getUserNameAndPhone();
+	public void insertData(User user);
+
+	public List<User> getUserList();
+
+	public void deleteData(String id);
+
+	public User getUser(String id);
+
+	public void updateData(User user);
+
+	public List<User> getUserList(int startLimit, int endLimit);
+
+	public List<User> getUserList(String query);
+
+	public List<User> getUserNameAndPhone();
 }

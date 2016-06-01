@@ -22,10 +22,10 @@ public interface UserDAO {
 
 	public User getUser(String id);
 
-	public List<User> getUserList(int limit);
+	public List<User> getUserList(int startLimit, int endLimit);
 
 	public List<User> getUserList(String query);
-	
+
 	public List<User> getUserNameAndPhone();
 
 }

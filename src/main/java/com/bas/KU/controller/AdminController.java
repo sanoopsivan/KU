@@ -35,7 +35,7 @@ public class AdminController {
 	@RequestMapping(value = "/addArea", method = RequestMethod.GET)
 	public String addUser(ModelMap model) {
 
-		setAreaList(model);
+		MainUtils.setAreaList(model);
 		return "addArea";
 	}
 
@@ -46,7 +46,7 @@ public class AdminController {
 			Area area = new Area(areaCode);
 			adminService.insertArea(area);
 		}
-		setAreaList(model);
+		MainUtils.setAreaList(model);
 
 		return "addArea";
 	}
@@ -71,8 +71,6 @@ public class AdminController {
 		return "addUniqueID";
 	}
 
-	private void setAreaList(ModelMap model) {
-		model.addAttribute("areaList", adminService.getAreaList());
-	}
+	
 
 }

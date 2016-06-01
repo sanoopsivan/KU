@@ -20,6 +20,7 @@
 	<bean id="thirdPartyService" class="com.bas.KU.services.ThirdPartyServiceImpl" />
 	<bean id="mainUtils" class="com.bas.KU.utils.MainUtils">
 		<property name="userService" ref="userService"></property>
+		<property name="adminService" ref="adminService"></property>
 	</bean>
 
 

@@ -11,25 +11,25 @@ $(function() {
 
 $(document.body).on('click', '.page', function(e) {
 	e.preventDefault();
-	ajaxCall();
+	ajaxCall(this.id);
 });
 
 $('document').ready(function() {
 	ajaxGetAreas();
 	ajaxGetSearchHelp();
-	ajaxCall();
+	ajaxCall(1);
 
 });
 
 $("#searchCustomerForm").submit(function(event) {
 
 	event.preventDefault();
-	ajaxCall();
+	ajaxCall(1);
 
 });
 
-function ajaxCall() {
-
+function ajaxCall(k) {
+	var id = k;
 	var searchHelper = new Array();
 	$
 			.ajax({
@@ -41,7 +41,8 @@ function ajaxCall() {
 					status : $('#searchCustomerByStatus').val(),
 					startDate : $('#datetimepicker_1').val(),
 					endDate : $('#datetimepicker_2').val(),
-					area : $('#searchByArea').val()
+					area : $('#searchByArea').val(),
+					page : id
 				},
 				beforeSend : function(result) {
 					$('#loadingImageHolder').show();
@@ -61,9 +62,10 @@ function ajaxCall() {
 					$('#noCustomerAvailable').hide();
 					$('#customerNotAvailable').hide();
 					$('.searchResultRow').remove()
+					$('.pagination').remove()
 					$
 							.each(
-									result,
+									result.userList,
 									function(i, item) {
 										var name = item.firstName + ' '
 												+ item.lastName;
@@ -93,12 +95,20 @@ function ajaxCall() {
 														$(
 																'<td class = "searchResultColumn">')
 																.html(
-																		'<a href = "'
-																				+ item.gender
+																		'<a href = "view/'
+																				+ item.userId
 																				+ '" class = "btn btn-success">View</a>'))
 												.appendTo('#customerTable');
 									});
+					$("#pagination").append("<ul class='pagination'></ul>");
+					pagination(result.totalPages, result.currentPage);
 
+					/*
+					 * $("#pagination").append("<ul class='pagination'></ul>");
+					 * $(result.totalPages).each(function() {
+					 * $(".pagination").append( "<li><a href='' class='page'
+					 * id='1'>1</a></li>"); });
+					 */
 					/*
 					 * $("#pagination").append("<ul class='pagination'></ul>");
 					 * $(".pagination").append( "<li><a href='' class='page'
@@ -194,4 +204,20 @@ function ajaxGetSearchHelp() {
 				}
 			});
 
+}
+
+function pagination(j, k) {
+
+	for (var i = 1; i <= j; i++) {
+		if (i == k) {
+			$(".pagination").append(
+					"<li class='active'><a href='' class='page' id=" + i + ">"
+							+ i + "</a></li>");
+		} else {
+
+			$(".pagination").append(
+					"<li><a href='' class='page' id=" + i + ">" + i
+							+ "</a></li>");
+		}
+	}
 }

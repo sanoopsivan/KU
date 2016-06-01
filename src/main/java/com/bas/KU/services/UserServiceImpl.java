@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
 
 	public User getUser(String id) {
 		// TODO Auto-generated method stub
-		return null;
+		return userdao.getUser(id);
 	}
 
 	public void updateData(User user) {
@@ -44,8 +44,8 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	public List<User> getUserList(int limit) {
-		return userdao.getUserList(limit);
+	public List<User> getUserList(int startLimit, int endLimit) {
+		return userdao.getUserList(startLimit, endLimit);
 	}
 
 	public List<User> getUserList(String query) {

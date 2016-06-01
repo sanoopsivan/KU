@@ -24,6 +24,7 @@ import com.bas.KU.models.User;
 import com.bas.KU.services.AdminService;
 import com.bas.KU.services.ThirdPartyService;
 import com.bas.KU.services.UserService;
+import com.bas.KU.utils.MainUtils;
 
 /**
  * @author San
@@ -81,7 +82,7 @@ public class UserController {
 		user.setCreationDate(new Date());
 		user.setName(firstName, lastName);
 		userService.insertData(user);
-		//thirdPartyService.sendMail();
+		// thirdPartyService.sendMail();
 		// thirdPartyService.sendSMS();
 		return new ModelAndView("view");
 	}
@@ -119,7 +120,11 @@ public class UserController {
 	 * userService.getUserList(); }
 	 */
 	@RequestMapping("/view/{id}")
-	public void getAttr(@PathVariable(value = "id") String id) {
+	public String getUserIdFromURL(@PathVariable(value = "id") String id, ModelMap model) {
 		System.out.println(id);
+		User user = userService.getUser(id);
+		model.addAttribute("user", user);
+		MainUtils.setAreaList(model);
+		return "editUser";
 	}
 }

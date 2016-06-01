@@ -30,6 +30,12 @@ public class MainUtils {
 
 	@Autowired
 	public static UserService userService;
+	@Autowired
+	public static AdminService adminService;
+
+	public static void setAdminService(AdminService adminService) {
+		MainUtils.adminService = adminService;
+	}
 
 	public UserService getAdminService() {
 		return userService;
@@ -42,6 +48,7 @@ public class MainUtils {
 	private static final String QUERY = "select * from user";
 	private static final String WHERE_CLAUSE = " where ";
 	private static final String AND_CLAUSE = " AND ";
+	private static final String LIMIT = " LIMIT %d,%d";
 
 	// return the page names after checking the role
 	public static String getPage(String role) {
@@ -55,7 +62,7 @@ public class MainUtils {
 		}
 	}
 
-	public static String getQuery(String q, String area, String status, String startDate, String endDate) {
+	public static String getQuery(String q, String area, String status, String startDate, String endDate, int page) {
 		boolean isWhereClauseAdded = false;
 		StringBuilder query = new StringBuilder(QUERY);
 		if (StringUtils.isBlank(q) && StringUtils.isBlank(area)
@@ -105,6 +112,11 @@ public class MainUtils {
 			}
 			query.append("(").append("creationDate <").append(endDate).append(")");
 		}
+		int startPage = 0;
+		int endPage = 5;
+		startPage *= page;
+		endPage *= page;
+		query.append(String.format(LIMIT, startPage, endPage));
 
 		return query.toString();
 	}
@@ -118,6 +130,10 @@ public class MainUtils {
 			searchHelpers.add(user.getPhoneNumber());
 		}
 		return searchHelpers;
+	}
+
+	public static void setAreaList(ModelMap model) {
+		model.addAttribute("areaList", adminService.getAreaList());
 	}
 
 }
