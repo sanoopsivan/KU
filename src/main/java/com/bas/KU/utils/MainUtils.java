@@ -27,6 +27,7 @@ import com.bas.KU.services.UserService;
 @Service
 public class MainUtils {
 	private static final String DEFAULT_STATUS = "ALL";
+	public static final int NUMBER_OF_RESULTS_PER_PAGE = 1;
 
 	@Autowired
 	public static UserService userService;
@@ -63,6 +64,7 @@ public class MainUtils {
 	}
 
 	public static String getQuery(String q, String area, String status, String startDate, String endDate, int page) {
+		page = page - 1;
 		boolean isWhereClauseAdded = false;
 		StringBuilder query = new StringBuilder(QUERY);
 		if (StringUtils.isBlank(q) && StringUtils.isBlank(area)
@@ -113,10 +115,10 @@ public class MainUtils {
 			query.append("(").append("creationDate <").append(endDate).append(")");
 		}
 		int startPage = 0;
-		int endPage = 5;
-		startPage *= page;
-		endPage *= page;
-		query.append(String.format(LIMIT, startPage, endPage));
+		if (page != 0)
+			startPage = NUMBER_OF_RESULTS_PER_PAGE * page;
+		// int endPage = startPage + NUMBER_OF_RESULTS_PER_PAGE;
+		query.append(String.format(LIMIT, (startPage), NUMBER_OF_RESULTS_PER_PAGE));
 
 		return query.toString();
 	}

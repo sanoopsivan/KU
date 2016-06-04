@@ -47,6 +47,8 @@ function ajaxCall(k) {
 				beforeSend : function(result) {
 					$('#loadingImageHolder').show();
 					$('#customerTable').hide();
+					$('.searchResultRow').remove()
+					$('.pagination').remove()
 				},
 				error : function() {
 					$('#loadingImageHolder').hide();
