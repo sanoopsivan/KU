@@ -47,28 +47,31 @@ function ajaxCall(k) {
 				beforeSend : function(result) {
 					$('#loadingImageHolder').show();
 					$('#customerTable').hide();
-					$('.searchResultRow').remove()
+					$('.searchResultRow').remove();
 					$('.pagination').remove()
 				},
 				error : function() {
 					$('#loadingImageHolder').hide();
 					$('#customerTable').show();
-					$('#noCustomerAvailable').show();
+					/* $('#noCustomerAvailable').show(); */
+					showNoResult();
 					$('#customerNotAvailable').hide();
 					$('.searchResultRow').remove()
 				},
 				success : function(result) {
-
+					var flag = true;
 					$('#loadingImageHolder').hide();
 					$('#customerTable').show();
 					$('#noCustomerAvailable').hide();
 					$('#customerNotAvailable').hide();
-					$('.searchResultRow').remove()
-					$('.pagination').remove()
+					$('.searchResultRow').remove();
+					$('.pagination').remove();
+
 					$
 							.each(
 									result.userList,
 									function(i, item) {
+										flag = false;
 										var name = item.firstName + ' '
 												+ item.lastName;
 										searchHelper.push(name);
@@ -99,11 +102,15 @@ function ajaxCall(k) {
 																.html(
 																		'<a href = "view/'
 																				+ item.userId
+																				+ "/editUser"
 																				+ '" class = "btn btn-success">View</a>'))
 												.appendTo('#customerTable');
 									});
 					$("#pagination").append("<ul class='pagination'></ul>");
 					pagination(result.totalPages, result.currentPage);
+					if (flag) {
+						showNoResult();
+					}
 
 					/*
 					 * $("#pagination").append("<ul class='pagination'></ul>");
@@ -210,7 +217,18 @@ function ajaxGetSearchHelp() {
 
 function pagination(j, k) {
 
-	for (var i = 1; i <= j; i++) {
+	if (j > 7) {
+		$(".pagination").append("<li><a href='#'>&laquo;</a></li></li>");
+	}
+	createPagination(1, k);
+	if (j > 7) {
+		$(".pagination").append("<li><a href='#'>&raquo;</a></li></li>");
+	}
+}
+
+function createPagination(i, k) {
+
+	for (; i <= 7; i++) {
 		if (i == k) {
 			$(".pagination").append(
 					"<li class='active'><a href='' class='page' id=" + i + ">"
@@ -222,4 +240,14 @@ function pagination(j, k) {
 							+ "</a></li>");
 		}
 	}
+}
+function showNoResult() {
+	$("#customerTable")
+			.append(
+					"<tr id='noCustomerAvailable'><td colspan='5' class='text-center>No users available.\
+	Please click to 'Add' to add new users.</td>\
+<td>\
+	<a href='<c:url value='/view'>'  class='btn btn-success'> Add </a>\
+</td>\
+</tr>");
 }

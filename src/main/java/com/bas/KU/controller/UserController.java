@@ -119,12 +119,18 @@ public class UserController {
 	 * System.out.println(searchCustomerByStatus); return
 	 * userService.getUserList(); }
 	 */
-	@RequestMapping("/view/{id}")
+	@RequestMapping("/view/{id}/editUser")
 	public String getUserIdFromURL(@PathVariable(value = "id") String id, ModelMap model) {
 		System.out.println(id);
 		User user = userService.getUser(id);
 		model.addAttribute("user", user);
 		MainUtils.setAreaList(model);
 		return "editUser";
+	}
+
+	@RequestMapping("/view/{id}/updateUser")
+	public void updateUser(@PathVariable(value = "id") String id, ModelMap model) {
+		System.out.println(id);
+
 	}
 }

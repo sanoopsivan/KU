@@ -78,13 +78,13 @@
 								<tbody id="customerTableBody">
 
 									<!-- April 10, 2016 - Ananthakirshnan: To be shown when no user is available -->
-									<tr id="noCustomerAvailable">
+									<!-- <tr id="noCustomerAvailable">
 										<td colspan="5" class="text-center">No users available.
 											Please click to 'Add' to add new users.</td>
 										<td>
 											<a href=addUser.html " class="btn btn-success"> Add </a>
 										</td>
-									</tr>
+									</tr> -->
 
 								</tbody>
 							</table>

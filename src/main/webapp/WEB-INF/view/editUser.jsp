@@ -63,13 +63,14 @@
 									value="${user.address}"></textarea>
 							</div>
 						</div>
+
 						<div class="row customMarginTop">
 							<div class="col-md-4">Area:</div>
 							<div class="col-md-8">
 								<select name="areaCode" id="areaCode">
 									<c:forEach var="area" items="${areaList}">
 										<c:choose>
-											<c:when test="${area.areaName}==${user.areaCode}">
+											<c:when test="${area.areaName == user.areaCode}">
 												<option value="${area.areaName}" selected="selected">${area.areaName}</option>
 											</c:when>
 											<c:otherwise>

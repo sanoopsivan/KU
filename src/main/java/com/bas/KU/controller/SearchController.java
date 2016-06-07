@@ -90,7 +90,8 @@ public class SearchController {
 		System.out.println("Eneterd search");
 		System.out.println("Query :" + query);
 		searchResult.setUserList(userService.getUserList(query));
-		searchResult.setTotalPages((int) Math.ceil(((float) userService.getUserList().size()) / ((float) MainUtils.NUMBER_OF_RESULTS_PER_PAGE)));
+		searchResult.setTotalPages((int) Math
+				.ceil(((float) userService.getUserList().size()) / ((float) MainUtils.NUMBER_OF_RESULTS_PER_PAGE)));
 		searchResult.setCurrentPage(page);
 		return searchResult;
 	}
