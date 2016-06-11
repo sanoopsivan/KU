@@ -216,28 +216,48 @@ function ajaxGetSearchHelp() {
 }
 
 function pagination(j, k) {
-
-	if (j > 7) {
-		$(".pagination").append("<li><a href='#'>&laquo;</a></li></li>");
+	/* current page greater than 7 */
+	if (k == 1) {
+		$(".pagination").append(
+				"<li class='page-item disabled'><a href='' class='previous' id='"
+						+ k + "'>&laquo;</a></li></li>");
+	} else {
+		$(".pagination").append(
+				"<li class='page-item'><a href='' class='previous' id='" + k
+						+ "'>&laquo;</a></li></li>");
 	}
-	createPagination(1, k);
-	if (j > 7) {
-		$(".pagination").append("<li><a href='#'>&raquo;</a></li></li>");
+	createPagination(j, k);
+	/* total pages greater than 7 */
+	if (j == k) {
+		$(".pagination").append(
+				"<li class='page-item disabled'><a href='' class='next' id='"
+						+ k + "'>&raquo;</a></li></li>");
+	} else {
+		$(".pagination").append(
+				"<li class='page-item'><a href='' class='next' id='" + k
+						+ "'>&raquo;</a></li></li>");
 	}
 }
 
-function createPagination(i, k) {
-
-	for (; i <= 7; i++) {
+function createPagination(j, k) {
+	var p = 7;
+	if (j < 7)
+		p = j;
+	var i = 1;
+	if (k > 7) {
+		i = (k - 6);
+		p = k;
+	}
+	for (i; i <= p; i++) {
 		if (i == k) {
 			$(".pagination").append(
-					"<li class='active'><a href='' class='page' id=" + i + ">"
-							+ i + "</a></li>");
+					"<li class='page-item active'><a href='' class='page' id="
+							+ i + ">" + i + "</a></li>");
 		} else {
 
 			$(".pagination").append(
-					"<li><a href='' class='page' id=" + i + ">" + i
-							+ "</a></li>");
+					"<li class='page-item'><a href='' class='page' id=" + i
+							+ ">" + i + "</a></li>");
 		}
 	}
 }
@@ -251,3 +271,17 @@ function showNoResult() {
 </td>\
 </tr>");
 }
+
+$(document.body).on('click', '.previous', function(e) {
+	e.preventDefault();
+	var id = parseFloat(this.id) - 1;
+	console.log("previous :" + id);
+	ajaxCall(id);
+});
+
+$(document.body).on('click', '.next', function(e) {
+	e.preventDefault();
+	var id = parseFloat(this.id) + 1;
+	console.log("next :" + id)
+	ajaxCall(id);
+});

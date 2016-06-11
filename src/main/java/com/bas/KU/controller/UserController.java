@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -129,8 +130,31 @@ public class UserController {
 	}
 
 	@RequestMapping("/view/{id}/updateUser")
-	public void updateUser(@PathVariable(value = "id") String id, ModelMap model) {
-		System.out.println(id);
-
+	public String updateUser(@PathVariable(value = "id") String id, ModelMap model,
+			@RequestParam(value = "firstName", required = false) String firstName,
+			@RequestParam(value = "lastName", required = false) String lastName,
+			@RequestParam(value = "gender", required = false) String gender,
+			@RequestParam(value = "address", required = false) String address,
+			@RequestParam(value = "areaCode", required = false) String areaCode,
+			@RequestParam(value = "landLineNumber", required = false) String landLineNumber,
+			@RequestParam(value = "pincode", required = false) String pincode,
+			@RequestParam(value = "email", required = false) String email) {
+		User user = userService.getUser(id);
+		if (StringUtils.isNotBlank(firstName))
+			user.setFirstName(firstName);
+		if (StringUtils.isNotBlank(lastName))
+			user.setLastName(lastName);
+		if (StringUtils.isNotBlank(landLineNumber))
+			user.setLandLineNumber(landLineNumber);
+		if (StringUtils.isNotBlank(gender))
+			user.setGender(gender);
+		if (StringUtils.isNotBlank(address))
+			user.setAddress(address);
+		if (StringUtils.isNotBlank(pincode))
+			user.setPincode(pincode);
+		if (StringUtils.isNotBlank(email))
+			user.setEmail(email);
+		userService.updateData(user);
+		return "redirect:/view/" + user.getUserId() + "/editUser";
 	}
 }

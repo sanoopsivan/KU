@@ -8,8 +8,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header">
-						Add User
-						<small>Add new user details</small>
+						Update User
+						<small>Update user details</small>
 					</h1>
 				</div>
 			</div>
@@ -26,7 +26,7 @@
 							<div class="col-md-4">First name:</div>
 							<div class="col-md-8">
 								<input type="text" class="form-control" id="firstName"
-									name="firstName" value="${user.firstName}">
+									name="firstName" value="${user.firstName}" readonly="readonly">
 							</div>
 						</div>
 						<div class="row customMarginTop">
@@ -59,8 +59,7 @@
 						<div class="row customMarginTop">
 							<div class="col-md-4">Address:</div>
 							<div class="col-md-8">
-								<textarea rows="4" cols="50" id="address" name="address"
-									value="${user.address}"></textarea>
+								<textarea rows="4" cols="50" id="address" name="address">${user.address}</textarea>
 							</div>
 						</div>
 
@@ -91,21 +90,22 @@
 							<div class="col-md-4">Pin code:</div>
 							<div class="col-md-8">
 								<input type="text" class="form-control" id="pincode"
-									name="pincode">
+									name="pincode" value="${user.pincode}">
 							</div>
 						</div>
 						<div class="row customMarginTop">
 							<div class="col-md-4">Mobile number:</div>
 							<div class="col-md-8">
 								<input type="text" class="form-control" id="phoneNumber"
-									name="phoneNumber">
+									name="phoneNumber" value="${user.phoneNumber}"
+									readonly="readonly">
 							</div>
 						</div>
 						<div class="row customMarginTop">
 							<div class="col-md-4">Land number:</div>
 							<div class="col-md-8">
 								<input type="text" class="form-control" id="landLineNumber"
-									name="landLineNumber">
+									name="landLineNumber" value="${user.landLineNumber}">
 							</div>
 						</div>
 						<div class="row customMarginTop">&nbsp;</div>

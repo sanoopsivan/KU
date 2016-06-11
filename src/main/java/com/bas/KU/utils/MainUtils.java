@@ -27,7 +27,7 @@ import com.bas.KU.services.UserService;
 @Service
 public class MainUtils {
 	private static final String DEFAULT_STATUS = "ALL";
-	public static final int NUMBER_OF_RESULTS_PER_PAGE = 1;
+	public static final int NUMBER_OF_RESULTS_PER_PAGE = 3;
 
 	@Autowired
 	public static UserService userService;
