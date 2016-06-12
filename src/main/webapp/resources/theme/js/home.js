@@ -14,6 +14,13 @@ $(document.body).on('click', '.page', function(e) {
 	ajaxCall(this.id);
 });
 
+$(document).ready(function() {
+	$('#paginationHelper').on('change', function(e) {
+		e.preventDefault();
+		ajaxCall(1);
+	});
+});
+
 $('document').ready(function() {
 	ajaxGetAreas();
 	ajaxGetSearchHelp();
@@ -42,7 +49,8 @@ function ajaxCall(k) {
 					startDate : $('#datetimepicker_1').val(),
 					endDate : $('#datetimepicker_2').val(),
 					area : $('#searchByArea').val(),
-					page : id
+					page : id,
+					paginationHelper : $('#paginationHelper').val(),
 				},
 				beforeSend : function(result) {
 					$('#loadingImageHolder').show();
@@ -107,7 +115,8 @@ function ajaxCall(k) {
 												.appendTo('#customerTable');
 									});
 					$("#pagination").append("<ul class='pagination'></ul>");
-					pagination(result.totalPages, result.currentPage);
+					if ((result.totalPages) > 1)
+						pagination(result.totalPages, result.currentPage);
 					if (flag) {
 						showNoResult();
 					}
@@ -219,7 +228,7 @@ function pagination(j, k) {
 	/* current page greater than 7 */
 	if (k == 1) {
 		$(".pagination").append(
-				"<li class='page-item disabled'><a href='' class='previous' id='"
+				"<li class='page-item disabled'><a href='' class='previous inactiveLink' id='"
 						+ k + "'>&laquo;</a></li></li>");
 	} else {
 		$(".pagination").append(
@@ -230,7 +239,7 @@ function pagination(j, k) {
 	/* total pages greater than 7 */
 	if (j == k) {
 		$(".pagination").append(
-				"<li class='page-item disabled'><a href='' class='next' id='"
+				"<li class='page-item disabled'><a href='' class='next inactiveLink' id='"
 						+ k + "'>&raquo;</a></li></li>");
 	} else {
 		$(".pagination").append(

@@ -44,3 +44,8 @@
 .twitter-typeahead {
 	width: 100%;
 }
+
+.inactiveLink {
+	pointer-events: none;
+	cursor: default;
+}

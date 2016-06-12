@@ -82,16 +82,18 @@ public class SearchController {
 			@RequestParam(value = "startDate", required = false) String startDate,
 			@RequestParam(value = "endDate", required = false) String endDate,
 			@RequestParam(value = "area", required = false) String area,
-			@RequestParam(value = "page", defaultValue = "1") int page) {
+			@RequestParam(value = "page", defaultValue = "1") int page,
+			@RequestParam(value = "paginationHelper", defaultValue = "5") int paginationHelper) {
 
 		SearchResult searchResult = new SearchResult();
 
-		String query = MainUtils.getQuery(q, area, status, startDate, endDate, page);
+		String query = MainUtils.getQuery(q, area, status, startDate, endDate, page ,paginationHelper);
 		System.out.println("Eneterd search");
 		System.out.println("Query :" + query);
+		System.out.println("paginationHelper :" + paginationHelper);
 		searchResult.setUserList(userService.getUserList(query));
-		searchResult.setTotalPages((int) Math
-				.ceil(((float) userService.getUserList().size()) / ((float) MainUtils.NUMBER_OF_RESULTS_PER_PAGE)));
+		searchResult.setTotalPages(
+				(int) Math.ceil(((float) userService.getUserList().size()) / ((float) paginationHelper)));
 		searchResult.setCurrentPage(page);
 		return searchResult;
 	}

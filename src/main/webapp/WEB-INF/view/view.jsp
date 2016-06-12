@@ -91,7 +91,25 @@
 						</div>
 					</div>
 				</div>
-				<div id="pagination"></div>
+				<div class="row">
+					<div class="col-md-4 topPadding">
+						<div class="form-group">
+							<select class="form-control" id="paginationHelper"
+								name="paginationHelper">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="5">5</option>
+								<option value="10">10</option>
+								<option value="15">15</option>
+								<option value="20">20</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-8 topPadding">
+						<div id="pagination"></div>
+					</div>
+				</div>
 			</form>
 		</div>
 	</div>

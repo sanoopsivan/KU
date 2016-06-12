@@ -27,6 +27,7 @@ import com.bas.KU.services.UserService;
 @Service
 public class MainUtils {
 	private static final String DEFAULT_STATUS = "ALL";
+	public static final String SHOW_ALL_RESULTS = "ALL";
 	public static final int NUMBER_OF_RESULTS_PER_PAGE = 3;
 
 	@Autowired
@@ -63,7 +64,8 @@ public class MainUtils {
 		}
 	}
 
-	public static String getQuery(String q, String area, String status, String startDate, String endDate, int page) {
+	public static String getQuery(String q, String area, String status, String startDate, String endDate, int page,
+			int paginationHelper) {
 		page = page - 1;
 		boolean isWhereClauseAdded = false;
 		StringBuilder query = new StringBuilder(QUERY);
@@ -116,9 +118,9 @@ public class MainUtils {
 		}
 		int startPage = 0;
 		if (page != 0)
-			startPage = NUMBER_OF_RESULTS_PER_PAGE * page;
+			startPage = paginationHelper * page;
 		// int endPage = startPage + NUMBER_OF_RESULTS_PER_PAGE;
-		query.append(String.format(LIMIT, (startPage), NUMBER_OF_RESULTS_PER_PAGE));
+		query.append(String.format(LIMIT, (startPage), paginationHelper));
 
 		return query.toString();
 	}
