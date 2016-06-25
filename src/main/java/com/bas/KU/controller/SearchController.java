@@ -4,6 +4,7 @@
 package com.bas.KU.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -17,13 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bas.KU.functions.MainFunctions;
 import com.bas.KU.models.Area;
 import com.bas.KU.models.SearchParams;
 import com.bas.KU.models.SearchResult;
 import com.bas.KU.models.User;
 import com.bas.KU.services.AdminService;
 import com.bas.KU.services.UserService;
-import com.bas.KU.utils.MainUtils;
 
 /**
  * @author San
@@ -39,26 +40,6 @@ public class SearchController {
 	@Autowired
 	AdminService adminService;
 
-	/*
-	 * @RequestMapping(value = "/ajax/getUsers") public @ResponseBody List<User>
-	 * Search(@RequestParam(value = "q", required = false) String q,
-	 * 
-	 * @RequestParam(value = "status", required = false) String status,
-	 * 
-	 * @RequestParam(value = "startDate", required = false) String startDate,
-	 * 
-	 * @RequestParam(value = "endDate", required = false) String endDate,
-	 * 
-	 * @RequestParam(value = "area", required = false) String area) {
-	 * 
-	 * List<User> searchResults = new ArrayList<>();
-	 * 
-	 * String query = MainUtils.getQuery(q, area, status, startDate, endDate);
-	 * System.out.println("Eneterd search"); System.out.println("Query :" +
-	 * query); searchResults = userService.getUserList(query);
-	 * 
-	 * return searchResults; }
-	 */
 	@RequestMapping(value = "/ajax/getAreas", method = RequestMethod.POST)
 	public @ResponseBody List<Area> getAreaList() {
 		List<Area> searchResults = new ArrayList<>();
@@ -72,11 +53,11 @@ public class SearchController {
 		List<String> searchResults = new ArrayList<>();
 		// searchResults = adminService.getAreaList();
 		// System.out.println(searchResults.size());
-		searchResults = MainUtils.getSearchHelpers();
+		searchResults = MainFunctions.getSearchHelpers();
 		return searchResults;
 	}
 
-	@RequestMapping(value = "/ajax/getUsers")
+	@RequestMapping(value = "/ajax/getUsers", method = RequestMethod.POST)
 	public @ResponseBody SearchResult Search(@RequestParam(value = "q", required = false) String q,
 			@RequestParam(value = "status", required = false) String status,
 			@RequestParam(value = "startDate", required = false) String startDate,
@@ -87,13 +68,20 @@ public class SearchController {
 
 		SearchResult searchResult = new SearchResult();
 
-		String query = MainUtils.getQuery(q, area, status, startDate, endDate, page ,paginationHelper);
+		String query = MainFunctions.getQuery(q, area, status, startDate, endDate);
+		String queryWithPagination = MainFunctions.getQueryWithPagination(query, page, paginationHelper);
 		System.out.println("Eneterd search");
-		System.out.println("Query :" + query);
+		System.out.println("Query :" + queryWithPagination);
 		System.out.println("paginationHelper :" + paginationHelper);
-		searchResult.setUserList(userService.getUserList(query));
-		searchResult.setTotalPages(
-				(int) Math.ceil(((float) userService.getUserList().size()) / ((float) paginationHelper)));
+		searchResult.setUserList(userService.getUserList(queryWithPagination));
+		int totalPages = 0;
+		try {
+			totalPages = (int) Math.ceil(((float) userService.getUserList(query).size()) / ((float) paginationHelper));
+		} catch (Exception e) {
+
+		}
+		System.out.println("totalPages :" + totalPages);
+		searchResult.setTotalPages(totalPages);
 		searchResult.setCurrentPage(page);
 		return searchResult;
 	}

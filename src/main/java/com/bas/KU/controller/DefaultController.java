@@ -7,11 +7,11 @@ import java.util.Locale;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
- * @author San
+ * @author San 
+ * This controller will override the spring default controller and
+ *         show login page on start up
  *
  */
 @Controller
@@ -24,7 +24,5 @@ public class DefaultController {
 		// System.out.println(locale.getCountry());
 		return "login";
 	}
-	
-	
-	
+
 }

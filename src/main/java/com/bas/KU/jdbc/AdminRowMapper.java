@@ -12,7 +12,7 @@ import com.bas.KU.models.Admin;
 import com.bas.KU.models.User;
 
 /**
- * @author San
+ * @author San This class acts as front door to call its extractor
  *
  */
 public class AdminRowMapper implements RowMapper<Admin> {

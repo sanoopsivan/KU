@@ -1,11 +1,11 @@
 $(function() {
 	$('#datetimepicker_1').datetimepicker({
-		format : 'DD/MM/YYYY'
+		format : 'YYYY-MM-DD'
 	});
 });
 $(function() {
 	$('#datetimepicker_2').datetimepicker({
-		format : 'DD/MM/YYYY'
+		format : 'YYYY-MM-DD'
 	});
 });
 
@@ -62,7 +62,7 @@ function ajaxCall(k) {
 					$('#loadingImageHolder').hide();
 					$('#customerTable').show();
 					/* $('#noCustomerAvailable').show(); */
-					showNoResult();
+					AddUser();
 					$('#customerNotAvailable').hide();
 					$('.searchResultRow').remove()
 				},
@@ -74,6 +74,11 @@ function ajaxCall(k) {
 					$('#customerNotAvailable').hide();
 					$('.searchResultRow').remove();
 					$('.pagination').remove();
+					if (result.totalPages == 0) {
+						showNoResult();
+						$('#paginationHelper').hide();
+
+					}
 
 					$
 							.each(
@@ -117,9 +122,6 @@ function ajaxCall(k) {
 					$("#pagination").append("<ul class='pagination'></ul>");
 					if ((result.totalPages) > 1)
 						pagination(result.totalPages, result.currentPage);
-					if (flag) {
-						showNoResult();
-					}
 
 					/*
 					 * $("#pagination").append("<ul class='pagination'></ul>");
@@ -273,12 +275,17 @@ function createPagination(j, k) {
 function showNoResult() {
 	$("#customerTable")
 			.append(
-					"<tr id='noCustomerAvailable'><td colspan='5' class='text-center>No users available.\
-	Please click to 'Add' to add new users.</td>\
-<td>\
-	<a href='<c:url value='/view'>'  class='btn btn-success'> Add </a>\
-</td>\
+					"<tr id='noCustomerAvailable'><td colspan='6' class='text-center'>No users available.\
+	with the selected search features.</td>\
 </tr>");
+}
+function AddUser() {
+	$("#customerTable")
+			.append(
+					"<tr id='noCustomerAvailable'><td colspan='5' class='text-center'>No users available.\
+Please Add new Users.</td>\
+</tr>");
+
 }
 
 $(document.body).on('click', '.previous', function(e) {

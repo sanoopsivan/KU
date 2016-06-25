@@ -14,6 +14,7 @@ import com.bas.KU.models.User;
 
 /**
  * @author San
+ * This class extracts the admin detail from the db and convert it into a POJO
  *
  */
 public class AdminExtractor implements ResultSetExtractor<Admin> {

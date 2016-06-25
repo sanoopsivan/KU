@@ -23,7 +23,7 @@
 			<!-- March 12, 2016 - Ananthakrishnan: Login user full name goes here -->
 		</li>
 		<li>
-			<a href="logout">
+			<a href="<c:url value="/logout"/>">
 				<i class="fa fa-fw fa-gear"></i>
 				Logout
 			</a>
@@ -47,6 +47,20 @@
 					Add New User
 				</a>
 			</li>
+			<c:if test="${admin.status=='superadmin'}">
+				<li>
+					<a href="<c:url value="/addArea"/>">
+						<i class="fa fa-fw fa-bar-chart-o"></i>
+						Add Area
+					</a>
+				</li>
+				<li>
+					<a href="<c:url value="/addUniqueID"/>">
+						<i class="fa fa-fw fa-bar-chart-o"></i>
+						Add Unique ID
+					</a>
+				</li>
+			</c:if>
 		</ul>
 	</div>
 	<!-- END: Side-bar navigation options; March 12, 2016 - Ananthakrishnan -->

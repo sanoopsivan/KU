@@ -15,8 +15,8 @@
 			</div>
 
 			<!-- BEGIN: User add form; March 13, 2016 - Ananthakrishnan -->
-			<form role="form" action="updateUser" id="userAddForm"
-				name="userAddForm" method="post">
+			<form role="form" id="userUpdateForm" name="userAddForm"
+				method="post">
 				<input type="hidden" name="id" value="${user.userId}" />
 				<div class="row">
 
@@ -114,8 +114,14 @@
 
 				</div>
 				<div class="row customMarginTop pull-right">
-					<input type="submit" class="btn btn-success" id="submit"
-						name="update">
+					<button type="button" class="btn btn-success" id="update"
+						name="update">Update</button>
+					<button type="button" class="btn btn-success" id="activate"
+						name="activate">Activate</button>
+					<c:if test="${admin.status=='superadmin'}">
+						<button type="button" class="btn btn-success" id="deacivate"
+							name="deacivate">Deactivate</button>
+					</c:if>
 				</div>
 
 			</form>
