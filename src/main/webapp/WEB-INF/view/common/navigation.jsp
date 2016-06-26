@@ -18,7 +18,7 @@
 		<li>
 			<a href="#">
 				<i class="fa fa-user"></i>
-				Ananthakrishnan Prakash
+				${admin.username}
 			</a>
 			<!-- March 12, 2016 - Ananthakrishnan: Login user full name goes here -->
 		</li>

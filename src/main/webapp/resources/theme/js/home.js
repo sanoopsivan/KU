@@ -301,3 +301,20 @@ $(document.body).on('click', '.next', function(e) {
 	console.log("next :" + id)
 	ajaxCall(id);
 });
+
+$(document.body).on('click', '#update', function(e) {
+	e.preventDefault();
+	document.userUpdateForm.action = 'updateUser';
+	document.userUpdateForm.submit();
+});
+
+$(document.body).on('click', '#activate', function(e) {
+	e.preventDefault();
+	document.userUpdateForm.action = 'activateUser';
+	document.userUpdateForm.submit();
+});
+$(document.body).on('click', '#deacivate', function(e) {
+	e.preventDefault();
+	document.userUpdateForm.action = 'deactivateUser';
+	document.userUpdateForm.submit();
+});

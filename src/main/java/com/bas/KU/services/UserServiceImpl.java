@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public void updateData(User user) {
-		// TODO Auto-generated method stub
+		userdao.updateUser(user);
 
 	}
 

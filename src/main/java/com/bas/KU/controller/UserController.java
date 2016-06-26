@@ -114,7 +114,8 @@ public class UserController {
 			@RequestParam(value = "areaCode", required = false) String areaCode,
 			@RequestParam(value = "landLineNumber", required = false) String landLineNumber,
 			@RequestParam(value = "pincode", required = false) String pincode,
-			@RequestParam(value = "email", required = false) String email) {
+			@RequestParam(value = "email", required = false) String email,
+			@RequestParam(value = "status", required = false) String status) {
 		System.out.println("1");
 
 		User user = userService.getUser(id);
@@ -132,8 +133,44 @@ public class UserController {
 			user.setPincode(pincode);
 		if (StringUtils.isNotBlank(email))
 			user.setEmail(email);
+		if (StringUtils.isNotBlank(status))
+			user.setStatus(status);
 		userService.updateData(user);
 		// redirectAttributes.addFlashAttribute("user", user);
 		return "redirect:/view/" + user.getUserId() + "/editUser";
+	}
+
+	// Handle the update use action
+	@RequestMapping(value = "/view/{id}/activateUser", method = RequestMethod.POST)
+	public String activateUser(@PathVariable(value = "id") String id, ModelMap model,
+			@RequestParam(value = "firstName", required = false) String firstName,
+			@RequestParam(value = "lastName", required = false) String lastName,
+			@RequestParam(value = "gender", required = false) String gender,
+			@RequestParam(value = "address", required = false) String address,
+			@RequestParam(value = "areaCode", required = false) String areaCode,
+			@RequestParam(value = "landLineNumber", required = false) String landLineNumber,
+			@RequestParam(value = "pincode", required = false) String pincode,
+			@RequestParam(value = "email", required = false) String email) {
+
+		// redirectAttributes.addFlashAttribute("user", user);
+		return updateUser(id, model, firstName, lastName, gender, address, areaCode, landLineNumber, pincode, email,
+				UserStatus.ACTIVATED.getStatus());
+	}
+
+	// Handle the update use action
+	@RequestMapping(value = "/view/{id}/deactivateUser", method = RequestMethod.POST)
+	public String deactivateUser(@PathVariable(value = "id") String id, ModelMap model,
+			@RequestParam(value = "firstName", required = false) String firstName,
+			@RequestParam(value = "lastName", required = false) String lastName,
+			@RequestParam(value = "gender", required = false) String gender,
+			@RequestParam(value = "address", required = false) String address,
+			@RequestParam(value = "areaCode", required = false) String areaCode,
+			@RequestParam(value = "landLineNumber", required = false) String landLineNumber,
+			@RequestParam(value = "pincode", required = false) String pincode,
+			@RequestParam(value = "email", required = false) String email) {
+
+		// redirectAttributes.addFlashAttribute("user", user);
+		return updateUser(id, model, firstName, lastName, gender, address, areaCode, landLineNumber, pincode, email,
+				UserStatus.PENDING_FOR_ACTIVATION.getStatus());
 	}
 }
