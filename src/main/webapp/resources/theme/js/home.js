@@ -74,6 +74,7 @@ function ajaxCall(k) {
 					$('#customerNotAvailable').hide();
 					$('.searchResultRow').remove();
 					$('.pagination').remove();
+					$('#paginationHelper').show();
 					if (result.totalPages == 0) {
 						showNoResult();
 						$('#paginationHelper').hide();
@@ -273,6 +274,7 @@ function createPagination(j, k) {
 	}
 }
 function showNoResult() {
+	$('#noCustomerAvailable').remove();
 	$("#customerTable")
 			.append(
 					"<tr id='noCustomerAvailable'><td colspan='6' class='text-center'>No users available.\
