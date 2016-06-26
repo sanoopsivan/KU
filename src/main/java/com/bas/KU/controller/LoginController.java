@@ -76,7 +76,7 @@ public class LoginController {
 	public String adminLogout(ModelMap model, SessionStatus status) {
 		// MainFunctions.removeAdminSessionAttributeFromModel(model);
 		status.setComplete();
-		return MainFunctions.getPage(AdminStatus.UNAUTHORISED.getStatus());
+		return "redirect:login";
 	}
 
 	// show view page after successful login

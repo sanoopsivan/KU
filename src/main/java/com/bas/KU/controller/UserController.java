@@ -95,7 +95,7 @@ public class UserController {
 	@RequestMapping(value = "/view/{id}/editUser", method = RequestMethod.GET)
 	public String getUserIdFromURL(@PathVariable(value = "id") String id, ModelMap model) {
 		if (!model.containsAttribute("admin")) {
-			return "login";
+			return "redirect:login";
 		}
 		System.out.println(id);
 		User user = userService.getUser(id);
