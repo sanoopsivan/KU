@@ -10,7 +10,7 @@
 <%-- <c:set var="contextPath" value="${pageContext.request.contextPath}" /> --%>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="index.html">SB Admin</a>
+		<a class="navbar-brand" href="<c:url value="/view"/>">SB Admin</a>
 	</div>
 
 	<!-- BEGIN: Header-bar navigation options (main navigation); March 12, 2016 - Ananthakrishnan -->
@@ -23,10 +23,12 @@
 			<!-- March 12, 2016 - Ananthakrishnan: Login user full name goes here -->
 		</li>
 		<li>
-			<a href="<c:url value="/logout"/>">
-				<i class="fa fa-fw fa-gear"></i>
-				Logout
-			</a>
+			<form action="logout">
+				<a href="#">
+					<i class="fa fa-fw fa-gear"></i>
+					Logout
+				</a>
+			</form>
 			<!-- March 12, 2016 - Ananthakrishnan: Logout button goes here -->
 		</li>
 	</ul>

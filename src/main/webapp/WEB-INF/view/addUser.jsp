@@ -57,6 +57,7 @@
 							<div class="col-md-4">Area:</div>
 							<div class="col-md-8">
 								<select name="areaCode" id="areaCode">
+									<option selected value="">Select Area</option>
 									<c:forEach var="area" items="${areaList}">
 										<option value="${area.areaName}">${area.areaName}</option>
 									</c:forEach>

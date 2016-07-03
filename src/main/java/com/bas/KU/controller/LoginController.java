@@ -67,7 +67,6 @@ public class LoginController {
 		if (model.containsAttribute("admin"))
 			return "redirect:view";
 
-		// status.setComplete();
 		return MainFunctions.getPage(AdminStatus.UNAUTHORISED.getStatus());
 	}
 
