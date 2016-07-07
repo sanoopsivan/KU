@@ -72,6 +72,7 @@
 										<th>Mobile</th>
 										<th>Status</th>
 										<th>Date</th>
+										<th>Expiry Date</th>
 										<th>Action</th>
 									</tr>
 								</thead>

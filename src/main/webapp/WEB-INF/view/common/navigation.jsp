@@ -23,12 +23,12 @@
 			<!-- March 12, 2016 - Ananthakrishnan: Login user full name goes here -->
 		</li>
 		<li>
-			<form action="logout">
-				<a href="#">
-					<i class="fa fa-fw fa-gear"></i>
-					Logout
-				</a>
-			</form>
+
+			<a href="<c:url value="/logout"/>">
+				<i class="fa fa-fw fa-gear"></i>
+				Logout
+			</a>
+
 			<!-- March 12, 2016 - Ananthakrishnan: Logout button goes here -->
 		</li>
 	</ul>
@@ -60,6 +60,12 @@
 					<a href="<c:url value="/addUniqueID"/>">
 						<i class="fa fa-fw fa-bar-chart-o"></i>
 						Add Unique ID
+					</a>
+				</li>
+				<li>
+					<a href="<c:url value="/adminHome"/>">
+						<i class="fa fa-fw fa-bar-chart-o"></i>
+						Admin Home
 					</a>
 				</li>
 			</c:if>

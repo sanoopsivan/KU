@@ -113,6 +113,10 @@ function ajaxCall(k) {
 																		item.creationDate),
 														$(
 																'<td class = "searchResultColumn">')
+																.text(
+																		item.deactivationDate),
+														$(
+																'<td class = "searchResultColumn">')
 																.html(
 																		'<a href = "view/'
 																				+ item.userId

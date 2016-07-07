@@ -86,8 +86,8 @@ public class MainFunctions {
 			return query.toString();
 		if (StringUtils.isNotBlank(q)) {
 			query.append(WHERE_CLAUSE).append("(").append("firstName like '").append(q).append("%' OR lastName like '")
-					.append(q).append("%' OR name like '").append(q).append("%' OR address like '").append(q)
-					.append("%' OR phoneNumber like '").append(q).append("%'").append(")");
+					.append(q).append("%' OR name like '").append(q).append("%' OR phoneNumber like '").append(q)
+					.append("%'").append(")");
 			isWhereClauseAdded = true;
 		}
 		if (StringUtils.isNotBlank(area)) {
@@ -140,7 +140,6 @@ public class MainFunctions {
 		// int endPage = startPage + NUMBER_OF_RESULTS_PER_PAGE;
 		queryWithPagination.append(ORDER_BY_CLAUSE);
 		queryWithPagination.append(String.format(LIMIT, (startPage), paginationHelper));
-		
 
 		return queryWithPagination.toString();
 	}

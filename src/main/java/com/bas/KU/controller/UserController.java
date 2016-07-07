@@ -135,6 +135,7 @@ public class UserController {
 			user.setEmail(email);
 		if (StringUtils.isNotBlank(status))
 			user.setStatus(status);
+		user.setName(user.getFirstName(), user.getLastName());
 		userService.updateData(user);
 		// redirectAttributes.addFlashAttribute("user", user);
 		return "redirect:/view/" + user.getUserId() + "/editUser";

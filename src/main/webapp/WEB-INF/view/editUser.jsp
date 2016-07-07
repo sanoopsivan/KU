@@ -26,7 +26,8 @@
 							<div class="col-md-4">First name:</div>
 							<div class="col-md-8">
 								<input type="text" class="form-control" id="firstName"
-									name="firstName" value="${user.firstName}" readonly="readonly">
+									name="firstName" value="${user.firstName}"
+									<c:if test="${admin.status!='superadmin'}"> readonly="readonly"</c:if>>
 							</div>
 						</div>
 						<div class="row customMarginTop">
@@ -98,7 +99,7 @@
 							<div class="col-md-8">
 								<input type="text" class="form-control" id="phoneNumber"
 									name="phoneNumber" value="${user.phoneNumber}"
-									readonly="readonly">
+									<c:if test="${admin.status!='superadmin'}"> readonly="readonly"</c:if>>
 							</div>
 						</div>
 						<div class="row customMarginTop">

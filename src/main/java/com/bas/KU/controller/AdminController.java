@@ -81,4 +81,14 @@ public class AdminController {
 		return "addUniqueID";
 	}
 
+	// Controller which handle addUniqueID GET request
+	@RequestMapping(value = "/adminHome", method = RequestMethod.GET)
+	public String adminHome(ModelMap model) {
+		if (!model.containsAttribute("admin")) {
+			return "redirect : login";
+		}
+
+		return "adminHome";
+	}
+
 }
