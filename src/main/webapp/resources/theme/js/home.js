@@ -200,6 +200,7 @@ function ajaxCall(k) {
 																				+ item.userId
 																				+ "/editUser"
 																				+ '" class = "btn btn-success">View</a>'))
+
 												.appendTo('#customerTable');
 									});
 					$("#pagination").append("<ul class='pagination'></ul>");
@@ -404,5 +405,10 @@ $(document.body).on('click', '#activateUser', function(e) {
 $(document.body).on('click', '#deactivateUser', function(e) {
 	e.preventDefault();
 	document.userUpdateForm.action = 'deactivateUser';
+	document.userUpdateForm.submit();
+});
+$(document.body).on('click', '#deleteUser', function(e) {
+	e.preventDefault();
+	document.userUpdateForm.action = 'deleteUser';
 	document.userUpdateForm.submit();
 });

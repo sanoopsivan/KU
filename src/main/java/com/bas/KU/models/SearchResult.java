@@ -14,6 +14,15 @@ public class SearchResult {
 	private int currentPage;
 	private int totalPages;
 	private List<User> userList;
+	private boolean showAdditionalOptions;
+
+	public boolean isShowAdditionalOptions() {
+		return showAdditionalOptions;
+	}
+
+	public void setShowAdditionalOptions(boolean showAdditionalOptions) {
+		this.showAdditionalOptions = showAdditionalOptions;
+	}
 
 	public int getCurrentPage() {
 		return currentPage;

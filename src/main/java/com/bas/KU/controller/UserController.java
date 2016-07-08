@@ -176,4 +176,12 @@ public class UserController {
 		return updateUser(id, model, firstName, lastName, gender, address, areaCode, landLineNumber, pincode, email,
 				UserStatus.PENDING_FOR_ACTIVATION.getStatus());
 	}
+
+	// Handle the update use action
+	@RequestMapping(value = "/view/{id}/deleteUser", method = RequestMethod.POST)
+	public String deleteUser(@PathVariable(value = "id") String id, ModelMap model) {
+
+		// redirectAttributes.addFlashAttribute("user", user);
+		return "redirect:/view";
+	}
 }

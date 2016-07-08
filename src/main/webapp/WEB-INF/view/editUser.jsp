@@ -141,6 +141,9 @@
 					<c:if test="${user.status != 'ACTIVATED'}">
 						<a class="btn btn-success" id="activateUser">Activate</a>
 					</c:if>
+					<c:if test="${admin.status=='superadmin'}">
+						<a class="btn btn-success" id="deleteUser">Delete</a>
+					</c:if>
 					<a class="btn btn-success" id="submitUser">Update</a>
 					<input type="submit" style="display: none;" id="submitHandle"
 						name="submitHandle">

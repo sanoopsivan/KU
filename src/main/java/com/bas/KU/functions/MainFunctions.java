@@ -199,4 +199,14 @@ public class MainFunctions {
 
 	}
 
+	public static boolean isSuperAdmin(ModelMap model) {
+		if (model.containsAttribute("admin")) {
+			Admin admin = (Admin) model.get("admin");
+			if (StringUtils.equalsIgnoreCase(admin.getStatus(), AdminStatus.SUPERADMIN.getStatus()))
+				return true;
+		}
+		return false;
+
+	}
+
 }
