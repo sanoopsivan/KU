@@ -57,7 +57,7 @@ public class LoginController {
 			return "redirect:" + MainFunctions.getPage(role);
 
 		}
-		return "redirect:" + (MainFunctions.getPage(AdminStatus.UNAUTHORISED.getStatus()));
+		return "redirect:/login";
 
 	}
 
@@ -65,7 +65,7 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String adminLogin(ModelMap model, SessionStatus status) {
 		if (model.containsAttribute("admin"))
-			return "redirect:view";
+			return "redirect:/view";
 
 		return MainFunctions.getPage(AdminStatus.UNAUTHORISED.getStatus());
 	}
@@ -75,14 +75,14 @@ public class LoginController {
 	public String adminLogout(ModelMap model, SessionStatus status) {
 		// MainFunctions.removeAdminSessionAttributeFromModel(model);
 		status.setComplete();
-		return "redirect:login";
+		return "redirect:/login";
 	}
 
 	// show view page after successful login
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public String adminView(ModelMap model) {
 		if (!model.containsAttribute("admin")) {
-			return "redirect:login";
+			return "redirect:/login";
 		}
 		List<Status> statusList = new ArrayList<>();
 		for (UserStatus status : UserStatus.values()) {

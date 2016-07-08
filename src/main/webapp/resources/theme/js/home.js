@@ -1,3 +1,81 @@
+$('.alphabets').keypress(
+		function(e) {
+			var regex = new RegExp("^[a-zA-Z]+$");
+			var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+			if (regex.test(str) || e.keyCode == 8 || e.keyCode == 9
+					|| e.keyCode == 16 || e.keyCode == 20 || e.keyCode == 37
+					|| e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40
+					|| e.keyCode == 46) {
+				return true;
+			}
+			e.preventDefault();
+			return false;
+		});
+
+$('.numeric').keypress(
+		function(e) {
+			var regex = new RegExp("^[0-9]+$");
+			var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+			if (regex.test(str) || e.keyCode == 8 || e.keyCode == 9
+					|| e.keyCode == 16 || e.keyCode == 20 || e.keyCode == 37
+					|| e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40
+					|| e.keyCode == 46) {
+				return true;
+			}
+			e.preventDefault();
+			return false;
+		});
+
+$('.alphanumeric').keypress(
+		function(e) {
+			var regex = new RegExp("^[a-zA-Z0-9]+$");
+			var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+			if (regex.test(str) || e.keyCode == 8 || e.keyCode == 9
+					|| e.keyCode == 16 || e.keyCode == 20 || e.keyCode == 37
+					|| e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40
+					|| e.keyCode == 46) {
+				return true;
+			}
+			e.preventDefault();
+			return false;
+		});
+
+function isEmail(email) {
+	var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	return regex.test(email);
+}
+
+$('#submitUser').click(function() {
+	var emailTest = isEmail($('#emailId').val());
+	if ($('#emailId').val().len) {
+		if (emailTest) {
+			$('#submitHandle').click();
+		} else {
+			alert('Entered email is not of correct format [eg: aaa@bb.cc]');
+		}
+	} else {
+		$('#submitHandle').click();
+	}
+});
+
+$('#clearUser').click(function() {
+	$("input[type='text'], textarea").val("");
+	$("input[type='radio']:checked").each(function() {
+		$(this).checked = false;
+	});
+});
+
+$('#searchCustomerByQuery').click(function() {
+	$('.hideSearch').show();
+});
+
+$('#searchCustomerClearButton').click(function() {
+	$('.searchControl').each(function() {
+		$(this).val('');
+	});
+	$('#searchCustomerByStatus select').val('ALL');
+});
+
 $(function() {
 	$('#datetimepicker_1').datetimepicker({
 		format : 'YYYY-MM-DD'
@@ -294,6 +372,10 @@ Please Add new Users.</td>\
 
 }
 
+function showTotalCount() {
+
+}
+
 $(document.body).on('click', '.previous', function(e) {
 	e.preventDefault();
 	var id = parseFloat(this.id) - 1;
@@ -308,18 +390,18 @@ $(document.body).on('click', '.next', function(e) {
 	ajaxCall(id);
 });
 
-$(document.body).on('click', '#update', function(e) {
+$(document.body).on('click', '#submitUser', function(e) {
 	e.preventDefault();
 	document.userUpdateForm.action = 'updateUser';
 	document.userUpdateForm.submit();
 });
 
-$(document.body).on('click', '#activate', function(e) {
+$(document.body).on('click', '#activateUser', function(e) {
 	e.preventDefault();
 	document.userUpdateForm.action = 'activateUser';
 	document.userUpdateForm.submit();
 });
-$(document.body).on('click', '#deacivate', function(e) {
+$(document.body).on('click', '#deactivateUser', function(e) {
 	e.preventDefault();
 	document.userUpdateForm.action = 'deactivateUser';
 	document.userUpdateForm.submit();

@@ -54,7 +54,7 @@ public class UserController {
 	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
 	public String addUser(ModelMap model) {
 		if (!model.containsAttribute("admin")) {
-			return "redirect:login";
+			return "redirect:/login";
 		}
 		model.addAttribute("areaList", adminService.getAreaList());
 		return "addUser";
@@ -95,7 +95,7 @@ public class UserController {
 	@RequestMapping(value = "/view/{id}/editUser", method = RequestMethod.GET)
 	public String getUserIdFromURL(@PathVariable(value = "id") String id, ModelMap model) {
 		if (!model.containsAttribute("admin")) {
-			return "login";
+			return "redirect:/login";
 		}
 		System.out.println(id);
 		User user = userService.getUser(id);
@@ -133,6 +133,8 @@ public class UserController {
 			user.setPincode(pincode);
 		if (StringUtils.isNotBlank(email))
 			user.setEmail(email);
+		if (StringUtils.isNotBlank(areaCode))
+			user.setAreaCode(areaCode);
 		if (StringUtils.isNotBlank(status))
 			user.setStatus(status);
 		user.setName(user.getFirstName(), user.getLastName());

@@ -39,7 +39,7 @@ public class AdminController {
 	@RequestMapping(value = "/addArea", method = RequestMethod.GET)
 	public String addUser(ModelMap model) {
 		if (!model.containsAttribute("admin")) {
-			return "redirect : /login";
+			return "redirect:/login";
 		}
 		MainFunctions.setAreaList(model);
 		return "addArea";
@@ -75,7 +75,7 @@ public class AdminController {
 	@RequestMapping(value = "/addUniqueID", method = RequestMethod.GET)
 	public String addUniqueID(ModelMap model) {
 		if (!model.containsAttribute("admin")) {
-			return "redirect : login";
+			return "redirect:/login";
 		}
 		model.addAttribute("KUid", adminService.getLastKuid());
 		return "addUniqueID";
@@ -85,7 +85,7 @@ public class AdminController {
 	@RequestMapping(value = "/adminHome", method = RequestMethod.GET)
 	public String adminHome(ModelMap model) {
 		if (!model.containsAttribute("admin")) {
-			return "redirect : login";
+			return "redirect:/login";
 		}
 
 		return "adminHome";

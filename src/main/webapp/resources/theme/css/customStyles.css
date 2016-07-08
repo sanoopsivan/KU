@@ -45,7 +45,7 @@
 	width: 100%;
 }
 
-.inactiveLink {
-	pointer-events: none;
-	cursor: default;
-}
+ .hideSearch  {
+ 	display: none;
+ }
+ 
