@@ -29,9 +29,8 @@ public class UserServiceImpl implements UserService {
 		return userdao.getUserList();
 	}
 
-	public void deleteData(String id) {
-		// TODO Auto-generated method stub
-
+	public void deleteUser(String id) {
+		userdao.deleteUser(id);
 	}
 
 	public User getUser(String id) {

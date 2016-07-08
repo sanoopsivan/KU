@@ -28,6 +28,7 @@ public class UserDAOImpl implements UserDAO {
 	private static final String SELECT_A_LIMIT_OF_USERS_QUERY = "select * from user limit %d,%d";
 	private static final String SELECT_NAME_AND_PHONE_OF_ALLUSERS_QUERY = "SELECT name,phoneNumber FROM user";
 	private static final String SELECT_USER_BY_ID = "select * from user where id = '%s'";
+	private static final String DELETE_USER_BY_ID = "DELETE FROM user where id ='%s'";
 
 	@Autowired
 	DataSource dataSource;
@@ -67,9 +68,10 @@ public class UserDAOImpl implements UserDAO {
 
 	}
 
-	public void deleteData(String id) {
-		// TODO Auto-generated method stub
-
+	public void deleteUser(String id) {
+		String sql = String.format(DELETE_USER_BY_ID, id);
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		jdbcTemplate.update(sql);
 	}
 
 	public User getUser(String id) {

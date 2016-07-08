@@ -181,7 +181,7 @@ public class UserController {
 	@RequestMapping(value = "/view/{id}/deleteUser", method = RequestMethod.POST)
 	public String deleteUser(@PathVariable(value = "id") String id, ModelMap model) {
 
-		// redirectAttributes.addFlashAttribute("user", user);
+		userService.deleteUser(id);
 		return "redirect:/view";
 	}
 }
