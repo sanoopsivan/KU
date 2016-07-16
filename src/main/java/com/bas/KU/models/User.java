@@ -69,46 +69,24 @@ public class User {
 		return activationDate;
 	}
 
-	public void setActivationDate(Date activationDate) {
-		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-		this.activationDate = sf.format(activationDate);
-	}
-
-	public void setActivationDate(Date activationDate, boolean val) {
-		if (activationDate != null) {
-			SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
-			this.activationDate = sf.format(activationDate);
-		}
+	public void setActivationDate(String activationDate) {
+		this.activationDate = activationDate;
 	}
 
 	public String getDeactivationDate() {
 		return deactivationDate;
 	}
 
-	public void setDeactivationDate(Date deactivationDate) {
-		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-		this.deactivationDate = sf.format(deactivationDate);
-	}
-
-	public void setDeactivationDate(Date deactivationDate, boolean val) {
-		if (activationDate != null) {
-			SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
-			this.deactivationDate = sf.format(deactivationDate);
-		}
+	public void setDeactivationDate(String deactivationDate) {
+		this.deactivationDate = deactivationDate;
 	}
 
 	public String getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(Date creationDate, boolean val) {
-		SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
-		this.creationDate = sf.format(creationDate);
-	}
-
-	public void setCreationDate(Date creationDate) {
-		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-		this.creationDate = sf.format(creationDate);
+	public void setCreationDate(String creationDate) {
+		this.creationDate = creationDate;
 	}
 
 	public String getAreaCode() {

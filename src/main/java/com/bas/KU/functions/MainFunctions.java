@@ -117,7 +117,7 @@ public class MainFunctions {
 				query.append(WHERE_CLAUSE);
 				isWhereClauseAdded = true;
 			}
-			query.append("(").append("creationDate > '").append(MYSQLDateFormatter(startDate)).append("')");
+			query.append("(").append("creationDate >= '").append(MYSQLDateFormatter(startDate)).append("')");
 		}
 		if (StringUtils.isNotBlank(endDate)) {
 			if (isWhereClauseAdded)
@@ -126,7 +126,7 @@ public class MainFunctions {
 				query.append(WHERE_CLAUSE);
 				isWhereClauseAdded = true;
 			}
-			query.append("(").append("creationDate < '").append(MYSQLDateFormatter(endDate)).append("')");
+			query.append("(").append("creationDate <= '").append(MYSQLDateFormatter(endDate)).append("')");
 		}
 
 		return query.toString();
@@ -214,6 +214,32 @@ public class MainFunctions {
 		String[] splittedDate = date.split("-");
 		String formattedDate = splittedDate[2] + "-" + splittedDate[1] + "-" + splittedDate[0];
 		return formattedDate;
+	}
+
+	public static String MYSQLDateFormatter(Date date) {
+		if (date != null)
+			return new SimpleDateFormat("yyyy-MM-dd").format(date);
+		return null;
+
+	}
+
+	public static String KUDateFormatter(String date) {
+		if (StringUtils.isNotBlank(date)) {
+			String[] splittedDate = date.split(" ");
+			return MYSQLDateFormatter(splittedDate[0]);
+		}
+		return null;
+	}
+
+	public static List<User> filterData(List<User> userList) {
+		List<User> filteredUserList = new ArrayList<>();
+		for (User user : userList) {
+			user.setCreationDate(KUDateFormatter(user.getCreationDate()));
+			user.setActivationDate(KUDateFormatter(user.getActivationDate()));
+			user.setDeactivationDate(KUDateFormatter(user.getDeactivationDate()));
+			filteredUserList.add(user);
+		}
+		return filteredUserList;
 	}
 
 }

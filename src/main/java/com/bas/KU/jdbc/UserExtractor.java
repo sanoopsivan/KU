@@ -69,13 +69,13 @@ public class UserExtractor implements ResultSetExtractor<User> {
 					user.setAddress(resultSet.getString("address"));
 					break;
 				case "creationDate":
-					user.setCreationDate(resultSet.getDate("creationDate"), true);
+					user.setCreationDate(resultSet.getString("creationDate"));
 					break;
 				case "activationDate":
-					user.setActivationDate(resultSet.getDate("activationDate"), true);
+					user.setActivationDate(resultSet.getString("activationDate"));
 					break;
 				case "deactivationDate":
-					user.setDeactivationDate(resultSet.getDate("deactivationDate"), true);
+					user.setDeactivationDate(resultSet.getString("deactivationDate"));
 					break;
 				default:
 					System.out.println("Unknown Column");

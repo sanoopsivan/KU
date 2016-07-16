@@ -6,6 +6,8 @@ package com.bas.KU.models;
 import java.util.Collections;
 import java.util.List;
 
+import com.bas.KU.functions.MainFunctions;
+
 /**
  * @author San
  *
@@ -45,7 +47,7 @@ public class SearchResult {
 	}
 
 	public void setUserList(List<User> userList) {
-		this.userList = userList;
+		this.userList = MainFunctions.filterData(userList);
 	}
 
 }

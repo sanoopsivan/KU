@@ -85,7 +85,7 @@ public class UserController {
 		user.setEmail(email);
 		MainFunctions.setUserKUID(user);
 		user.setStatus(UserStatus.PENDING_FOR_ACTIVATION.getStatus());
-		user.setCreationDate(new Date());
+		user.setCreationDate(MainFunctions.MYSQLDateFormatter(new Date()));
 		user.setComment(comment);
 		user.setName(firstName, lastName);
 		userService.insertData(user);
@@ -103,6 +103,7 @@ public class UserController {
 		System.out.println(id);
 		User user = userService.getUser(id);
 		model.addAttribute("user", user);
+		MainFunctions.KUDateFormatter(user.getCreationDate());
 		MainFunctions.setAreaList(model);
 		return "editUser";
 	}
@@ -146,9 +147,9 @@ public class UserController {
 		if (StringUtils.isNotBlank(comment))
 			user.setComment(comment);
 		if (activationDate != null)
-			user.setActivationDate(activationDate);
+			user.setActivationDate(MainFunctions.MYSQLDateFormatter(activationDate));
 		if (deactivationDate != null)
-			user.setDeactivationDate(deactivationDate);
+			user.setDeactivationDate(MainFunctions.MYSQLDateFormatter(deactivationDate));
 		user.setName(user.getFirstName(), user.getLastName());
 		userService.updateData(user);
 		// redirectAttributes.addFlashAttribute("user", user);

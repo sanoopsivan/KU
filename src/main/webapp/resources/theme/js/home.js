@@ -365,6 +365,7 @@ function showNoResult() {
 </tr>");
 }
 function AddUser() {
+	$('#noCustomerAvailable').remove();
 	$("#customerTable")
 			.append(
 					"<tr id='noCustomerAvailable'><td colspan='7' class='text-center'>No users available.\
