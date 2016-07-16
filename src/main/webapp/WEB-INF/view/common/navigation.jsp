@@ -10,13 +10,13 @@
 <%-- <c:set var="contextPath" value="${pageContext.request.contextPath}" /> --%>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="<c:url value="/view"/>">SB Admin</a>
+		<a class="navbar-brand" href="<c:url value="/view"/>">KU Admin</a>
 	</div>
 
 	<!-- BEGIN: Header-bar navigation options (main navigation); March 12, 2016 - Ananthakrishnan -->
 	<ul class="nav navbar-right top-nav">
 		<li>
-			<a href="#">
+			<a href="<c:url value="/view"/>">
 				<i class="fa fa-user"></i>
 				${admin.username}
 			</a>

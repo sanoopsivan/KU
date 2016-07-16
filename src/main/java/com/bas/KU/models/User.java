@@ -3,7 +3,12 @@
  */
 package com.bas.KU.models;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+
+import com.bas.KU.functions.MainFunctions;
 
 /**
  * @author San
@@ -14,19 +19,27 @@ public class User {
 	private String KUId;
 	private String name;
 	private String status;
-
 	private String firstName;
 	private String lastName;
 	private String gender;
 	private String address;
 	private String phoneNumber;
 	private String email;
-	private Date creationDate;
+	private String creationDate;
 	private String areaCode;
 	private String landLineNumber;
 	private String pincode;
-	private Date activationDate;
-	private Date deactivationDate;
+	private String activationDate;
+	private String deactivationDate;
+	private String comment;
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 
 	public String getKUId() {
 		return KUId;
@@ -52,28 +65,50 @@ public class User {
 		this.pincode = pincode;
 	}
 
-	public Date getActivationDate() {
+	public String getActivationDate() {
 		return activationDate;
 	}
 
 	public void setActivationDate(Date activationDate) {
-		this.activationDate = activationDate;
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+		this.activationDate = sf.format(activationDate);
 	}
 
-	public Date getDeactivationDate() {
+	public void setActivationDate(Date activationDate, boolean val) {
+		if (activationDate != null) {
+			SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
+			this.activationDate = sf.format(activationDate);
+		}
+	}
+
+	public String getDeactivationDate() {
 		return deactivationDate;
 	}
 
 	public void setDeactivationDate(Date deactivationDate) {
-		this.deactivationDate = deactivationDate;
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+		this.deactivationDate = sf.format(deactivationDate);
 	}
 
-	public Date getCreationDate() {
+	public void setDeactivationDate(Date deactivationDate, boolean val) {
+		if (activationDate != null) {
+			SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
+			this.deactivationDate = sf.format(deactivationDate);
+		}
+	}
+
+	public String getCreationDate() {
 		return creationDate;
 	}
 
+	public void setCreationDate(Date creationDate, boolean val) {
+		SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
+		this.creationDate = sf.format(creationDate);
+	}
+
 	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+		this.creationDate = sf.format(creationDate);
 	}
 
 	public String getAreaCode() {
@@ -160,6 +195,5 @@ public class User {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
 
 }

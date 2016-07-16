@@ -4,6 +4,7 @@
 package com.bas.KU.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
@@ -69,7 +70,8 @@ public class UserController {
 			@RequestParam(value = "areaCode", required = false) String areaCode,
 			@RequestParam(value = "landLineNumber", required = false) String landLineNumber,
 			@RequestParam(value = "pincode", required = false) String pincode,
-			@RequestParam(value = "email", required = false) String email) {
+			@RequestParam(value = "email", required = false) String email,
+			@RequestParam(value = "comment", required = false) String comment) {
 
 		User user = new User();
 		user.setFirstName(firstName);
@@ -84,6 +86,7 @@ public class UserController {
 		MainFunctions.setUserKUID(user);
 		user.setStatus(UserStatus.PENDING_FOR_ACTIVATION.getStatus());
 		user.setCreationDate(new Date());
+		user.setComment(comment);
 		user.setName(firstName, lastName);
 		userService.insertData(user);
 		// thirdPartyService.sendMail();
@@ -115,7 +118,10 @@ public class UserController {
 			@RequestParam(value = "landLineNumber", required = false) String landLineNumber,
 			@RequestParam(value = "pincode", required = false) String pincode,
 			@RequestParam(value = "email", required = false) String email,
-			@RequestParam(value = "status", required = false) String status) {
+			@RequestParam(value = "status", required = false) String status,
+			@RequestParam(value = "comment", required = false) String comment,
+			@RequestParam(value = "activationDate", required = false) Date activationDate,
+			@RequestParam(value = "deactivationDate", required = false) Date deactivationDate) {
 		System.out.println("1");
 
 		User user = userService.getUser(id);
@@ -137,6 +143,12 @@ public class UserController {
 			user.setAreaCode(areaCode);
 		if (StringUtils.isNotBlank(status))
 			user.setStatus(status);
+		if (StringUtils.isNotBlank(comment))
+			user.setComment(comment);
+		if (activationDate != null)
+			user.setActivationDate(activationDate);
+		if (deactivationDate != null)
+			user.setDeactivationDate(deactivationDate);
 		user.setName(user.getFirstName(), user.getLastName());
 		userService.updateData(user);
 		// redirectAttributes.addFlashAttribute("user", user);
@@ -153,11 +165,16 @@ public class UserController {
 			@RequestParam(value = "areaCode", required = false) String areaCode,
 			@RequestParam(value = "landLineNumber", required = false) String landLineNumber,
 			@RequestParam(value = "pincode", required = false) String pincode,
-			@RequestParam(value = "email", required = false) String email) {
+			@RequestParam(value = "email", required = false) String email,
+			@RequestParam(value = "comment", required = false) String comment) {
+
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date());
+		c.add(Calendar.YEAR, 2);
 
 		// redirectAttributes.addFlashAttribute("user", user);
 		return updateUser(id, model, firstName, lastName, gender, address, areaCode, landLineNumber, pincode, email,
-				UserStatus.ACTIVATED.getStatus());
+				UserStatus.ACTIVATED.getStatus(), comment, new Date(), c.getTime());
 	}
 
 	// Handle the update use action
@@ -170,11 +187,12 @@ public class UserController {
 			@RequestParam(value = "areaCode", required = false) String areaCode,
 			@RequestParam(value = "landLineNumber", required = false) String landLineNumber,
 			@RequestParam(value = "pincode", required = false) String pincode,
-			@RequestParam(value = "email", required = false) String email) {
+			@RequestParam(value = "email", required = false) String email,
+			@RequestParam(value = "comment", required = false) String comment) {
 
 		// redirectAttributes.addFlashAttribute("user", user);
 		return updateUser(id, model, firstName, lastName, gender, address, areaCode, landLineNumber, pincode, email,
-				UserStatus.PENDING_FOR_ACTIVATION.getStatus());
+				UserStatus.PENDING_FOR_ACTIVATION.getStatus(), comment, null, null);
 	}
 
 	// Handle the update use action

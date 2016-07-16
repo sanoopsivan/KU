@@ -62,14 +62,20 @@ public class UserExtractor implements ResultSetExtractor<User> {
 				case "status":
 					user.setStatus(resultSet.getString("status"));
 					break;
+				case "comment":
+					user.setComment(resultSet.getString("comment"));
+					break;
+				case "address":
+					user.setAddress(resultSet.getString("address"));
+					break;
 				case "creationDate":
-					user.setCreationDate(resultSet.getDate("creationDate"));
+					user.setCreationDate(resultSet.getDate("creationDate"), true);
 					break;
 				case "activationDate":
-					user.setActivationDate(resultSet.getDate("activationDate"));
+					user.setActivationDate(resultSet.getDate("activationDate"), true);
 					break;
 				case "deactivationDate":
-					user.setDeactivationDate(resultSet.getDate("deactivationDate"));
+					user.setDeactivationDate(resultSet.getDate("deactivationDate"), true);
 					break;
 				default:
 					System.out.println("Unknown Column");
@@ -84,7 +90,7 @@ public class UserExtractor implements ResultSetExtractor<User> {
 			 * user.setActivationDate(resultSet.getDate("activationDate"));
 			 * user.setDeactivationDate(resultSet.getDate("deactivationDate"));
 			 */
-			
+
 			return user;
 		} else
 			return null;

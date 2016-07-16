@@ -8,11 +8,12 @@
 			<form id="searchCustomerForm">
 				<div class="row">
 
-					<div class="col-md-4 topPadding">
-						<input type="text" class="form-control" id="searchCustomerByQuery"
-							placeholder="Search" name="q" />
+					<div class="col-xs-12 col-sm-4 col-lg-4 col-md-4 topPadding">
+						<input type="text" class="form-control searchControl"
+							id="searchCustomerByQuery" placeholder="Search" name="q" />
 					</div>
-					<div class="col-md-4 topPadding">
+					<div
+						class="col-xs-12 col-sm-4 col-lg-4 col-md-4 topPadding hideSearch">
 						<div class="form-group">
 							<select class="form-control" id="searchCustomerByStatus"
 								name="searchCustomerByStatus">
@@ -23,30 +24,32 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-4 topPadding">
+					<div
+						class="col-xs-12 col-sm-4 col-lg-4 col-md-4 topPadding hideSearch">
 						<div class="form-group">
-							<input type='text' class="form-control" id='searchByArea'
-								placeholder="Area" name="searchByArea" />
+							<input type='text' class="form-control searchControl"
+								id='searchByArea' placeholder="Area" name="searchByArea" />
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4 topPadding">
-						<input type='text' class="form-control" id='datetimepicker_1'
-							placeholder="From Date" name="fromDate" />
+					<div
+						class="col-xs-12 col-sm-4 col-lg-4 col-md-4 topPadding hideSearch">
+						<input type='text' class="form-control searchControl"
+							id='datetimepicker_1' placeholder="From Date" name="fromDate" />
 					</div>
-					<div class="col-md-4 topPadding">
-						<input type='text' class="form-control" id='datetimepicker_2'
-							placeholder="Till Date" name="tillDate" />
+					<div
+						class="col-xs-12 col-sm-4 col-lg-4 col-md-4 topPadding hideSearch">
+						<input type='text' class="form-control searchControl"
+							id='datetimepicker_2' placeholder="Till Date" name="tillDate" />
 					</div>
-					<div class="col-md-2 topPadding">
-						<button class="btn btn-default" id="searchCustomerSubmitButton">Search</button>
-					</div>
-					<div class="col-md-2 topPadding">
-						<button class="btn btn-default" id="searchCustomerClearButton">Clear</button>
+					<div class="col-xs-12 col-sm-4 col-lg-4 col-md-4 topPadding">
+						<button class="btn btn-primary" id="searchCustomerSubmitButton">Search</button>
+						<button class="btn btn-warning" id="searchCustomerClearButton">Clear</button>
 					</div>
 
 				</div>
+
 
 				<div class="row">
 					<div class="col-md-12">

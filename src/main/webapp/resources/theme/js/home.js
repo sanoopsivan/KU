@@ -78,12 +78,12 @@ $('#searchCustomerClearButton').click(function() {
 
 $(function() {
 	$('#datetimepicker_1').datetimepicker({
-		format : 'YYYY-MM-DD'
+		format : 'DD-MM-YYYY'
 	});
 });
 $(function() {
 	$('#datetimepicker_2').datetimepicker({
-		format : 'YYYY-MM-DD'
+		format : 'DD-MM-YYYY'
 	});
 });
 
@@ -360,14 +360,14 @@ function showNoResult() {
 	$('#noCustomerAvailable').remove();
 	$("#customerTable")
 			.append(
-					"<tr id='noCustomerAvailable'><td colspan='6' class='text-center'>No users available.\
+					"<tr id='noCustomerAvailable'><td colspan='7' class='text-center'>No users available.\
 	with the selected search features.</td>\
 </tr>");
 }
 function AddUser() {
 	$("#customerTable")
 			.append(
-					"<tr id='noCustomerAvailable'><td colspan='5' class='text-center'>No users available.\
+					"<tr id='noCustomerAvailable'><td colspan='7' class='text-center'>No users available.\
 Please Add new Users.</td>\
 </tr>");
 

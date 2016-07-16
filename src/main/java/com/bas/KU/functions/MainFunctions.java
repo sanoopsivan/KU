@@ -39,8 +39,8 @@ public class MainFunctions {
 	private static final String DEFAULT_STATUS = "ALL";
 	public static final String SHOW_ALL_RESULTS = "ALL";
 	public static final int NUMBER_OF_RESULTS_PER_PAGE = 3;
-	private static final String DATE_FORMAT = "YYYY-MM-DD";
-	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);
+	private static final String DATE_FORMAT = "dd/mm/YYYY";
+	public static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);
 
 	@Autowired
 	public static UserService userService;
@@ -78,6 +78,7 @@ public class MainFunctions {
 	}
 
 	public static String getQuery(String q, String area, String status, String startDate, String endDate) {
+
 		boolean isWhereClauseAdded = false;
 		StringBuilder query = new StringBuilder(QUERY);
 		if (StringUtils.isBlank(q) && StringUtils.isBlank(area)
@@ -116,7 +117,7 @@ public class MainFunctions {
 				query.append(WHERE_CLAUSE);
 				isWhereClauseAdded = true;
 			}
-			query.append("(").append("creationDate > '").append(startDate).append("')");
+			query.append("(").append("creationDate > '").append(MYSQLDateFormatter(startDate)).append("')");
 		}
 		if (StringUtils.isNotBlank(endDate)) {
 			if (isWhereClauseAdded)
@@ -125,7 +126,7 @@ public class MainFunctions {
 				query.append(WHERE_CLAUSE);
 				isWhereClauseAdded = true;
 			}
-			query.append("(").append("creationDate < '").append(endDate).append("')");
+			query.append("(").append("creationDate < '").append(MYSQLDateFormatter(endDate)).append("')");
 		}
 
 		return query.toString();
@@ -207,6 +208,12 @@ public class MainFunctions {
 		}
 		return false;
 
+	}
+
+	private static String MYSQLDateFormatter(String date) {
+		String[] splittedDate = date.split("-");
+		String formattedDate = splittedDate[2] + "-" + splittedDate[1] + "-" + splittedDate[0];
+		return formattedDate;
 	}
 
 }

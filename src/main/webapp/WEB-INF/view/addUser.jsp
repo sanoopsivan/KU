@@ -101,6 +101,13 @@
 									id="emailId" name="emailId">
 							</div>
 						</div>
+						<div class="row customMarginTop">
+							<div class="col-xs-5 col-sm-4 col-lg-4 col-md-4">Comment:</div>
+							<div class="col-xs-7 col-sm-8 col-lg-8 col-md-8">
+								<textarea rows="4" cols="50" id="comment" name="comment"
+									style="resize: none;"></textarea>
+							</div>
+						</div>
 						<div class="row customMarginTop">&nbsp;</div>
 					</div>
 					<!-- END: Form fields RHS; March 13, 2016 - Ananthakrishnan -->
