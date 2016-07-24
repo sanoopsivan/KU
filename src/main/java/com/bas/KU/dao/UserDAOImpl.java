@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.bas.KU.enums.UserStatus;
 import com.bas.KU.jdbc.AdminRowMapper;
 import com.bas.KU.jdbc.UserRowMapper;
 import com.bas.KU.models.Admin;
@@ -54,7 +55,7 @@ public class UserDAOImpl implements UserDAO {
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		userList = jdbcTemplate.query(sql, new UserRowMapper());
-		return userList.isEmpty() ? null : userList;
+		return userList;
 	}
 
 	public void updateUser(User user) {
@@ -95,29 +96,29 @@ public class UserDAOImpl implements UserDAO {
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		userList = jdbcTemplate.query(sql, new UserRowMapper());
-		return userList.isEmpty() ? null : userList;
+		return userList;
 	}
 
 	public List<User> getUserList(String query) {
 		List<User> userList = new ArrayList<>();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		userList = jdbcTemplate.query(query, new UserRowMapper());
-		return userList.isEmpty() ? null : userList;
+		return userList;
 	}
 
 	public List<User> getUserNameAndPhone() {
 		List<User> userList = new ArrayList<>();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		userList = jdbcTemplate.query(SELECT_NAME_AND_PHONE_OF_ALLUSERS_QUERY, new UserRowMapper());
-		return userList.isEmpty() ? null : userList;
+		return userList;
 	}
 
 	public List<User> getUsersForStatusUpdation() {
 		List<User> userList = new ArrayList<>();
-
+		String sql = String.format(SELECT_ALL_USER_FOR_STATUS_UPDATION, UserStatus.ACTIVATED.getStatus());
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		userList = jdbcTemplate.query(SELECT_ALL_USER_FOR_STATUS_UPDATION, new UserRowMapper());
-		return userList.isEmpty() ? null : userList;
+		userList = jdbcTemplate.query(sql, new UserRowMapper());
+		return userList;
 	}
 
 }
