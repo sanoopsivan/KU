@@ -142,7 +142,8 @@ function ajaxCall(k) {
 					/* $('#noCustomerAvailable').show(); */
 					AddUser();
 					$('#customerNotAvailable').hide();
-					$('.searchResultRow').remove()
+					$('.searchResultRow').remove();
+					$('#paginationHelper').hide()
 				},
 				success : function(result) {
 					var flag = true;

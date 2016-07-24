@@ -3,8 +3,6 @@
  */
 package com.bas.KU.functions;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,20 +10,17 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.bas.KU.Constants.KUConstants;
 import com.bas.KU.enums.AdminStatus;
 import com.bas.KU.enums.UserStatus;
 import com.bas.KU.models.Admin;
-import com.bas.KU.models.Area;
 import com.bas.KU.models.KUid;
-import com.bas.KU.models.SearchParams;
 import com.bas.KU.models.Status;
 import com.bas.KU.models.User;
+import com.bas.KU.scheduler.Scheduler;
 import com.bas.KU.services.AdminService;
 import com.bas.KU.services.UserService;
 
@@ -34,13 +29,14 @@ import com.bas.KU.services.UserService;
  *
  */
 @Service
-
 public class MainFunctions {
-	private static final String DEFAULT_STATUS = "ALL";
-	public static final String SHOW_ALL_RESULTS = "ALL";
-	public static final int NUMBER_OF_RESULTS_PER_PAGE = 3;
-	private static final String DATE_FORMAT = "dd/mm/YYYY";
-	public static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);
+	
+	private static final String QUERY = "select * from user";
+	private static final String WHERE_CLAUSE = " where ";
+	private static final String AND_CLAUSE = " AND ";
+	private static final String LIMIT = " LIMIT %d,%d";
+	private static final String ORDER_BY_CLAUSE = " order by creationDate DESC";
+
 
 	@Autowired
 	public static UserService userService;
@@ -59,23 +55,7 @@ public class MainFunctions {
 		this.userService = userService;
 	}
 
-	private static final String QUERY = "select * from user";
-	private static final String WHERE_CLAUSE = " where ";
-	private static final String AND_CLAUSE = " AND ";
-	private static final String LIMIT = " LIMIT %d,%d";
-	private static final String ORDER_BY_CLAUSE = " order by creationDate DESC";
-
 	// return the page names after checking the role
-	public static String getPage(String role) {
-		switch (role) {
-		case "admin":
-		case "superadmin":
-			return "view";
-		case "unauthorized":
-		default:
-			return "login";
-		}
-	}
 
 	public static String getQuery(String q, String area, String status, String startDate, String endDate) {
 
@@ -100,7 +80,7 @@ public class MainFunctions {
 			}
 			query.append("(").append("areaCode like '").append(area).append("%')");
 		}
-		if (StringUtils.isNotBlank(status) && !StringUtils.equalsIgnoreCase(status, DEFAULT_STATUS)) {
+		if (StringUtils.isNotBlank(status) && !StringUtils.equalsIgnoreCase(status, KUConstants.DEFAULT_STATUS)) {
 			if (isWhereClauseAdded)
 				query.append(AND_CLAUSE);
 			else {
@@ -193,13 +173,6 @@ public class MainFunctions {
 			model.remove("admin");
 	}
 
-	public static boolean checkSessionExists(ModelMap model) {
-		if (model.containsAttribute("admin"))
-			MainFunctions.getPage(AdminStatus.UNAUTHORISED.getStatus());
-		return true;
-
-	}
-
 	public static boolean isSuperAdmin(ModelMap model) {
 		if (model.containsAttribute("admin")) {
 			Admin admin = (Admin) model.get("admin");
@@ -240,6 +213,12 @@ public class MainFunctions {
 			filteredUserList.add(user);
 		}
 		return filteredUserList;
+	}
+
+	public static void runSheduler() {
+		if (!Scheduler.initialized) {
+			Scheduler.doValidateExpiryDates();
+		}
 	}
 
 }

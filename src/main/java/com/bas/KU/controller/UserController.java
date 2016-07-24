@@ -3,7 +3,6 @@
  */
 package com.bas.KU.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -11,21 +10,17 @@ import org.apache.commons.lang3.StringUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.bas.KU.enums.AdminStatus;
+import com.bas.KU.Constants.KUConstants;
 import com.bas.KU.enums.UserStatus;
 import com.bas.KU.functions.MainFunctions;
-import com.bas.KU.models.Admin;
 import com.bas.KU.models.User;
 import com.bas.KU.services.AdminService;
 import com.bas.KU.services.ThirdPartyService;
@@ -37,11 +32,8 @@ import com.bas.KU.services.UserService;
  */
 
 @Controller
-@SessionAttributes("admin")
+@SessionAttributes(KUConstants.ADMIN)
 public class UserController {
-
-	private static final String DATE_FORMAT = "dd/mm/yyyy";
-	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);
 
 	@Autowired
 	UserService userService;
@@ -52,15 +44,16 @@ public class UserController {
 	@Autowired
 	ThirdPartyService thirdPartyService;
 
+	// add user get
 	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
 	public String addUser(ModelMap model) {
-		if (!model.containsAttribute("admin")) {
+		if (!model.containsAttribute("admin"))
 			return "redirect:/login";
-		}
 		model.addAttribute("areaList", adminService.getAreaList());
-		return "addUser";
+		return KUConstants.ADD_USER_PAGE;
 	}
 
+	// Handles the add user action
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	public ModelAndView addUser(@RequestParam(value = "firstName", required = false) String firstName,
 			@RequestParam(value = "lastName", required = false) String lastName,
@@ -91,7 +84,7 @@ public class UserController {
 		userService.insertData(user);
 		// thirdPartyService.sendMail();
 		// thirdPartyService.sendSMS();
-		return new ModelAndView("view");
+		return new ModelAndView(KUConstants.VIEW_PAGE);
 	}
 
 	// Handles the edit user action
@@ -100,12 +93,11 @@ public class UserController {
 		if (!model.containsAttribute("admin")) {
 			return "redirect:/login";
 		}
-		System.out.println(id);
 		User user = userService.getUser(id);
 		model.addAttribute("user", user);
 		MainFunctions.KUDateFormatter(user.getCreationDate());
 		MainFunctions.setAreaList(model);
-		return "editUser";
+		return KUConstants.EDIT_USER_PAGE;
 	}
 
 	// Handle the update use action
@@ -123,7 +115,6 @@ public class UserController {
 			@RequestParam(value = "comment", required = false) String comment,
 			@RequestParam(value = "activationDate", required = false) Date activationDate,
 			@RequestParam(value = "deactivationDate", required = false) Date deactivationDate) {
-		System.out.println("1");
 
 		User user = userService.getUser(id);
 		if (StringUtils.isNotBlank(firstName))
@@ -169,6 +160,7 @@ public class UserController {
 			@RequestParam(value = "email", required = false) String email,
 			@RequestParam(value = "comment", required = false) String comment) {
 
+		// add 2 years
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
 		c.add(Calendar.YEAR, 2);
@@ -190,7 +182,6 @@ public class UserController {
 			@RequestParam(value = "pincode", required = false) String pincode,
 			@RequestParam(value = "email", required = false) String email,
 			@RequestParam(value = "comment", required = false) String comment) {
-
 		// redirectAttributes.addFlashAttribute("user", user);
 		return updateUser(id, model, firstName, lastName, gender, address, areaCode, landLineNumber, pincode, email,
 				UserStatus.PENDING_FOR_ACTIVATION.getStatus(), comment, null, null);
@@ -199,7 +190,6 @@ public class UserController {
 	// Handle the update use action
 	@RequestMapping(value = "/view/{id}/deleteUser", method = RequestMethod.POST)
 	public String deleteUser(@PathVariable(value = "id") String id, ModelMap model) {
-
 		userService.deleteUser(id);
 		return "redirect:/view";
 	}

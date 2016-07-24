@@ -22,6 +22,10 @@
 		<property name="userService" ref="userService"></property>
 		<property name="adminService" ref="adminService"></property>
 	</bean>
+	<bean id="sheduler" class="com.bas.KU.scheduler.Scheduler">
+		<property name="userService" ref="userService"></property>
+		<property name="adminService" ref="adminService"></property>
+	</bean>
 
 
 	<bean

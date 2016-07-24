@@ -5,20 +5,20 @@ package com.bas.KU.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
+import java.util.logging.Logger;
 
 import org.apache.commons.lang3.StringUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.bas.KU.Constants.KUConstants;
 import com.bas.KU.enums.AdminStatus;
 import com.bas.KU.enums.UserStatus;
 import com.bas.KU.functions.MainFunctions;
@@ -33,8 +33,9 @@ import com.bas.KU.services.UserService;
  */
 
 @Controller
-@SessionAttributes("admin")
+@SessionAttributes(KUConstants.ADMIN)
 public class LoginController {
+	private static Logger logger = Logger.getLogger(LoginController.class.getName());
 
 	@Autowired
 	AdminService adminService;
@@ -49,12 +50,9 @@ public class LoginController {
 
 		if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
 			Admin admin = adminService.getAdmin(username, password);
-			String role = (admin != null && admin.getStatus().equalsIgnoreCase(AdminStatus.SUPERADMIN.getStatus()))
-					? AdminStatus.SUPERADMIN.getStatus()
-					: admin != null && admin.getStatus().equalsIgnoreCase(AdminStatus.ADMIN.getStatus())
-							? AdminStatus.ADMIN.getStatus() : AdminStatus.UNAUTHORISED.getStatus();
 			MainFunctions.setModel(model, admin);
-			return "redirect:" + MainFunctions.getPage(role);
+			MainFunctions.runSheduler();
+			return "redirect:/view";
 
 		}
 		return "redirect:/login";
@@ -64,10 +62,10 @@ public class LoginController {
 	// for GET Request
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String adminLogin(ModelMap model, SessionStatus status) {
-		if (model.containsAttribute("admin"))
+		if (model.containsAttribute(KUConstants.ADMIN))
 			return "redirect:/view";
 
-		return MainFunctions.getPage(AdminStatus.UNAUTHORISED.getStatus());
+		return KUConstants.LOGIN_PAGE;
 	}
 
 	// remove session variable on logout
@@ -81,15 +79,15 @@ public class LoginController {
 	// show view page after successful login
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public String adminView(ModelMap model) {
-		if (!model.containsAttribute("admin")) {
+		if (!model.containsAttribute(KUConstants.ADMIN))
 			return "redirect:/login";
-		}
+
 		List<Status> statusList = new ArrayList<>();
 		for (UserStatus status : UserStatus.values()) {
 			statusList.add(MainFunctions.getStatusOf(status));
 		}
 		model.addAttribute("statusList", statusList);
-		return "view";
+		return KUConstants.VIEW_PAGE;
 	}
 
 }

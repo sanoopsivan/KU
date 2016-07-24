@@ -8,10 +8,10 @@ import java.util.List;
 import com.bas.KU.models.Admin;
 import com.bas.KU.models.Area;
 import com.bas.KU.models.KUid;
-import com.bas.KU.models.User;
 
 /**
  * @author San
+ * 
  *
  */
 public interface AdminService {

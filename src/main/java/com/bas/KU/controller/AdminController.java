@@ -8,15 +8,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.bas.KU.enums.AdminStatus;
+import com.bas.KU.Constants.KUConstants;
 import com.bas.KU.functions.MainFunctions;
-import com.bas.KU.models.Admin;
 import com.bas.KU.models.Area;
 import com.bas.KU.models.KUid;
 import com.bas.KU.services.AdminService;
@@ -27,22 +25,20 @@ import com.bas.KU.services.AdminService;
  */
 
 @Controller
-@SessionAttributes("admin")
+@SessionAttributes(KUConstants.ADMIN)
 public class AdminController {
 
 	@Autowired
 	AdminService adminService;
 
-	// public static MainFunctions mainFunctions = new MainFunctions();
-
 	// Controller which handle addArea Get request
 	@RequestMapping(value = "/addArea", method = RequestMethod.GET)
 	public String addUser(ModelMap model) {
-		if (!model.containsAttribute("admin")) {
+		if (!model.containsAttribute("admin"))
 			return "redirect:/login";
-		}
+
 		MainFunctions.setAreaList(model);
-		return "addArea";
+		return KUConstants.ADD_AREA_PAGE;
 	}
 
 	// Controller which handle addArea POST request
@@ -53,7 +49,7 @@ public class AdminController {
 			adminService.insertArea(area);
 		}
 		MainFunctions.setAreaList(model);
-		return "addArea";
+		return KUConstants.ADD_AREA_PAGE;
 	}
 
 	// Controller which handle addUniqueID POST request
@@ -68,27 +64,26 @@ public class AdminController {
 			adminService.insertKUid(kuid);
 		}
 		model.addAttribute("KUid", adminService.getLastKuid());
-		return "addUniqueID";
+		return KUConstants.ADD_UNIQUE_ID;
 	}
 
 	// Controller which handle addUniqueID GET request
 	@RequestMapping(value = "/addUniqueID", method = RequestMethod.GET)
 	public String addUniqueID(ModelMap model) {
-		if (!model.containsAttribute("admin")) {
+		if (!model.containsAttribute("admin"))
 			return "redirect:/login";
-		}
+
 		model.addAttribute("KUid", adminService.getLastKuid());
-		return "addUniqueID";
+		return KUConstants.ADD_UNIQUE_ID;
 	}
 
 	// Controller which handle addUniqueID GET request
 	@RequestMapping(value = "/adminHome", method = RequestMethod.GET)
 	public String adminHome(ModelMap model) {
-		if (!model.containsAttribute("admin")) {
+		if (!model.containsAttribute("admin"))
 			return "redirect:/login";
-		}
 
-		return "adminHome";
+		return KUConstants.ADMIN_HOME;
 	}
 
 }
