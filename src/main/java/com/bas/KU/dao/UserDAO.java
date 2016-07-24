@@ -27,5 +27,7 @@ public interface UserDAO {
 	public List<User> getUserList(String query);
 
 	public List<User> getUserNameAndPhone();
+	
+	public List<User> getUsersForStatusUpdation();
 
 }

@@ -29,6 +29,7 @@ public class UserDAOImpl implements UserDAO {
 	private static final String SELECT_NAME_AND_PHONE_OF_ALLUSERS_QUERY = "SELECT name,phoneNumber FROM user";
 	private static final String SELECT_USER_BY_ID = "select * from user where id = '%s'";
 	private static final String DELETE_USER_BY_ID = "DELETE FROM user where id ='%s'";
+	private static final String SELECT_ALL_USER_FOR_STATUS_UPDATION = "select * from user where status = '%s' and deactivationDate <= CURDATE()";
 
 	@Autowired
 	DataSource dataSource;
@@ -108,6 +109,14 @@ public class UserDAOImpl implements UserDAO {
 		List<User> userList = new ArrayList<>();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		userList = jdbcTemplate.query(SELECT_NAME_AND_PHONE_OF_ALLUSERS_QUERY, new UserRowMapper());
+		return userList.isEmpty() ? null : userList;
+	}
+
+	public List<User> getUsersForStatusUpdation() {
+		List<User> userList = new ArrayList<>();
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		userList = jdbcTemplate.query(SELECT_ALL_USER_FOR_STATUS_UPDATION, new UserRowMapper());
 		return userList.isEmpty() ? null : userList;
 	}
 

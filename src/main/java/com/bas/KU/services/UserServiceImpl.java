@@ -55,4 +55,9 @@ public class UserServiceImpl implements UserService {
 		return userdao.getUserNameAndPhone();
 	}
 
+	@Override
+	public List<User> getUsersForStatusUpdation() {
+		return userdao.getUsersForStatusUpdation();
+	}
+
 }

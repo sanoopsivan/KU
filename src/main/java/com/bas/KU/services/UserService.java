@@ -28,4 +28,6 @@ public interface UserService {
 	public List<User> getUserList(String query);
 
 	public List<User> getUserNameAndPhone();
+
+	public List<User> getUsersForStatusUpdation();
 }

@@ -53,16 +53,12 @@ public class Scheduler {
 
 	public static void doValidateExpiryDates() {
 		initialized = true;
-		String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-		List<User> userList = userService.getUserList();
+		List<User> userList = userService.getUsersForStatusUpdation();
 		for (User user : userList) {
-			if (StringUtils.equalsIgnoreCase(user.getStatus(), UserStatus.ACTIVATED.getStatus())) {
-				String userDeactivationDate = user.getCreationDate().split(" ")[0];
-				if (StringUtils.equalsIgnoreCase(currentDate, userDeactivationDate)) {
-					user.setStatus(UserStatus.EXPIRED.getStatus());
-					userService.updateData(user);
-				}
-			}
+
+			user.setStatus(UserStatus.EXPIRED.getStatus());
+			userService.updateData(user);
+
 		}
 	}
 
