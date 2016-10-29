@@ -45,6 +45,10 @@ function isEmail(email) {
 	return regex.test(email);
 }
 
+$('#submit').click(function() {
+	$('#submitHandle').click();
+});
+
 $('#submitUser').click(function() {
 	var emailTest = isEmail($('#emailId').val());
 	if ($('#emailId').val().len) {

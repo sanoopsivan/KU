@@ -37,7 +37,7 @@
 	<!-- BEGIN: Side-bar navigation options; March 12, 2016 - Ananthakrishnan -->
 	<div class="collapse navbar-collapse navbar-ex1-collapse">
 		<ul class="nav navbar-nav side-nav">
-			<li class="active">
+			<li>
 				<a href="<c:url value="/view"/>">
 					<i class="fa fa-fw fa-dashboard"></i>
 					View User List
@@ -62,12 +62,12 @@
 						Add Unique ID
 					</a>
 				</li>
-				<li>
+				<%-- <li>
 					<a href="<c:url value="/adminHome"/>">
 						<i class="fa fa-fw fa-bar-chart-o"></i>
 						Admin Home
 					</a>
-				</li>
+				</li> --%>
 			</c:if>
 		</ul>
 	</div>

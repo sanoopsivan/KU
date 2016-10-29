@@ -96,9 +96,9 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4 topPadding">
+					<div class="col-md-4 topPadding customMarginTop">
 						<div class="form-group">
-							<select class="form-control" id="paginationHelper"
+							<select class="form-control customMarginTop" id="paginationHelper"
 								name="paginationHelper">
 								<option value="1">1</option>
 								<option value="2">2</option>
