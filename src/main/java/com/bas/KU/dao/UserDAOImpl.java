@@ -21,26 +21,27 @@ import com.bas.KU.models.User;
  * @author San
  *
  */
+// FIXME remove 
+// JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
+// with appropriate code because it is repeating more than twice and its annoying
 public class UserDAOImpl implements UserDAO {
 
-	private static final String INSERT_NEW_USER_QUERY = "INSERT INTO user (KUid,firstName,lastName,name,gender,email,address,phoneNumber,landlineNumber,areaCode,status,comment,creationDate,activationDate,deactivationDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?)";
-	private static final String UPDATE_USER_QUERY = "UPDATE user set firstName = ?,lastName = ?, name=?, gender = ?, email = ? ,address = ?,phoneNumber =?,landlineNumber =?,areaCode =?,status =?,comment =?,activationDate =?,deactivationDate=? where id = ?";
-	private static final String SELECT_ALL_USER_QUERY = "select * from user";
-	private static final String SELECT_A_LIMIT_OF_USERS_QUERY = "select * from user limit %d,%d";
+	// QUERIES
+	private static final String INSERT_NEW_USER_QUERY 					= "INSERT INTO user (KUid,firstName,lastName,name,gender,email,address,phoneNumber,landlineNumber,areaCode,status,comment,creationDate,activationDate,deactivationDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?)";
+	private static final String UPDATE_USER_QUERY 						= "UPDATE user set firstName = ?,lastName = ?, name=?, gender = ?, email = ? ,address = ?,phoneNumber =?,landlineNumber =?,areaCode =?,status =?,comment =?,activationDate =?,deactivationDate=? where id = ?";
+	private static final String SELECT_ALL_USER_QUERY 					= "select * from user";
+	private static final String SELECT_A_LIMIT_OF_USERS_QUERY 			= "select * from user limit %d,%d";
 	private static final String SELECT_NAME_AND_PHONE_OF_ALLUSERS_QUERY = "SELECT name,phoneNumber FROM user";
-	private static final String SELECT_USER_BY_ID = "select * from user where id = '%s'";
-	private static final String DELETE_USER_BY_ID = "DELETE FROM user where id ='%s'";
-	private static final String SELECT_ALL_USER_FOR_STATUS_UPDATION = "select * from user where status = '%s' and deactivationDate <= CURDATE()";
+	private static final String SELECT_USER_BY_ID 						= "select * from user where id = '%s'";
+	private static final String DELETE_USER_BY_ID 						= "DELETE FROM user where id ='%s'";
+	private static final String SELECT_ALL_USER_FOR_STATUS_UPDATION 	= "select * from user where status = '%s' and deactivationDate <= CURDATE()";
 
 	@Autowired
 	DataSource dataSource;
 
 	public void insertUser(User user) {
-		String sql = INSERT_NEW_USER_QUERY;
-
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
-		jdbcTemplate.update(sql,
+		jdbcTemplate.update(INSERT_NEW_USER_QUERY,
 				new Object[] { user.getKUId(), user.getFirstName(), user.getLastName(), user.getName(),
 						user.getGender(), user.getEmail(), user.getAddress(), user.getPhoneNumber(),
 						user.getLandLineNumber(), user.getAreaCode(), user.getStatus(), user.getComment(),
@@ -50,20 +51,14 @@ public class UserDAOImpl implements UserDAO {
 
 	public List<User> getUserList() {
 		List<User> userList = new ArrayList<>();
-
-		String sql = SELECT_ALL_USER_QUERY;
-
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		userList = jdbcTemplate.query(sql, new UserRowMapper());
+		userList = jdbcTemplate.query(SELECT_ALL_USER_QUERY, new UserRowMapper());
 		return userList;
 	}
 
 	public void updateUser(User user) {
-		String sql = UPDATE_USER_QUERY;
-
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
-		jdbcTemplate.update(sql,
+		jdbcTemplate.update(UPDATE_USER_QUERY,
 				new Object[] { user.getFirstName(), user.getLastName(), user.getName(), user.getGender(),
 						user.getEmail(), user.getAddress(), user.getPhoneNumber(), user.getLandLineNumber(),
 						user.getAreaCode(), user.getStatus(), user.getComment(), user.getActivationDate(),
@@ -85,15 +80,12 @@ public class UserDAOImpl implements UserDAO {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		// retrieve the datas from db and map the result to admin
 		userList = jdbcTemplate.query(sql, new UserRowMapper());
-
 		return userList.isEmpty() ? null : userList.get(0);
 	}
 
 	public List<User> getUserList(int startLimit, int endLimit) {
 		List<User> userList = new ArrayList<>();
-
 		String sql = String.format(SELECT_A_LIMIT_OF_USERS_QUERY, startLimit, endLimit);
-
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		userList = jdbcTemplate.query(sql, new UserRowMapper());
 		return userList;

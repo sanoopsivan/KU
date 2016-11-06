@@ -23,31 +23,35 @@ public class AdminDAOImpl implements AdminDAO {
 	@Autowired
 	DataSource dataSource;
 
-	private static final String GET_ALL_ADMINS_QUERY = "select * from admin";
-	private static final String GET_ADMIN_BY_USERNAME_AND_PASSWORD = "select * from admin where username= '%s' and password = '%s'";
-	private static final String GET_ALL_AREAS = "select * from area";
-	private static final String INSERT_NEW_AREA = "insert into area (areaName) values (?)";
-	private static final String GET_LAST_KUID = "SELECT * FROM kuid ORDER BY id DESC LIMIT 1;";
-	private static final String INSERT_NEW_KUID = "insert into kuid (format,value,KUid) values (? ,? ,?)";
+	// QUERIES
+	private static final String GET_ALL_ADMINS_QUERY 				= "select * from admin";
+	private static final String GET_ADMIN_BY_USERNAME_AND_PASSWORD 	= "select * from admin where username= '%s' and password = '%s'";
+	private static final String GET_ALL_AREAS 						= "select * from area";
+	private static final String INSERT_NEW_AREA 					= "insert into area (areaName) values (?)";
+	private static final String GET_LAST_KUID 						= "SELECT * FROM kuid ORDER BY id DESC LIMIT 1;";
+	private static final String INSERT_NEW_KUID 					= "insert into kuid (format,value,KUid) values (? ,? ,?)";
 
 	public void insertData(Admin admin) {
+		// TODO
 	};
 
 	public List<Admin> getAdminList() {
 		List<Admin> adminList = new ArrayList<Admin>();
-		String sql = GET_ALL_ADMINS_QUERY;
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		adminList = jdbcTemplate.query(sql, new AdminRowMapper());
+		adminList = jdbcTemplate.query(GET_ALL_ADMINS_QUERY, new AdminRowMapper());
 		return adminList;
 	};
 
 	public void updateData(Admin admin) {
+		// TODO
 	};
 
 	public void deleteData(String id) {
+		// TODO
 	};
 
 	public Admin getAdmin(String id) {
+		// TODO
 		return null;
 	};
 
@@ -58,56 +62,46 @@ public class AdminDAOImpl implements AdminDAO {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		// retrieve the datas from db and map the result to admin
 		adminList = jdbcTemplate.query(sql, new AdminRowMapper());
-
+		//FIXME
 		return adminList.isEmpty() ? null : adminList.get(0);
 	}
 
 	@Override
 	public void insertArea(Area area) {
-		String sql = INSERT_NEW_AREA;
-
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
-		jdbcTemplate.update(sql, new Object[] { area.getAreaName() });
+		jdbcTemplate.update(INSERT_NEW_AREA, new Object[] { area.getAreaName() });
 
 	}
 
 	@Override
 	public List<Area> getAreaList() {
 		List<Area> areaList = new ArrayList<>();
-
-		String sql = GET_ALL_AREAS;
-
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		areaList = jdbcTemplate.query(sql, new AreaRowMapper());
+		areaList = jdbcTemplate.query(GET_ALL_AREAS, new AreaRowMapper());
 		return areaList.isEmpty() ? null : areaList;
 	}
 
 	@Override
 	public void deleteArea(String id) {
-		// TODO Auto-generated method stub
-
+		//TODO
 	}
 
 	@Override
 	public void updateArea(Area admiarean) {
-		// TODO Auto-generated method stub
+		// TODO
 
 	}
 
 	@Override
 	public List<KUid> getKUidList() {
-		// TODO Auto-generated method stub
+		// TODO
 		return null;
 	}
 
 	@Override
 	public void insertKUid(KUid kuid) {
-		String sql = INSERT_NEW_KUID;
-
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
-		jdbcTemplate.update(sql, new Object[] { kuid.getFormat(), kuid.getValue(), kuid.getKUid() });
+		jdbcTemplate.update(INSERT_NEW_KUID, new Object[] { kuid.getFormat(), kuid.getValue(), kuid.getKUid() });
 
 	}
 
@@ -117,9 +111,8 @@ public class AdminDAOImpl implements AdminDAO {
 		String sql = String.format(GET_LAST_KUID);
 		// create database connection using spring jdbc template
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		// retrieve the datas from db and map the result to admin
+		// retrieve the data from db and map the result to admin
 		kUidList = jdbcTemplate.query(sql, new KUidRowMapper());
-
 		return kUidList.isEmpty() ? null : kUidList.get(0);
 	}
 

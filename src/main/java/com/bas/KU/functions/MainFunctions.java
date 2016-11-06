@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
-import com.bas.KU.Constants.KUConstants;
+import com.bas.KU.constants.KUConstants;
 import com.bas.KU.enums.AdminStatus;
 import com.bas.KU.enums.UserStatus;
 import com.bas.KU.models.Admin;
@@ -31,10 +31,10 @@ import com.bas.KU.services.UserService;
 @Service
 public class MainFunctions {
 	
-	private static final String QUERY = "select * from user";
-	private static final String WHERE_CLAUSE = " where ";
-	private static final String AND_CLAUSE = " AND ";
-	private static final String LIMIT = " LIMIT %d,%d";
+	private static final String QUERY 			= "select * from user";
+	private static final String WHERE_CLAUSE 	= " where ";
+	private static final String AND_CLAUSE		= " AND ";
+	private static final String LIMIT 			= " LIMIT %d,%d";
 	private static final String ORDER_BY_CLAUSE = " order by creationDate DESC";
 
 
@@ -55,8 +55,7 @@ public class MainFunctions {
 		this.userService = userService;
 	}
 
-	// return the page names after checking the role
-
+	//FIXME
 	public static String getQuery(String q, String area, String status, String startDate, String endDate) {
 
 		boolean isWhereClauseAdded = false;
@@ -112,6 +111,7 @@ public class MainFunctions {
 		return query.toString();
 	}
 
+	//FIXME
 	public static String getQueryWithPagination(String query, int page, int paginationHelper) {
 		page = page - 1;
 		StringBuilder queryWithPagination = new StringBuilder(query);
@@ -125,6 +125,7 @@ public class MainFunctions {
 		return queryWithPagination.toString();
 	}
 
+	//FIXME
 	public static List<String> getSearchHelpers() {
 
 		List<String> searchHelpers = new ArrayList<>();

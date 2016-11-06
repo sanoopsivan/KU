@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.bas.KU.Constants.KUConstants;
+import com.bas.KU.constants.KUConstants;
 import com.bas.KU.functions.MainFunctions;
 import com.bas.KU.models.Area;
 import com.bas.KU.models.KUid;

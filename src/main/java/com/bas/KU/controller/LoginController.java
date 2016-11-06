@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.bas.KU.Constants.KUConstants;
+import com.bas.KU.constants.KUConstants;
 import com.bas.KU.enums.AdminStatus;
 import com.bas.KU.enums.UserStatus;
 import com.bas.KU.functions.MainFunctions;
@@ -35,6 +35,7 @@ import com.bas.KU.services.UserService;
 @Controller
 @SessionAttributes(KUConstants.ADMIN)
 public class LoginController {
+
 	private static Logger logger = Logger.getLogger(LoginController.class.getName());
 
 	@Autowired
@@ -52,10 +53,10 @@ public class LoginController {
 			Admin admin = adminService.getAdmin(username, password);
 			MainFunctions.setModel(model, admin);
 			MainFunctions.runSheduler();
-			return "redirect:/view";
+			return "redirect:/" + KUConstants.VIEW_PAGE;
 
 		}
-		return "redirect:/login";
+		return "redirect:/" + KUConstants.LOGIN_PAGE;
 
 	}
 
@@ -63,7 +64,7 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String adminLogin(ModelMap model, SessionStatus status) {
 		if (model.containsAttribute(KUConstants.ADMIN))
-			return "redirect:/view";
+			return "redirect:/" + KUConstants.VIEW_PAGE;
 
 		return KUConstants.LOGIN_PAGE;
 	}
@@ -71,17 +72,15 @@ public class LoginController {
 	// remove session variable on logout
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String adminLogout(ModelMap model, SessionStatus status) {
-		// MainFunctions.removeAdminSessionAttributeFromModel(model);
 		status.setComplete();
-		return "redirect:/login";
+		return "redirect:/" + KUConstants.LOGIN_PAGE;
 	}
 
 	// show view page after successful login
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public String adminView(ModelMap model) {
 		if (!model.containsAttribute(KUConstants.ADMIN))
-			return "redirect:/login";
-
+			return "redirect:/" + KUConstants.LOGIN_PAGE;
 		List<Status> statusList = new ArrayList<>();
 		for (UserStatus status : UserStatus.values()) {
 			statusList.add(MainFunctions.getStatusOf(status));

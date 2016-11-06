@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.bas.KU.Constants;
+package com.bas.KU.constants;
 
 import java.text.SimpleDateFormat;
 

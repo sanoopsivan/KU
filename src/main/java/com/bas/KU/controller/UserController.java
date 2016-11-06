@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bas.KU.Constants.KUConstants;
+import com.bas.KU.constants.KUConstants;
 import com.bas.KU.enums.UserStatus;
 import com.bas.KU.functions.MainFunctions;
 import com.bas.KU.models.User;
@@ -48,7 +48,7 @@ public class UserController {
 	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
 	public String addUser(ModelMap model) {
 		if (!model.containsAttribute("admin"))
-			return "redirect:/login";
+			return "redirect:/" + KUConstants.LOGIN_PAGE;
 		model.addAttribute("areaList", adminService.getAreaList());
 		return KUConstants.ADD_USER_PAGE;
 	}
@@ -91,7 +91,7 @@ public class UserController {
 	@RequestMapping(value = "/view/{id}/editUser", method = RequestMethod.GET)
 	public String getUserIdFromURL(@PathVariable(value = "id") String id, ModelMap model) {
 		if (!model.containsAttribute("admin")) {
-			return "redirect:/login";
+			return "redirect:/" + KUConstants.LOGIN_PAGE;
 		}
 		User user = userService.getUser(id);
 		model.addAttribute("user", user);
@@ -115,7 +115,7 @@ public class UserController {
 			@RequestParam(value = "comment", required = false) String comment,
 			@RequestParam(value = "activationDate", required = false) Date activationDate,
 			@RequestParam(value = "deactivationDate", required = false) Date deactivationDate) {
-
+		// FIXME remove if with more suitable code
 		User user = userService.getUser(id);
 		if (StringUtils.isNotBlank(firstName))
 			user.setFirstName(firstName);
@@ -144,7 +144,7 @@ public class UserController {
 		user.setName(user.getFirstName(), user.getLastName());
 		userService.updateData(user);
 		// redirectAttributes.addFlashAttribute("user", user);
-		return "redirect:/view/" + user.getUserId() + "/editUser";
+		return "redirect:/" + KUConstants.VIEW_PAGE + "/" + user.getUserId() + "/" + KUConstants.EDIT_USER_PAGE;
 	}
 
 	// Handle the update use action
@@ -170,7 +170,7 @@ public class UserController {
 				UserStatus.ACTIVATED.getStatus(), comment, new Date(), c.getTime());
 	}
 
-	// Handle the update use action
+	// Handle the update user action
 	@RequestMapping(value = "/view/{id}/deactivateUser", method = RequestMethod.POST)
 	public String deactivateUser(@PathVariable(value = "id") String id, ModelMap model,
 			@RequestParam(value = "firstName", required = false) String firstName,
@@ -187,10 +187,10 @@ public class UserController {
 				UserStatus.PENDING_FOR_ACTIVATION.getStatus(), comment, null, null);
 	}
 
-	// Handle the update use action
+	// Handle the delete user action
 	@RequestMapping(value = "/view/{id}/deleteUser", method = RequestMethod.POST)
 	public String deleteUser(@PathVariable(value = "id") String id, ModelMap model) {
 		userService.deleteUser(id);
-		return "redirect:/view";
+		return "redirect:/" + KUConstants.VIEW_PAGE;
 	}
 }

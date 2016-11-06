@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.bas.KU.Constants.KUConstants;
+import com.bas.KU.constants.KUConstants;
 import com.bas.KU.enums.AdminStatus;
 import com.bas.KU.functions.MainFunctions;
 
@@ -27,11 +27,9 @@ public class DefaultController {
 
 	// will load the login page on start up
 	@RequestMapping("/")
-	public String login(Locale locale, ModelMap model) {
-		// for study purpose
-		// System.out.println(locale.getCountry());
-		if (model.containsAttribute("admin"))
-			return "redirect:/view";
+	public String login(ModelMap model) {
+		if (model.containsAttribute(KUConstants.ADMIN))
+			return "redirect:/" + KUConstants.VIEW_PAGE;
 		return KUConstants.LOGIN_PAGE;
 	}
 
