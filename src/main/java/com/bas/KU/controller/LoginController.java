@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bas.KU.constants.KUConstants;
 import com.bas.KU.enums.AdminStatus;
@@ -45,27 +46,35 @@ public class LoginController {
 	UserService userService;
 
 	// for POST Request
+	// FIXME
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String adminLogin(@RequestParam(value = "username", required = false) String username,
-			@RequestParam(value = "password", required = false) String password, ModelMap model) {
+			@RequestParam(value = "password", required = false) String password, ModelMap model,
+			RedirectAttributes redirectAttributes) {
 
 		if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
 			Admin admin = adminService.getAdmin(username, password);
+			if (admin == null) {
+				redirectAttributes.addFlashAttribute("errorMessage", "Please provide valid credentials!");
+				return "redirect:/" + KUConstants.LOGIN_PAGE;
+			}
 			MainFunctions.setModel(model, admin);
 			MainFunctions.runSheduler();
 			return "redirect:/" + KUConstants.VIEW_PAGE;
 
 		}
+		redirectAttributes.addFlashAttribute("errorMessage", "Please provide valid credentials!");
 		return "redirect:/" + KUConstants.LOGIN_PAGE;
 
 	}
 
 	// for GET Request
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String adminLogin(ModelMap model, SessionStatus status) {
+	public String adminLogin(ModelMap model, SessionStatus status, RedirectAttributes redirectAttributes) {
 		if (model.containsAttribute(KUConstants.ADMIN))
 			return "redirect:/" + KUConstants.VIEW_PAGE;
-
+		if (model.containsAttribute("errorMessage"))
+			redirectAttributes.addFlashAttribute("errorMessage", "Please provide valid credentials!");
 		return KUConstants.LOGIN_PAGE;
 	}
 
