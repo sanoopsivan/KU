@@ -3,6 +3,8 @@
  */
 package com.bas.KU.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -49,21 +51,24 @@ public class LoginController {
 	// FIXME
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String adminLogin(@RequestParam(value = "username", required = false) String username,
-			@RequestParam(value = "password", required = false) String password, ModelMap model,
-			RedirectAttributes redirectAttributes) {
+			@RequestParam(value = "password", required = false) String password, ModelMap model)
+			throws UnsupportedEncodingException {
 
 		if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
 			Admin admin = adminService.getAdmin(username, password);
 			if (admin == null) {
-				redirectAttributes.addFlashAttribute("errorMessage", "Please provide valid credentials!");
-				return "redirect:/" + KUConstants.LOGIN_PAGE;
+				// redirectAttributes.addFlashAttribute("errorMessage", "Please
+				// provide valid credentials!");
+				return "redirect:/" + KUConstants.LOGIN_PAGE + "?error="
+						+ URLEncoder.encode("Please provide valid credentials!", "UTF-8");
 			}
 			MainFunctions.setModel(model, admin);
 			MainFunctions.runSheduler();
 			return "redirect:/" + KUConstants.VIEW_PAGE;
 
 		}
-		redirectAttributes.addFlashAttribute("errorMessage", "Please provide valid credentials!");
+		// redirectAttributes.addFlashAttribute("errorMessage", "Please provide
+		// valid credentials!");
 		return "redirect:/" + KUConstants.LOGIN_PAGE;
 
 	}
@@ -73,8 +78,8 @@ public class LoginController {
 	public String adminLogin(ModelMap model, SessionStatus status, RedirectAttributes redirectAttributes) {
 		if (model.containsAttribute(KUConstants.ADMIN))
 			return "redirect:/" + KUConstants.VIEW_PAGE;
-		if (model.containsAttribute("errorMessage"))
-			redirectAttributes.addFlashAttribute("errorMessage", "Please provide valid credentials!");
+		/*if (model.containsAttribute("errorMessage"))
+			redirectAttributes.addFlashAttribute("errorMessage", "Please provide valid credentials!");*/
 		return KUConstants.LOGIN_PAGE;
 	}
 

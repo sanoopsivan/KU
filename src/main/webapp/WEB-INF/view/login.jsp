@@ -80,8 +80,8 @@ body {
 
 		<form class="form-signin" action="login" method="post">
 			<h2 class="form-signin-heading text-center">Login</h2>
-			<c:if test="${not empty errorMessage}">
-				<h6 class="form-signin-heading text-center" style="color: red">${errorMessage}</h6>
+			<c:if test="${not empty param.error}">
+				<h6 class="form-signin-heading text-center" style="color: red">${param.error}</h6>
 			</c:if>
 			<label for="inputEmail" class="sr-only">Username</label>
 			<input type="text" id="inputEmail" name="username"
